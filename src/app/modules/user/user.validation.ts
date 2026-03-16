@@ -5,7 +5,7 @@ export const userSignupSchema = z.object({
   body: z.object({
     email: z.string().email("Invalid email address").toLowerCase().trim(),
     fullName: z.string().min(1, "Full name is required"),
-    phone: z.string().min(1, "Phone name is required"),
+    phone: z.string().min(1, "Phone number is required"),
     password: z.string().min(6, "Password must be at least 6 characters"),
     role: z.enum([USER_ROLES.VENDOR, USER_ROLES.CUSTOMER]),
   })
@@ -23,6 +23,7 @@ export const userUpdateSchema = z.object({
     email: z.string().email("Invalid email address").trim().toLowerCase().optional(),
     fullName: z.string().min(1, "Full name is required").optional(),
     phone: z.string().min(1, "Phone is required").optional(),
+    address: z.string().optional(),
     image: z.string().url("Invalid image URL").optional(),
     password: z.string().min(6, "Password must be at least 6 characters").optional(),
     status: z.nativeEnum(USER_STATUS).optional(),

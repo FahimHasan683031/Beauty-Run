@@ -66,7 +66,7 @@ const getChatFromDB = async (
     const chats = await chatQueryBuilder.modelQuery
         .populate({
             path: 'participants',
-            select: '_id fullName profilePicture role email',
+            select: '_id fullName image role email',
             match: { _id: { $ne: user.id } }
         })
         .populate({

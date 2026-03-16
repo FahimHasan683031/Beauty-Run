@@ -27,6 +27,7 @@ export type IUser = {
     authentication: IAuthentication;
     deviceToken?: string;
     fcmToken?: string;
+    address?: string;
 };
 
 export type UserModel = {

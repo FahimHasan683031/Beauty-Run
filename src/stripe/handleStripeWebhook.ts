@@ -4,10 +4,7 @@ import { StatusCodes } from 'http-status-codes'
 import config from '../config'
 import stripe from '../config/stripe'
 import ApiError from '../errors/ApiError'
-import { handleSubscriptionCreated } from './handleSubscriptionCreated'
 import { logger } from '../shared/logger'
-import { User } from '../app/modules/user/user.model'
-import { Subscription } from '../app/modules/subscription/subscription.model'
 import { Payment } from '../app/modules/payment/payment.model'
 
 const handleStripeWebhook = async (req: Request, res: Response) => {
@@ -34,8 +31,7 @@ const handleStripeWebhook = async (req: Request, res: Response) => {
                 const session = data as Stripe.Checkout.Session
                 logger.info('✅ Checkout completed:', session.id)
 
-                const mode = session.mode;
-                if (mode === 'payment') {
+                if (session.mode === 'payment') {
                     // Handle one-time payment
                     await Payment.create({
                         email: session.customer_details?.email,
@@ -46,55 +42,6 @@ const handleStripeWebhook = async (req: Request, res: Response) => {
                         referenceId: session.metadata?.referenceId,
                     });
                 }
-
-                // ✅ AUTO-RENEW OFF for subscriptions
-                if (session.subscription) {
-                    await stripe.subscriptions.update(
-                        session.subscription as string,
-                        { cancel_at_period_end: true }
-                    )
-                }
-                break
-            }
-
-            case 'customer.subscription.created':
-                await handleSubscriptionCreated(data as Stripe.Subscription)
-                break
-
-            case 'customer.subscription.updated': {
-                const subscription = data as Stripe.Subscription
-
-                if (
-                    subscription.cancel_at_period_end &&
-                    subscription.status === 'active'
-                ) {
-                    logger.info(
-                        `Subscription for user ${subscription.metadata.userId} will expire`,
-                    )
-
-                    await User.findByIdAndUpdate(subscription.metadata.userId, {
-                        subscribe: false,
-                    })
-
-                    await Subscription.findOneAndUpdate(
-                        { user: subscription.metadata.userId },
-                        { status: 'expired' },
-                    )
-                }
-                break
-            }
-
-            case 'customer.subscription.deleted': {
-                const deletedSub = data as Stripe.Subscription
-
-                await User.findByIdAndUpdate(deletedSub.metadata.userId, {
-                    subscribe: false,
-                })
-
-                await Subscription.findOneAndUpdate(
-                    { user: deletedSub.metadata.userId },
-                    { status: 'expired' },
-                )
                 break
             }
 

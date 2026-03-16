@@ -22,7 +22,6 @@ const handleLoginLogic = async (payload: ILoginData, isUserExist: IUser):Promise
     const otpExpiresIn = new Date(Date.now() + 5 * 60 * 1000)
 
     const authentication = {
-      email: payload.email,
       oneTimeCode: otp,
       expiresAt: otpExpiresIn,
       latestRequestAt: new Date(),
