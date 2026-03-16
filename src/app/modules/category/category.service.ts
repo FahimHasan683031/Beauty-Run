@@ -10,21 +10,20 @@ const createCategory = async (payload: ICategory) => {
 
 // Get all categories
 const getAllCategories = async (query: Record<string, unknown>) => {
-  const categoryQueryBuilder = new QueryBuilder(CategoryModel.find({ isActive: true, parent: null }), query)
+  const categoryQueryBuilder = new QueryBuilder(CategoryModel.find(), query)
     .filter()
+    .sort()
     .fields()
+    .paginate();
 
-  const totalCategories = await CategoryModel.countDocuments()
+  const categories = await categoryQueryBuilder.modelQuery;
+  const meta = await categoryQueryBuilder.getPaginationInfo();
 
-  const categories = await categoryQueryBuilder.modelQuery
-
-  return {
-    categories,
-  };
+  return { categories, meta };
 };
 
 // Update service
-const updateCategory = async (id: string, payload: ICategory) => {
+const updateCategory = async (id: string, payload: Partial<ICategory>) => {
   const result = await CategoryModel.findByIdAndUpdate(id, payload, {
     new: true,
   });
@@ -36,7 +35,6 @@ const deleteCategory = async (id: string) => {
   const result = await CategoryModel.findByIdAndDelete(id);
   return result;
 };
-
 
 export const serviceService = {
   createCategory,

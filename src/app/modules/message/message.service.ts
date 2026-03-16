@@ -212,10 +212,6 @@ const deleteMessageFromDB = async (messageId: string, userId: string): Promise<I
   return await Message.findByIdAndDelete(messageId);
 };
 
-const updateMoneyRequestStatusToDB = async (messageId: string, user: JwtPayload, status: 'accepted' | 'rejected') => {
-  return null;
-};
-
 export const MessageService = {
   sendMessageToDB,
   getMessageFromDB,
@@ -223,5 +219,4 @@ export const MessageService = {
   getUnreadCountForChat,
   getTotalUnreadCount,
   deleteMessageFromDB,
-  updateMoneyRequestStatusToDB
-};
+};

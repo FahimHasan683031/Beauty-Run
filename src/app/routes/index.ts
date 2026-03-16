@@ -10,6 +10,8 @@ import { TokenRoutes } from '../modules/token/token.route';
 import { ChatRoutes } from '../modules/chat/chat.routes';
 import { MessageRoutes } from '../modules/message/message.routes';
 import { NotificationRoutes } from '../modules/notification/notification.routes';
+import { ProductRoutes } from '../modules/product/product.route';
+import { OrderRoutes } from '../modules/order/order.route';
 
 
 const router = express.Router();
@@ -25,6 +27,8 @@ const apiRoutes = [
     { path: "/chat", route: ChatRoutes },
     { path: "/message", route: MessageRoutes },
     { path: "/notification", route: NotificationRoutes },
+    { path: "/product", route: ProductRoutes },
+    { path: "/order", route: OrderRoutes },
 ]
 
 router.post('/webhook', handleStripeWebhook);

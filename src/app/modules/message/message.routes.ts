@@ -2,8 +2,6 @@ import express from 'express';
 import { USER_ROLES } from '../../../enum/user';
 import auth from '../../middleware/auth';
 import { MessageController } from './message.controller';
-import fileUploadHandler from '../../middleware/fileUploadHandler';
-import { getSingleFilePath } from '../../../shared/getFilePath';
 import { fileAndBodyProcessorUsingDiskStorage } from '../../middleware/processReqBody';
 
 const router = express.Router();
@@ -34,13 +32,6 @@ router.get(
   '/unread/count',
   auth(USER_ROLES.VENDOR, USER_ROLES.CUSTOMER, USER_ROLES.ADMIN),
   MessageController.getUnreadCount
-);
-
-// Update money request status (accept/reject)
-router.patch(
-  '/:messageId/money-request',
-  auth(USER_ROLES.VENDOR, USER_ROLES.CUSTOMER),
-  MessageController.updateMoneyRequestStatus
 );
 
 // Delete a message
