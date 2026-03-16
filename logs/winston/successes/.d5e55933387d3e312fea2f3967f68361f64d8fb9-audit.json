@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\Fahim\\Projects\\Beauty-run-server\\logs\\winston\\successes\\.d5e55933387d3e312fea2f3967f68361f64d8fb9-audit.json",
+    "files": [
+        {
+            "date": 1773639721319,
+            "name": "D:\\Fahim\\Projects\\Beauty-run-server\\logs\\winston\\successes\\sg-2026-03-16-11-success.log",
+            "hash": "52f14eaabcbcdc37c7a917f917188221fd9f0caf56f3fccde774d5f85a729787"
+        },
+        {
+            "date": 1773641910449,
+            "name": "D:\\Fahim\\Projects\\Beauty-run-server\\logs\\winston\\successes\\sg-2026-03-16-12-success.log",
+            "hash": "b01486f5f19ad17f6a416d79a5cefecf8af9a12b48c239f70bf7940a329a1ea1"
+        }
+    ],
+    "hashType": "sha256"
+}

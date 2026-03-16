@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\Fahim\\Projects\\Beauty-run-server\\logs\\winston\\errors\\.55fecdc79d6465166f2481e664938234497aef14-audit.json",
+    "files": [
+        {
+            "date": 1773639721321,
+            "name": "D:\\Fahim\\Projects\\Beauty-run-server\\logs\\winston\\errors\\sg-2026-03-16-11-error.log",
+            "hash": "4f992681de9c32f8b4909c37edaac46a9ee8bbab40124e6136eafcebe19369eb"
+        },
+        {
+            "date": 1773641910452,
+            "name": "D:\\Fahim\\Projects\\Beauty-run-server\\logs\\winston\\errors\\sg-2026-03-16-12-error.log",
+            "hash": "6e831e7ce62fed516c1aae3b760517479648a99035d4c2fbeb5ada7a06db289b"
+        }
+    ],
+    "hashType": "sha256"
+}
