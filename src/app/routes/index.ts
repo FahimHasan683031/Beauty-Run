@@ -12,6 +12,7 @@ import { MessageRoutes } from '../modules/message/message.routes';
 import { NotificationRoutes } from '../modules/notification/notification.routes';
 import { ProductRoutes } from '../modules/product/product.route';
 import { OrderRoutes } from '../modules/order/order.route';
+import { WishlistRoutes } from '../modules/wishlist/wishlist.route';
 
 
 const router = express.Router();
@@ -29,6 +30,7 @@ const apiRoutes = [
     { path: "/notification", route: NotificationRoutes },
     { path: "/product", route: ProductRoutes },
     { path: "/order", route: OrderRoutes },
+    { path: "/wishlist", route: WishlistRoutes },
 ]
 
 router.post('/webhook', handleStripeWebhook);
