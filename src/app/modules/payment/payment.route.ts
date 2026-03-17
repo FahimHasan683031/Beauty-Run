@@ -14,18 +14,6 @@ router.post(
 )
 
 router.get(
-    "/onboard",
-    auth(USER_ROLES.VENDOR),
-    PaymentController.onboardVendorController
-)
-
-router.get(
-    "/onboard-status",
-    auth(USER_ROLES.VENDOR),
-    PaymentController.checkOnboardingStatusController
-)
-
-router.get(
     "/",
     auth(USER_ROLES.ADMIN),
     PaymentController.getPaymentsController

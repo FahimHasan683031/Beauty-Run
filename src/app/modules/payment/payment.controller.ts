@@ -50,23 +50,6 @@ export const getPaymentByIdController = catchAsync(async (req: Request, res: Res
   });
 });
 
-// onboard vendor
-export const onboardVendorController = catchAsync(async (req: Request, res: Response) => {
-  const result = await PaymentService.onboardVendor(req.user!);
-  res.status(StatusCodes.OK).json({ url: result.url });
-});
-
-// check vendor onboarding status
-export const checkOnboardingStatusController = catchAsync(async (req: Request, res: Response) => {
-  const result = await PaymentService.checkOnboardingStatus(req.user!);
-  sendResponse(res, {
-    statusCode: StatusCodes.OK,
-    success: true,
-    message: 'Onboarding status retrieved successfully',
-    data: result,
-  });
-});
-
 
 
 export const PaymentController = {
@@ -75,6 +58,4 @@ export const PaymentController = {
   getPaymentsController,
   getPaymentByIdController,
   handleStripeWebhook,
-  onboardVendorController,
-  checkOnboardingStatusController,
 }
