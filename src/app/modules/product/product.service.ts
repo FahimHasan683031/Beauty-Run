@@ -4,11 +4,21 @@ import { IProduct } from './product.interface';
 import { Product } from './product.model';
 import { JwtPayload } from 'jsonwebtoken';
 import QueryBuilder from '../../builder/QueryBuilder';
+import { User } from '../user/user.model';
 
 // Create product
 const createProduct = async (user: JwtPayload, payload: IProduct, images: string[]) => {
   if (!images || images.length === 0) {
     throw new ApiError(StatusCodes.BAD_REQUEST, 'At least one product image is required');
+  }
+
+  const vendor = await User.findById(user.authId || user.id);
+  if (!vendor || vendor.role !== 'vendor') {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Only vendors can create products');
+  }
+
+  if (!vendor.stripeAccountStatus?.chargesEnabled || !vendor.stripeAccountStatus?.payoutsEnabled) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Please complete your payment onboarding fully before creating products');
   }
 
   const finalPrice = payload.offer

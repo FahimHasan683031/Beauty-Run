@@ -28,6 +28,12 @@ export type IUser = {
     deviceToken?: string;
     fcmToken?: string;
     address?: string;
+    stripeAccountId?: string;
+    stripeAccountStatus?: {
+        detailsSubmitted: boolean;
+        chargesEnabled: boolean;
+        payoutsEnabled: boolean;
+    };
 };
 
 export type UserModel = {

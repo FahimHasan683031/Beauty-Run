@@ -86,6 +86,14 @@ const UserSchema = new Schema(
             type: String,
             default: "",
         },
+        stripeAccountId: {
+            type: String,
+        },
+        stripeAccountStatus: {
+            detailsSubmitted: { type: Boolean, default: false },
+            chargesEnabled: { type: Boolean, default: false },
+            payoutsEnabled: { type: Boolean, default: false },
+        },
     },
     {
         timestamps: true,

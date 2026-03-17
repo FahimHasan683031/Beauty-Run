@@ -2,7 +2,13 @@ import stripe from "../config/stripe";
 import { JwtPayload } from "jsonwebtoken";
 import config from "../config";
 
-export const createPaymentSession = async (user: JwtPayload, amount: number, referenceId: string) => {
+export const createPaymentSession = async (
+    user: JwtPayload, 
+    amount: number, 
+    referenceId: string, 
+    platformFee: number,
+    vendorStripeAccountId: string
+) => {
     const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         line_items: [{
@@ -17,6 +23,12 @@ export const createPaymentSession = async (user: JwtPayload, amount: number, ref
             quantity: 1,
         }],
         mode: 'payment',
+        payment_intent_data: {
+            application_fee_amount: Math.round(platformFee * 100),
+            transfer_data: {
+                destination: vendorStripeAccountId,
+            },
+        },
         success_url: `${config.stripe.frontendUrl}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${config.stripe.frontendUrl}/payment/cancel`,
         customer_email: user.email,
