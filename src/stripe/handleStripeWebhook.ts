@@ -7,6 +7,7 @@ import ApiError from '../errors/ApiError'
 import { logger } from '../shared/logger'
 import { Payment } from '../app/modules/payment/payment.model'
 import { Order } from '../app/modules/order/order.model'
+import { NotificationService } from '../app/modules/notification/notification.service'
 
 const handleStripeWebhook = async (req: Request, res: Response) => {
     console.log('hit stripe webhook')
@@ -43,15 +44,41 @@ const handleStripeWebhook = async (req: Request, res: Response) => {
                         referenceId: session.metadata?.referenceId,
                     });
 
-                    // Update corresponding Order payment status
+                    // Update corresponding Order payment status and notify users
                     if (session.metadata?.referenceId) {
-                        await Order.findByIdAndUpdate(
+                        const updatedOrder = await Order.findByIdAndUpdate(
                             session.metadata.referenceId,
                             { 
                                 paymentStatus: 'paid',
                                 transactionId: session.payment_intent as string || session.id
+                            },
+                            { new: true }
+                        ).populate('product');
+
+                        if (updatedOrder) {
+                            // Notify Customer
+                            await NotificationService.insertNotification({
+                                receiver: updatedOrder.user,
+                                title: 'Payment Successful',
+                                message: `Your payment for the order has been successfully processed.`,
+                                type: 'USER',
+                                referenceId: updatedOrder._id,
+                                screen: 'ORDER_DETAILS'
+                            });
+
+                            // Notify Vendor
+                            const product: any = updatedOrder.product;
+                            if (product && product.createdBy) {
+                                await NotificationService.insertNotification({
+                                    receiver: product.createdBy,
+                                    title: 'Payment Received',
+                                    message: `Payment for your product has been received and securely transferred via Escrow.`,
+                                    type: 'USER',
+                                    referenceId: updatedOrder._id,
+                                    screen: 'ORDER_DETAILS'
+                                });
                             }
-                        );
+                        }
                     }
                 }
                 break
