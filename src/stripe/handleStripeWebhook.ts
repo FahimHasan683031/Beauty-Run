@@ -6,6 +6,7 @@ import stripe from '../config/stripe'
 import ApiError from '../errors/ApiError'
 import { logger } from '../shared/logger'
 import { Payment } from '../app/modules/payment/payment.model'
+import { Order } from '../app/modules/order/order.model'
 
 const handleStripeWebhook = async (req: Request, res: Response) => {
     console.log('hit stripe webhook')
@@ -41,6 +42,17 @@ const handleStripeWebhook = async (req: Request, res: Response) => {
                         customerName: session.customer_details?.name,
                         referenceId: session.metadata?.referenceId,
                     });
+
+                    // Update corresponding Order payment status
+                    if (session.metadata?.referenceId) {
+                        await Order.findByIdAndUpdate(
+                            session.metadata.referenceId,
+                            { 
+                                paymentStatus: 'paid',
+                                transactionId: session.payment_intent as string || session.id
+                            }
+                        );
+                    }
                 }
                 break
             }

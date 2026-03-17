@@ -14,7 +14,7 @@ import { ProductRoutes } from '../modules/product/product.route';
 import { OrderRoutes } from '../modules/order/order.route';
 import { WishlistRoutes } from '../modules/wishlist/wishlist.route';
 import { SupportRoutes } from '../modules/support/support.route';
-
+import { SettingsRoutes } from '../modules/settings/settings.route';
 
 const router = express.Router();
 
@@ -33,6 +33,7 @@ const apiRoutes = [
     { path: "/order", route: OrderRoutes },
     { path: "/wishlist", route: WishlistRoutes },
     { path: "/support", route: SupportRoutes },
+    { path: "/settings", route: SettingsRoutes },
 ]
 
 router.post('/webhook', handleStripeWebhook);
