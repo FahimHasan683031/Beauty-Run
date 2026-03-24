@@ -1,2 +1,8 @@
 {Tue Mar 24 2026 17:08:48} [APP 🐞] error: ::ffff:10.10.7.50 - GET /api/v1/settings 500 - 6.367 ms
 {Tue Mar 24 2026 17:08:56} [APP 🐞] error: ::ffff:10.10.7.50 - GET /api/v1/settings 403 - 3.366 ms
+{Tue Mar 24 2026 17:13:28} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/payment/checkout-session/69c271a61c6bb9cd451a9c16 500 - 1.833 ms
+{Tue Mar 24 2026 17:25:37} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/payment/checkout-session/69c271a61c6bb9cd451a9c16 500 - 8.954 ms
+{Tue Mar 24 2026 17:27:24} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/payment/checkout-session/69c271a61c6bb9cd451a9c16 500 - 7.577 ms
+{Tue Mar 24 2026 17:28:20} [APP 🐞] error: ::ffff:10.10.7.50 - GET /api/v1/payment/onboard-status 403 - 2.381 ms
+{Tue Mar 24 2026 17:28:29} [APP 🐞] error: ::ffff:10.10.7.50 - GET /api/v1/payment/onboard-status 403 - 1.306 ms
+{Tue Mar 24 2026 17:28:32} [APP 🐞] error: ::ffff:10.10.7.50 - GET /api/v1/payment/onboard-status 403 - 1.235 ms

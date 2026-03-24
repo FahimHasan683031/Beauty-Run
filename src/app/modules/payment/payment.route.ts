@@ -9,7 +9,8 @@ const router = Router();
 
 
 router.post(
-    "/checkout-session/:referenceId",
+    "/checkout-session/:orderId",
+    auth(USER_ROLES.CUSTOMER, USER_ROLES.VENDOR, USER_ROLES.ADMIN),
     PaymentController.createCheckoutSession
 )
 

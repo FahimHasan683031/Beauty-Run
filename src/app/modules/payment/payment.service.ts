@@ -4,10 +4,27 @@ import { Payment } from "./payment.model";
 import { createPaymentSession } from "../../../stripe/createPaymentSession";
 import config from "../../../config";
 import { JwtPayload } from "jsonwebtoken";
+import { Order } from "../order/order.model";
+import ApiError from "../../../errors/ApiError";
+import { StatusCodes } from "http-status-codes";
 
 // Create seassion
-const creatSession = async (user: JwtPayload, referenceId: string, amount: number) => {
-  const url = await createPaymentSession(user, amount, referenceId);
+const creatSession = async (user: JwtPayload, orderId: string) => {
+  const order = await Order.findById(orderId);
+
+  if (!order) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'Order not found');
+  }
+
+  if (order.user.toString() !== (user.id || (user as any).authId)) {
+    throw new ApiError(StatusCodes.FORBIDDEN, "You are not authorized to pay for this order");
+  }
+
+  if (order.paymentStatus === 'paid') {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Order is already paid');
+  }
+
+  const url = await createPaymentSession(user, order.finalPrice, orderId);
 
   return { url }
 }
