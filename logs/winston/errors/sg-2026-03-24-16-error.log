@@ -2,3 +2,10 @@
 {Tue Mar 24 2026 16:08:57} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/auth/change-password 400 - 215.330 ms
 {Tue Mar 24 2026 16:09:41} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/auth/login 400 - 210.369 ms
 {Tue Mar 24 2026 16:10:15} [APP 🐞] error: ::ffff:10.10.7.50 - GET /api/v1/user/me 500 - 2.403 ms
+{Tue Mar 24 2026 16:14:01} [APP 🐞] error: ::ffff:10.10.7.50 - GET /api/v1/user 403 - 4.020 ms
+{Tue Mar 24 2026 16:20:34} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/category 404 - 1.359 ms
+{Tue Mar 24 2026 16:21:16} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/category/create 409 - 375.588 ms
+{Tue Mar 24 2026 16:24:48} [APP 🐞] error: ::ffff:10.10.7.50 - PATCH /api/v1/category/69c265adf241a214e03b9392 404 - 9.434 ms
+{Tue Mar 24 2026 16:24:53} [APP 🐞] error: ::ffff:10.10.7.50 - PATCH /api/v1/category/69c265adf241a214e03b9392 400 - 6.772 ms
+{Tue Mar 24 2026 16:25:37} [APP 🐞] error: ::ffff:10.10.7.50 - PATCH /api/v1/category/69c265adf241a214e03b9392 400 - 8.855 ms
+{Tue Mar 24 2026 16:27:41} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/category/create 500 - 3.498 ms

@@ -10,7 +10,7 @@ import config from '../../../config'
 
 
 const getAllUser = async (query: Record<string, unknown>) => {
-    const userQueryBuilder = new QueryBuilder(User.find().select('-password -authentication'), query)
+    const userQueryBuilder = new QueryBuilder(User.find({ status: { $ne: USER_STATUS.DELETED }, role: { $ne: USER_ROLES.ADMIN } }).select('-password -authentication'), query)
         .filter()
         .sort()
         .fields()
@@ -42,7 +42,7 @@ const deleteUser = async (id: string) => {
         throw new ApiError(StatusCodes.NOT_FOUND, 'User not found')
     }
 
-    const result = await User.findByIdAndDelete(id)
+    const result = await User.findByIdAndUpdate(id, { status: USER_STATUS.DELETED })
     return result
 }
 
@@ -91,7 +91,7 @@ const deleteMyAccount = async (user: JwtPayload) => {
         )
     }
 
-    await User.findByIdAndDelete(isExistUser._id)
+    await User.findByIdAndUpdate(isExistUser._id, { status: USER_STATUS.DELETED })
 
     return 'Account deleted successfully'
 }
