@@ -17,7 +17,7 @@ const createProduct = async (user: JwtPayload, payload: IProduct, images: string
 
   const product = await Product.create({
     ...payload,
-    image: images,
+    images: images,
     createdBy: user.authId,
     finalPrice: Math.round(finalPrice * 100) / 100,
   });
@@ -93,7 +93,7 @@ const updateProduct = async (
 
   const updateData: Partial<IProduct> = { ...payload };
   if (images && images.length > 0) {
-    updateData.image = images;
+    updateData.images = images;
   }
 
   // Recalculate finalPrice if price or offer changes
@@ -113,6 +113,7 @@ const updateProduct = async (
 
 // Delete product
 const deleteProduct = async (user: JwtPayload, id: string) => {
+  
   const product = await Product.findById(id);
 
   if (!product) {

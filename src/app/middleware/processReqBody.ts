@@ -6,13 +6,7 @@ import path from 'path'
 import fs from 'fs'
 import sharp from 'sharp'
 
-type IFolderName =
-  | 'image'
-  | 'media'
-  | 'documents'
-  | 'logo'
-  | 'lostImage'
-  | 'shippingLabel'
+type IFolderName = 'image' | 'images' | 'media' | 'documents'
 
 interface ProcessedFiles {
   [key: string]: string | string[] | undefined
@@ -20,11 +14,9 @@ interface ProcessedFiles {
 
 const uploadFields = [
   { name: 'image', maxCount: 1 },
+  { name: 'images', maxCount: 5 },
   { name: 'media', maxCount: 3 },
   { name: 'documents', maxCount: 3 },
-  { name: 'logo', maxCount: 1 },
-  { name: 'lostImage', maxCount: 4 },
-  { name: 'shippingLabel', maxCount: 1 },
 ] as const
 
 export const fileAndBodyProcessorUsingDiskStorage = () => {
@@ -57,18 +49,11 @@ export const fileAndBodyProcessorUsingDiskStorage = () => {
     cb: FileFilterCallback,
   ) => {
     try {
-      const allowedTypes = {
-        image: ['image/jpeg', 'image/png', 'image/jpg'],
+      const allowedTypes: Record<IFolderName, string[]> = {
+        image: ['image/jpeg', 'image/png', 'image/jpg', 'image/webp', 'image/heic', 'image/heif'],
+        images: ['image/jpeg', 'image/png', 'image/jpg', 'image/webp', 'image/heic', 'image/heif'],
         media: ['video/mp4', 'audio/mpeg'],
         documents: ['application/pdf'],
-        logo: ['image/jpeg', 'image/png', 'image/jpg'],
-        lostImage: ['image/jpeg', 'image/png', 'image/jpg'],
-        shippingLabel: [
-          'image/jpeg',
-          'image/png',
-          'image/jpg',
-          'application/pdf',
-        ],
       };
 
       const fieldType = file.fieldname as IFolderName;
@@ -127,7 +112,7 @@ export const fileAndBodyProcessorUsingDiskStorage = () => {
                 paths.push(filePath);
 
                 if (
-                  ['image', 'logo', 'lostImage', 'shippingLabel'].includes(
+                  ['image', 'images'].includes(
                     fieldName,
                   ) &&
                   file.mimetype.startsWith('image/')
@@ -169,14 +154,10 @@ export const fileAndBodyProcessorUsingDiskStorage = () => {
 
         req.body = {
           ...req.body,
-          ...(processedFiles.logo && { logo: processedFiles.logo }),
           ...(processedFiles.image && { image: processedFiles.image }),
-          ...(processedFiles.shippingLabel && {
-            shippingLabel: processedFiles.shippingLabel,
-          }),
-          ...(processedFiles.lostImage && {
-            images: processedFiles.lostImage,
-          }),
+          ...(processedFiles.images && { images: processedFiles.images }),
+          ...(processedFiles.media && { media: processedFiles.media }),
+          ...(processedFiles.documents && { documents: processedFiles.documents }),
         };
 
         next();

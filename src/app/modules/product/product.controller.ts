@@ -6,7 +6,7 @@ import { ProductService } from './product.service';
 
 // Create product
 const createProduct = catchAsync(async (req: Request, res: Response) => {
-  const images = req.files ? (req.files as Express.Multer.File[]).map(f => f.path) : [];
+  const images = req.body.images || [];
   const result = await ProductService.createProduct(req.user!, req.body, images);
   sendResponse(res, {
     statusCode: StatusCodes.CREATED,
@@ -53,7 +53,7 @@ const getSingleProduct = catchAsync(async (req: Request, res: Response) => {
 
 // Update product
 const updateProduct = catchAsync(async (req: Request, res: Response) => {
-  const images = req.files ? (req.files as Express.Multer.File[]).map(f => f.path) : [];
+  const images = req.body.images || [];
   const result = await ProductService.updateProduct(req.user!, req.params.id, req.body, images);
   sendResponse(res, {
     statusCode: StatusCodes.OK,

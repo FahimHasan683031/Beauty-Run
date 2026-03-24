@@ -8,7 +8,7 @@ const productSchema = new Schema<IProduct>(
       required: true,
       trim: true,
     },
-    image: {
+    images: {
       type: [String],
       required: true,
     },

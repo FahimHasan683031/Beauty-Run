@@ -1,0 +1,2 @@
+{Tue Mar 24 2026 17:08:48} [APP 🐞] error: ::ffff:10.10.7.50 - GET /api/v1/settings 500 - 6.367 ms
+{Tue Mar 24 2026 17:08:56} [APP 🐞] error: ::ffff:10.10.7.50 - GET /api/v1/settings 403 - 3.366 ms

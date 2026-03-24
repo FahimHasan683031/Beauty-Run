@@ -9,3 +9,7 @@
 {Tue Mar 24 2026 16:24:53} [APP 🐞] error: ::ffff:10.10.7.50 - PATCH /api/v1/category/69c265adf241a214e03b9392 400 - 6.772 ms
 {Tue Mar 24 2026 16:25:37} [APP 🐞] error: ::ffff:10.10.7.50 - PATCH /api/v1/category/69c265adf241a214e03b9392 400 - 8.855 ms
 {Tue Mar 24 2026 16:27:41} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/category/create 500 - 3.498 ms
+{Tue Mar 24 2026 16:36:56} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/product 500 - 1.020 ms
+{Tue Mar 24 2026 16:37:10} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/product 500 - 2.374 ms
+{Tue Mar 24 2026 16:59:20} [APP 🐞] error: ::ffff:10.10.7.50 - PATCH /api/v1/product/69c2658cf241a214e03b938e 500 - 4.273 ms
+{Tue Mar 24 2026 16:59:31} [APP 🐞] error: ::ffff:10.10.7.50 - PATCH /api/v1/product/69c2658cf241a214e03b938e 404 - 24.259 ms

@@ -1,0 +1,26 @@
+{Tue Mar 24 2026 17:01:11} [APP 🚀] info: ::ffff:10.10.7.50 - GET /api/v1/product/my-products 200 - 6.408 ms
+{Tue Mar 24 2026 17:02:50} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Mar 24 2026 17:02:50} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Tue Mar 24 2026 17:02:50} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Tue Mar 24 2026 17:02:54} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Mar 24 2026 17:02:54} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Tue Mar 24 2026 17:02:54} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Tue Mar 24 2026 17:04:02} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Mar 24 2026 17:04:02} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Tue Mar 24 2026 17:04:02} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Tue Mar 24 2026 17:04:39} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Mar 24 2026 17:04:39} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Tue Mar 24 2026 17:04:39} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Tue Mar 24 2026 17:04:53} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Mar 24 2026 17:04:53} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Tue Mar 24 2026 17:04:53} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Tue Mar 24 2026 17:04:56} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Mar 24 2026 17:04:56} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Tue Mar 24 2026 17:04:56} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Tue Mar 24 2026 17:05:48} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Mar 24 2026 17:05:48} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Tue Mar 24 2026 17:05:48} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Tue Mar 24 2026 17:09:06} [APP 🚀] info: ::ffff:10.10.7.50 - GET /api/v1/settings 200 - 11.841 ms
+{Tue Mar 24 2026 17:09:23} [APP 🚀] info: ::ffff:10.10.7.50 - POST /api/v1/settings 200 - 23.624 ms
+{Tue Mar 24 2026 17:09:27} [APP 🚀] info: ::ffff:10.10.7.50 - GET /api/v1/settings 200 - 2.235 ms
+{Tue Mar 24 2026 17:10:05} [APP 🚀] info: ::ffff:10.10.7.50 - GET /api/v1/product 200 - 16.809 ms
