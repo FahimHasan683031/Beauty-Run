@@ -53,15 +53,7 @@ const createAccount = (values: ICreateAccount) => {
           </p>
         </div>
 
-        <!-- Button -->
-        <div style="text-align:center; margin-top:45px;">
-          <a href="${config.frontend_url}/otp-verify" 
-             style="background-color:#FB6CC0; color:#ffffff; padding:14px 32px; font-size:16px; 
-                    font-weight:600; border-radius:10px; text-decoration:none; display:inline-block; 
-                    box-shadow:0 4px 12px rgba(251,108,192,0.3); transition:all 0.3s;">
-            Open App 🚀
-          </a>
-        </div>
+
       </td>
     </tr>
 
@@ -97,8 +89,8 @@ const resetPassword = (values: IResetPassword) => {
     
     <!-- Header -->
     <tr>
-      <td align="center" style="background:linear-gradient(135deg,#F5FAFF,#E6F0FF); padding:35px 20px; border-bottom:1px solid #0096FF33;">
-        <img src="https://i.ibb.co.com/Hf7XccNJ/Send-you-back-Final-logo-02-3.png" alt="App"
+      <td align="center" style="background:linear-gradient(135deg,#FFF0F9,#FFE6F2); padding:35px 20px; border-bottom:1px solid #FB6CC033;">
+        <img src="https://i.ibb.co.com/ZCCGRGf/dd55d4a6535f8e84f9d45593679b0f9429bf90de.png" alt="App"
              style="width:220px; height:auto; filter:drop-shadow(0 0 6px rgba(0,0,0,0.25));">
       </td>
     </tr>
@@ -137,26 +129,17 @@ const resetPassword = (values: IResetPassword) => {
           </p>
         </div>
 
-        <!-- Button -->
-        <div style="text-align:center; margin-top:45px;">
-          <a href="${config.frontend_url}/otp-verify" target="_blank"
-             style="background-color:#FB6CC0; color:#ffffff; padding:14px 32px; font-size:16px;
-                    font-weight:600; border-radius:10px; text-decoration:none; display:inline-block;
-                    box-shadow:0 4px 12px rgba(251,108,192,0.3); transition:all 0.3s;">
-            🔑 Reset Password
-          </a>
-        </div>
       </td>
     </tr>
 
     <!-- Footer -->
     <tr>
-      <td align="center" style="background:linear-gradient(135deg,#F5FAFF,#E6F0FF); padding:25px 20px; border-top:1px solid #0096FF33;">
-        <p style="margin:0; color:#003060; font-size:13px;">
+      <td align="center" style="background:linear-gradient(135deg,#FFF0F9,#FFE6F2); padding:25px 20px; border-top:1px solid #FB6CC033;">
+        <p style="margin:0; color:#5D0032; font-size:13px;">
           © ${new Date().getFullYear()} <strong>Beauty-Run</strong>. All rights reserved.
         </p>
-        <p style="margin:6px 0 0; color:#003060; font-size:13px;">
-          Powered by <strong style="color:#0096FF;">Beauty-Run API</strong> ✨
+        <p style="margin:6px 0 0; color:#5D0032; font-size:13px;">
+          Powered by <strong style="color:#FB6CC0;">Beauty-Run API</strong> ✨
         </p>
       </td>
     </tr>
@@ -236,16 +219,7 @@ const resendOtp = (values: {
           </p>
         </div>
 
-        <!-- Button -->
-        <div style="text-align:center; margin-top:45px;">
-          <a href="${config.frontend_url}/otp-verify"
-             style="background-color:#FB6CC0; color:#ffffff; padding:14px 32px;
-                    font-size:16px; font-weight:600; border-radius:10px;
-                    text-decoration:none; display:inline-block;
-                    box-shadow:0 4px 12px rgba(251,108,192,0.3);">
-            ${isReset ? 'Reset Password' : 'Verify Account'}
-          </a>
-        </div>
+
       </td>
     </tr>
 
@@ -287,9 +261,9 @@ const adminContactNotificationEmail = (payload: {
     <!-- Header -->
     <tr>
       <td align="center" 
-          style="background:linear-gradient(135deg,#F5FAFF,#E6F0FF); padding:35px 20px; border-bottom:1px solid #0096FF33;">
-        <img src="https://i.ibb.co.com/Hf7XccNJ/Send-you-back-Final-logo-02-3.png" alt="App"
-             style="width:220px; height:75px; filter:drop-shadow(0 0 6px rgba(0,0,0,0.25));">
+          style="background:linear-gradient(135deg,#FFF0F9,#FFE6F2); padding:35px 20px; border-bottom:1px solid #FB6CC033;">
+        <img src="https://i.ibb.co.com/ZCCGRGf/dd55d4a6535f8e84f9d45593679b0f9429bf90de.png" alt="App"
+             style="width:220px; height:auto; filter:drop-shadow(0 0 6px rgba(0,0,0,0.25));">
       </td>
     </tr>
 
@@ -345,12 +319,12 @@ const adminContactNotificationEmail = (payload: {
     <!-- Footer -->
     <tr>
       <td align="center" 
-          style="background:linear-gradient(135deg,#F5FAFF,#E6F0FF); padding:25px 20px; border-top:1px solid #0096FF33;">
-        <p style="margin:0; color:#003060; font-size:13px;">
+          style="background:linear-gradient(135deg,#FFF0F9,#FFE6F2); padding:25px 20px; border-top:1px solid #FB6CC033;">
+        <p style="margin:0; color:#5D0032; font-size:13px;">
           © ${new Date().getFullYear()} <strong>Beauty-Run</strong>. All rights reserved.
         </p>
-        <p style="margin:6px 0 0; color:#003060; font-size:13px;">
-          Powered by <strong style="color:#0096FF;">Beauty-Run API</strong> 
+        <p style="margin:6px 0 0; color:#5D0032; font-size:13px;">
+          Powered by <strong style="color:#FB6CC0;">Beauty-Run API</strong> 
         </p>
       </td>
     </tr>
@@ -379,9 +353,9 @@ const userContactConfirmationEmail = (payload: {
     <!-- Header -->
     <tr>
       <td align="center" 
-          style="background:linear-gradient(135deg,#F5FAFF,#E6F0FF); padding:35px 20px; border-bottom:1px solid #0096FF33;">
-        <img src="https://i.ibb.co.com/Hf7XccNJ/Send-you-back-Final-logo-02-3.png" alt="App"
-             style="width:220px; height:75px; filter:drop-shadow(0 0 6px rgba(0,0,0,0.25));">
+          style="background:linear-gradient(135deg,#FFF0F9,#FFE6F2); padding:35px 20px; border-bottom:1px solid #FB6CC033;">
+        <img src="https://i.ibb.co.com/ZCCGRGf/dd55d4a6535f8e84f9d45593679b0f9429bf90de.png" alt="App"
+             style="width:220px; height:auto; filter:drop-shadow(0 0 6px rgba(0,0,0,0.25));">
       </td>
     </tr>
 
@@ -410,701 +384,20 @@ const userContactConfirmationEmail = (payload: {
           We truly appreciate your message 💗
         </p>
 
-        <!-- Button -->
-        <div style="text-align:center; margin-top:40px;">
-          <a href="${config.frontend_url}"
-             style="background-color:#0096FF; color:#ffffff; padding:14px 32px; font-size:16px; 
-                    font-weight:600; border-radius:10px; text-decoration:none; display:inline-block; 
-                    box-shadow:0 4px 12px rgba(0,150,255,0.3); transition:all 0.3s;">
-            Open App 
-          </a>
-        </div>
       </td>
     </tr>
 
     <!-- Footer -->
     <tr>
       <td align="center" 
-          style="background:linear-gradient(135deg,#F5FAFF,#E6F0FF); padding:25px 20px; border-top:1px solid #0096FF33;">
-        <p style="margin:0; color:#003060; font-size:13px;">
+          style="background:linear-gradient(135deg,#FFF0F9,#FFE6F2); padding:25px 20px; border-top:1px solid #FB6CC033;">
+        <p style="margin:0; color:#5D0032; font-size:13px;">
           © ${new Date().getFullYear()} <strong>Beauty-Run</strong>. All rights reserved.
         </p>
-        <p style="margin:6px 0 0; color:#003060; font-size:13px;">
-          Powered by <strong style="color:#0096FF;">Beauty-Run API</strong> ✨
+        <p style="margin:6px 0 0; color:#5D0032; font-size:13px;">
+          Powered by <strong style="color:#FB6CC0;">Beauty-Run API</strong> ✨
+ e="color:#FB6CC0;">Beauty-Run API</strong> ✨
         </p>
-      </td>
-    </tr>
-
-  </table>
-</body>
-    `,
-  }
-}
-
-
-const sendPaymentConfirmationEmail = (data: any) => {
-  const parcelsHtml = data.parcel
-    .map(
-      (p: any, i: number) => `
-        <tr>
-          <td style="padding:6px 0; color:#00000099;">Parcel ${i + 1}:</td>
-          <td style="padding:6px 0; color:#000000; text-align:right;">
-            ${p.name}, ${p.weight}${p.mass_unit}
-          </td>
-        </tr>
-      `,
-    )
-    .join('')
-
-  return {
-    to: data.address_to.email,
-    subject: `✅ Payment Completed – Beauty-Run Order`,
-    html: `
-<body style="margin:0; padding:0; font-family:'Inter','Segoe UI',sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px; margin:40px auto; background:#ffffff; border-radius:14px; box-shadow:0 4px 12px rgba(0,0,0,0.05);">
-
-    <!-- Header -->
-    <tr>
-      <td align="center" style="background:linear-gradient(135deg, #FFF0F9, #FFE6F2); padding:30px 20px;">
-        <img src="https://i.ibb.co.com/ZCCGRGf/dd55d4a6535f8e84f9d45593679b0f9429bf90de.png" alt="App Logo" style="height:70px; width:auto; margin-bottom:10px;" />
-        <h1 style="color:#FB6CC0; font-size:22px; margin:0;">Payment Successful ✅</h1>
-      </td>
-    </tr>
-
-    <!-- Body -->
-    <tr>
-      <td style="padding:30px 25px;">
-        <p style="color:#000; font-size:15px; line-height:1.6; text-align:center;">
-          Hello <strong style="color:#0096FF;">${data.address_from.name}</strong>, your payment for your shipping order has been successfully completed.
-        </p>
-
-        <!-- Sender & Receiver -->
-        <h2 style="color:#0096FF; font-size:17px; margin-top:25px;">📨 Sender & Receiver</h2>
-        <p style="font-size:14px; margin:3px 0;"><strong>From:</strong> ${data.address_from.name}, ${data.address_from.city}, ${data.address_from.country}</p>
-        <p style="font-size:14px; margin:3px 0;"><strong>To:</strong> ${data.address_to.name}, ${data.address_to.city}, ${data.address_to.country}</p>
-
-        <!-- Shipping Summary -->
-        <h3 style="color:#0096FF; font-size:16px; margin-top:20px;">📦 Shipping Details</h3>
-        <p style="font-size:14px; margin:3px 0;">Type: <strong>${data.shipping_type}</strong></p>
-        <p style="font-size:14px; margin:3px 0;">Status: <strong>${data.status}</strong></p>
-
-        <!-- Parcel Details -->
-        <h3 style="color:#0096FF; font-size:16px; margin-top:20px;">🛍 Parcels</h3>
-        <table style="width:100%; border-collapse:collapse;">${parcelsHtml}</table>
-
-        <!-- Insurance -->
-        <h3 style="color:#0096FF; font-size:16px; margin-top:20px;">🛡 Insurance</h3>
-        <p style="font-size:14px; margin:3px 0;">Insured: <strong>${data.insurance.isInsured ? 'Yes' : 'No'}</strong></p>
-        <p style="font-size:14px; margin:3px 0;">Product Value: £${data.insurance.productValue}</p>
-        <p style="font-size:14px; margin:3px 0; color:#0096FF; font-weight:700;">Insurance Cost: £${data.insurance.insuranceCost}</p>
-
-        <!-- Payment Summary -->
-        <h3 style="color:#FB6CC0; font-size:16px; margin-top:20px;">💰 Payment</h3>
-        <p style="font-size:14px; margin:3px 0;">Shipping Cost: £${data.shipping_cost}</p>
-        <p style="font-size:14px; margin:3px 0; color:#FB6CC0; font-weight:700;">Total Paid: £${data.total_cost}</p>
-
-        <!-- Notes -->
-        <div style="background:#FB6CC022; padding:12px 15px; border-radius:10px; margin-top:15px;">
-          <p style="margin:0; font-size:13px; color:#5D0032;">💬 Notes: ${data.notes || 'None'}</p>
-        </div>
-      </td>
-    </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" style="background:#f5f5f5; padding:15px; font-size:12px; color:#777;">
-        © ${new Date().getFullYear()} — Beauty-Run Services. Built with 💙 for your comfort
-      </td>
-    </tr>
-
-  </table>
-</body>
-    `,
-  }
-}
-
-const sendAdminPaymentNotificationEmail = (data: any) => {
-  return {
-    to: config.super_admin.email as string,
-    subject: `💡 Payment Completed by ${data.address_from.name} – ${data.shipping_type}`,
-    html: `
-<body style="margin:0; padding:0; font-family:'Inter','Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0"
-    style="max-width:640px; margin:40px auto; background:#ffffff; border-radius:16px;
-           overflow:hidden; border:1px solid #0096FF55; box-shadow:0 4px 20px #00000011;">
-
-    <!-- Header -->
-   <td align="center" 
-  style="
-    background: linear-gradient(135deg, #FFF0F9, #FFE6F2);
-    padding: 35px 20px; 
-    border-bottom: 1px solid #FB6CC033;
-  "
->
-  <img 
-    src="https://i.ibb.co.com/ZCCGRGf/dd55d4a6535f8e84f9d45593679b0f9429bf90de.png"
-    alt="App Logo"
-    style="height:85px; width:auto; margin-bottom:10px;" 
-  />
-  
-  <h1 style="
-    color:#FB6CC0;  
-    font-size:24px; 
-    font-weight:700; 
-    margin:0;
-  ">
-    Payment Completed Notification
-  </h1>
-</td>
-
-
-    <!-- Body -->
-    <tr>
-      <td style="padding:40px;">
-        <p style="color:#00000099; font-size:15px; line-height:1.7; text-align:center;">
-          <strong style="color:#0096FF;">${data.address_from.name}</strong> has successfully completed the payment for
-          <strong>${data.shipping_type}</strong>.
-        </p>
-
-        <!-- Service Summary -->
-        <h2 style="color:#0096FF; font-size:19px; margin-bottom:15px; margin-top:30px;">
-          🧾 Shipping Details
-        </h2>
-
-        <table style="width:100%; border-collapse:collapse;">
-
-          <tr>
-            <td style="padding:8px 0; color:#00000099;">Customer Name:</td>
-            <td style="padding:8px 0; color:#000000; text-align:right;">
-              ${data.address_from.name}
-            </td>
-          </tr>
-
-          <tr style="border-top:1px solid #0096FF22;">
-            <td style="padding:8px 0; color:#00000099;">Email:</td>
-            <td style="padding:8px 0; color:#000000; text-align:right;">
-              ${data.address_from.email}
-            </td>
-          </tr>
-
-          <tr style="border-top:1px solid #0096FF22;">
-            <td style="padding:8px 0; color:#00000099;">Phone:</td>
-            <td style="padding:8px 0; color:#000000; text-align:right;">
-              ${data.address_from.phone}
-            </td>
-          </tr>
-
-          <tr style="border-top:1px solid #0096FF22;">
-            <td style="padding:8px 0; color:#00000099;">Shipping Type:</td>
-            <td style="padding:8px 0; color:#000000; text-align:right;">
-              ${data.shipping_type}
-            </td>
-          </tr>
-
-          <tr style="border-top:1px solid #0096FF22;">
-            <td style="padding:8px 0; color:#00000099;">Address:</td>
-            <td style="padding:8px 0; color:#000000; text-align:right;">
-              ${data.address_from.street1}, ${data.address_from.city}, 
-              ${data.address_from.state}, ${data.address_from.postal_code}, ${data.address_from.country}
-            </td>
-          </tr>
-
-          <tr style="border-top:1px solid #0096FF22;">
-            <td style="padding:8px 0; color:#00000099;">Total Paid:</td>
-            <td style="padding:8px 0; color:#0096FF; font-weight:700; text-align:right;">
-              £${data.total_cost}
-            </td>
-          </tr>
-
-        </table>
-
-        <!-- Notes -->
-        <div style="background:#0096FF22; padding:15px 18px; border-radius:12px;
-                    border-left:4px solid #0096FF; margin-top:25px;">
-          <p style="margin:0; color:#000000; font-size:14px;">
-            💬 <strong>Notes:</strong> ${data.notes || 'No additional notes'}
-          </p>
-        </div>
-
-      </td>
-    </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" style="background:#FFF0F9; padding:22px; border-top:1px solid #FB6CC022;">
-        <p style="margin:0; color:#5D0032; font-size:12px;">
-          © ${new Date().getFullYear()} — Beauty-Run Services
-        </p>
-        <p style="margin:5px 0 0; color:#5D0032; font-size:12px;">
-          Built with 💗 for your comfort
-        </p>
-      </td>
-    </tr>
-
-  </table>
-</body>
-    `,
-  }
-}
-
-const businessUserShipmentInfoEmail = (data: any) => {
-  const parcels = data.parcel
-    .map(
-      (p: any, i: number) => `<tr>
-        <td style="padding:4px 0; color:#555;">Parcel ${i + 1}:</td>
-        <td style="padding:4px 0; text-align:right; color:#000;">
-          ${p.name} — ${p.weight}${p.mass_unit} (${p.length}x${p.width}x${p.height}${p.distance_unit})
-        </td>
-      </tr>`,
-    )
-    .join('')
-
-  return {
-    to: data.address_from.email,
-    subject: `📦 Your Lost Item Has Been Booked – #${data._id}`,
-    html: `
-<body style="margin:0;padding:0;font-family:Inter,Segoe UI,sans-serif;background:#f7f9fc;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="max-width:620px;margin:30px auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,0.06);">
-    
-    <!-- Header -->
-    <tr>
-      <td align="center" style="background:#FFF0F9;padding:25px 20px;">
-        <img src="https://i.ibb.co.com/ZCCGRGf/dd55d4a6535f8e84f9d45593679b0f9429bf90de.png" style="height:70px;margin-bottom:8px;" />
-        <h2 style="margin:0;color:#FB6CC0;font-size:20px;">Your Lost Item Has Been Booked!</h2>
-        <p style="margin:4px 0 0;color:#5D0032;font-size:13px;">Booking ID: <strong>${data._id}</strong></p>
-      </td>
-    </tr>
-
-    <!-- Body -->
-    <tr>
-      <td style="padding:25px 20px;">
-        <p style="font-size:14px;color:#000;line-height:1.5;">
-          Hello <strong style="color:#0077DD;">${data.address_from.name}</strong>,<br>
-          Your added lost item has been successfully booked for shipment. ✅
-        </p>
-
-        <!-- Shipment Summary -->
-        <h3 style="color:#0077DD;font-size:15px;margin:15px 0 6px;">📦 Shipment Summary</h3>
-        <p style="font-size:13px;margin:2px 0;"><strong>Type:</strong> ${data.shipping_type}</p>
-        <p style="font-size:13px;margin:2px 0;"><strong>To:</strong> ${data.address_to.name}, ${data.address_to.city}, ${data.address_to.country}</p>
-
-        <!-- Parcels -->
-        <h3 style="color:#0077DD;font-size:15px;margin:15px 0 6px;">🛍 Parcels</h3>
-        <table width="100%" style="margin-top:6px;">${parcels}</table>
-
-        <!-- Notes & Insurance -->
-        <div style="background:#FFF0F9;padding:10px;border-radius:8px;margin-top:15px;">
-          <p style="margin:2px 0;font-size:13px; color:#5D0032;"><strong>Notes:</strong> ${data.notes || 'None'}</p>
-          ${data.insurance ? `<p style="margin:2px 0;font-size:13px; color:#5D0032;"><strong>Insurance:</strong> Yes — ${data.insurance.amount}</p>` : ''}
-        </div>
-
-        <!-- Dashboard Button -->
-        <div style="text-align:center;margin-top:20px;">
-          <a href="${config.frontend_url}/dashboard"
-             style="background:#FB6CC0;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:14px;display:inline-block;">
-            Go to Dashboard & Check Shipment
-          </a>
-        </div>
-      </td>
-    </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" style="background:#FFF0F9;padding:12px;font-size:12px;color:#5D0032;">
-        © ${new Date().getFullYear()} Beauty-Run • Business Services
-      </td>
-    </tr>
-  </table>
-</body>
-`,
-  }
-}
-
-const businessUserRegistrationInviteEmail = (data: any) => {
-  const parcels = data.parcel
-    .map(
-      (p: any, i: number) => `
-        <tr>
-          <td style="padding:4px 0; color:#555;">Parcel ${i + 1}:</td>
-          <td style="padding:4px 0; text-align:right; color:#000;">
-            ${p.name} — ${p.weight}${p.mass_unit} (${p.length}x${p.width}x${p.height}${p.distance_unit})
-          </td>
-        </tr>`,
-    )
-    .join('')
-
-  return {
-    to: data.address_from.email,
-    subject: `📦 Action Required – Create Your Beauty-Run Account`,
-    html: `
-<body style="margin:0;padding:0;font-family:Inter,Segoe UI,sans-serif;background:#f7f9fc;">
-  <table width="100%" cellpadding="0" cellspacing="0"
-         style="max-width:620px;margin:30px auto;background:#fff;
-         border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,0.06);">
-
-    <!-- Header -->
-    <tr>
-      <td align="center" style="background:#FFF0F9;padding:25px 20px;">
-        <img src="https://i.ibb.co.com/ZCCGRGf/dd55d4a6535f8e84f9d45593679b0f9429bf90de.png"
-             style="height:70px;margin-bottom:8px;" />
-        <h2 style="margin:0;color:#FB6CC0;font-size:20px;">A Lost Item Shipment Was Created</h2>
-        <p style="margin:4px 0 0;color:#5D0032;font-size:13px;">Booking ID: <strong>${data._id}</strong></p>
-      </td>
-    </tr>
-
-    <!-- Body -->
-    <tr>
-      <td style="padding:25px 20px;">
-        <p style="font-size:14px;color:#000;line-height:1.5;">
-          Hello <strong style="color:#0077DD;">${data.address_from.name}</strong>,<br>
-          A customer has booked a shipment for the lost item you found.  
-          To continue and provide shipping information, you must register a business account.
-        </p>
-
-        <!-- Summary -->
-        <h3 style="color:#0077DD;font-size:15px;margin:15px 0 6px;">📦 Shipment Summary</h3>
-        <p style="font-size:13px;margin:2px 0;"><strong>Type:</strong> ${data.shipping_type}</p>
-        <p style="font-size:13px;margin:2px 0;"><strong>To:</strong> ${data.address_to.name}, ${data.address_to.city}, ${data.address_to.country}</p>
-
-        <!-- Parcels -->
-        <h3 style="color:#0077DD;font-size:15px;margin:15px 0 6px;">🛍 Parcels</h3>
-        <table width="100%" style="margin-top:6px;">${parcels}</table>
-
-        <!-- Notes -->
-        <div style="background:#E8F6FF;padding:10px;border-radius:8px;margin-top:15px;">
-          <p style="margin:2px 0;font-size:13px;">
-            <strong>Notes:</strong> ${data.notes || 'None'}
-          </p>
-        </div>
-
-        <!-- Register Button -->
-        <div style="text-align:center;margin-top:20px;">
-          <a href="${config.frontend_url}/register"
-             style="background:#FB6CC0;color:#fff;padding:12px 28px;border-radius:8px;
-             text-decoration:none;font-size:14px;display:inline-block;">
-            Create Your Beauty-Run Account
-          </a>
-        </div>
-
-        <p style="font-size:13px;color:#555;text-align:center;margin-top:10px;">
-          Registration is required to collect shipping information and proceed with the delivery.
-        </p>
-      </td>
-    </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" style="background:#FFF0F9;padding:12px;font-size:12px;color:#5D0032;">
-        © ${new Date().getFullYear()} Beauty-Run • Business Services
-      </td>
-    </tr>
-
-  </table>
-</body>`,
-  }
-}
-
-const guestLostItemNotificationEmail = (data: any) => {
-  const businessDetails = data?.user?.BusinessDetails;
-  const BASE_URL = "https://api.App.com";
-
-  const imagesHtml =
-    Array.isArray(data?.images) && data.images.length > 0
-      ? `
-        <h3 style="color:#0077DD;font-size:15px;margin:15px 0 8px;">
-          📷 Item Images
-        </h3>
-        <table width="100%" cellpadding="0" cellspacing="0">
-          <tr>
-            ${data.images
-        .map(
-          (img: string) => `
-                <td align="center" style="padding:6px;">
-                  <img
-                    src="${BASE_URL}${img}"
-                    alt="Lost Item Image"
-                    style="width:100%;max-width:170px;
-                    border-radius:10px;border:1px solid #ddd;" />
-                </td>
-              `
-        )
-        .join("")}
-          </tr>
-        </table>
-      `
-      : "";
-
-  return {
-    to: data.guestEmail,
-    subject: `📦 We Found Your Lost Item – Action Required`,
-    html: `
-<body style="margin:0;padding:0;font-family:Inter,Segoe UI,sans-serif;background:#f7f9fc;">
-  <table width="100%" cellpadding="0" cellspacing="0"
-    style="max-width:620px;margin:30px auto;background:#fff;
-    border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,0.06);">
-
-    <!-- Header -->
-    <tr>
-      <td align="center" style="background:#FFF0F9;padding:25px 20px;">
-        <img src="https://i.ibb.co.com/ZCCGRGf/dd55d4a6535f8e84f9d45593679b0f9429bf90de.png"
-          style="height:70px;margin-bottom:8px;" />
-
-        <h2 style="margin:0;color:#FB6CC0;font-size:20px;">
-          Good News! We Found Your Item
-        </h2>
-
-        ${businessDetails
-        ? `<p style="margin-top:6px;font-size:13px;color:#333;">
-                <strong>${businessDetails.BusinessName || ""}</strong>
-                ${businessDetails.companyName
-          ? `• ${businessDetails.companyName}`
-          : ""
-        }
-              </p>`
-        : ""
-      }
-      </td>
-    </tr>
-
-    <!-- Body -->
-    <tr>
-      <td style="padding:25px 20px;">
-
-        <p style="font-size:14px;color:#000;line-height:1.6;">
-          Hello <strong style="color:#0077DD;">${data.guestName}</strong>,<br>
-          We hope you're doing well. Our team has located an item that matches your belongings.
-          Please review the details below.
-        </p>
-
-        ${imagesHtml}
-
-        <!-- Item Details -->
-        <h3 style="color:#0077DD;font-size:15px;margin:15px 0 6px;">
-          🟦 Lost Item Details
-        </h3>
-        <p style="font-size:13px;margin:2px 0;"><strong>Item Name:</strong> ${data.itemName}</p>
-        <p style="font-size:13px;margin:2px 0;"><strong>Description:</strong> ${data.itemDescription || "N/A"}</p>
-        <p style="font-size:13px;margin:2px 0;">
-          <strong>Date Found:</strong> ${new Date(data.dateFound).toDateString()}
-        </p>
-        <p style="font-size:13px;margin:2px 0;">
-          <strong>Location Found:</strong> ${data.locationFound}
-        </p>
-
-        <!-- Guest Info -->
-        <h3 style="color:#0077DD;font-size:15px;margin:15px 0 6px;">
-          🏨 Your Stay Information
-        </h3>
-        <p style="font-size:13px;margin:2px 0;">
-          <strong>Name on Reservation:</strong> ${data.guestReservationName}
-        </p>
-        <p style="font-size:13px;margin:2px 0;">
-          <strong>Room Number:</strong> ${data.guestRoomNumber}
-        </p>
-        <p style="font-size:13px;margin:2px 0;">
-          <strong>Contact Number:</strong> ${data.guestPhone}
-        </p>
-
-        <!-- Action -->
-        <div style="background:#FFF0F9;padding:12px;border-radius:8px;margin-top:16px;">
-          <p style="margin:0;font-size:13px;color:#5D0032;">
-            To have your item safely shipped to your address, please complete your shipping details below.
-          </p>
-        </div>
-
-        <div style="text-align:center;margin-top:22px;">
-          <a href="${config.frontend_url}/orders/${data._id}"
-            style="background:#FB6CC0;color:#fff;padding:12px 30px;
-            border-radius:8px;text-decoration:none;font-size:14px;display:inline-block;">
-            Book Shipping for Your Item
-          </a>
-        </div>
-
-        <p style="font-size:13px;color:#555;text-align:center;margin-top:12px;">
-          If this item does not belong to you, please ignore this email.
-        </p>
-      </td>
-    </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" style="background:#FFF0F9;padding:12px;font-size:12px;color:#5D0032;">
-        © ${new Date().getFullYear()} Beauty-Run • Lost & Found Services
-      </td>
-    </tr>
-
-  </table>
-</body>
-`,
-  };
-};
-
-
-
-const businessShippingDetailsUpdateEmail = (data: any) => {
-  return {
-    to: data.address_from.email,
-    subject: `📦 Shipping Details Updated – #${data._id}`,
-    html: `
-<body style="margin:0;padding:0;font-family:Inter,Segoe UI,sans-serif;background:#f7f9fc;">
-  <table width="100%" cellpadding="0" cellspacing="0"
-         style="max-width:620px;margin:30px auto;background:#fff;
-         border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,0.06);">
-
-    <!-- Header -->
-    <tr>
-      <td align="center" style="background:#FFF0F9;padding:25px 20px;">
-        <img src="https://i.ibb.co.com/ZCCGRGf/dd55d4a6535f8e84f9d45593679b0f9429bf90de.png"
-             style="height:70px;margin-bottom:8px;" />
-        <h2 style="margin:0;color:#FB6CC0;font-size:20px;">Shipping Details Updated</h2>
-        <p style="margin:4px 0 0;color:#5D0032;font-size:13px;">Shipment ID: <strong>${data._id}</strong></p>
-      </td>
-    </tr>
-
-    <!-- Body -->
-    <tr>
-      <td style="padding:25px 20px;">
-
-        <p style="font-size:14px;color:#000;line-height:1.6;">
-          Hello <strong style="color:#0077DD;">${data.address_from.name}</strong>,<br>
-          The shipping for this lost-item shipment has now been <strong>booked with <span style="color:#0077DD;">${data.carrier || 'the carrier'}</span></strong>.
-        </p>
-
-        <div style="background:#FFF0F9;padding:12px;border-radius:8px;margin:14px 0;">
-          <p style="margin:0;font-size:13px;color:#5D0032;line-height:1.5;">
-            This shipment is scheduled for delivery to the item owner. Please <strong>collect the required recipient information</strong> (Shipping Label, Tracking Number) and <strong>prepare the parcel for dispatch</strong> so it's ready for carrier pickup.
-          </p>
-        </div>
-
-        <!-- Shipping Info -->
-        <h3 style="color:#0077DD;font-size:15px;margin:12px 0 6px;">🚚 Current Shipping Details</h3>
-        <p style="font-size:13px;margin:2px 0;"><strong>Carrier:</strong> ${data.carrier || 'N/A'}</p>
-        <p style="font-size:13px;margin:2px 0;"><strong>Tracking Number:</strong> ${data.tracking_id || 'N/A'}</p>
-        ${data.tracking_url ? `<p style="font-size:13px;margin:2px 0;"><strong>Tracking URL:</strong> <a href="${data.tracking_url}" style="color:#0077DD;">Track Package</a></p>` : ''}
-
-        ${data.shippingLabel
-        ? `
-        <div style="margin-top:12px;">
-      <a href="${config.backend_url}/${data.shippingLabel}"
-   download
-   style="background:#0077DD;color:#fff;padding:10px 26px;border-radius:8px;
-   text-decoration:none;font-size:14px;display:inline-block;">
-  Download Shipping Label
-</a>
-
-        </div>`
-        : ''
-      }
-
-        <!-- Action -->
-        <div style="text-align:center;margin-top:18px;">
-          <a href="${config.frontend_url}/dashboard"
-             style="background:#FB6CC0;color:#fff;padding:10px 26px;border-radius:8px;
-             text-decoration:none;font-size:14px;display:inline-block;">
-            Open Shipment in Dashboard
-          </a>
-        </div>
-
-        <p style="font-size:12px;color:#666;text-align:center;margin-top:12px;">
-          If you need assistance, contact support or check the shipment in your dashboard.
-        </p>
-
-      </td>
-    </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" style="background:#FFF0F9;padding:12px;font-size:12px;color:#5D0032;">
-        © ${new Date().getFullYear()} Beauty-Run • Business Portal
-      </td>
-    </tr>
-
-  </table>
-</body>
-`,
-  }
-}
-
-const customerShippingDetailsUpdateEmail = (data: any) => {
-  return {
-    to: data.address_to.email,
-    subject: `📦 Your Shipment Tracking Details Updated – #${data._id}`,
-    html: `
-<body style="margin:0;padding:0;font-family:Inter,Segoe UI,sans-serif;background:#f7f9fc;">
-  <table width="100%" cellpadding="0" cellspacing="0"
-         style="max-width:620px;margin:30px auto;background:#fff;
-         border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,0.06);">
-
-    <!-- Header -->
-    <tr>
-      <td style="padding:25px 20px;">
-
-        <p style="font-size:14px;color:#000;line-height:1.6;">
-          Hello <strong style="color:#0077DD;">${data.address_to.name}</strong>,<br>
-          Your shipment has now been <strong>booked with the carrier</strong> and is ready for delivery.
-          You can use the tracking details below to monitor your package.
-        </p>
-
-        <!-- Tracking Info -->
-        <h3 style="color:#0077DD;font-size:15px;margin:16px 0 6px;">🚚 Tracking Details</h3>
-        <p style="font-size:13px;margin:2px 0;"><strong>Carrier:</strong> ${data.carrier || 'N/A'}</p>
-        <p style="font-size:13px;margin:2px 0;"><strong>Tracking Number:</strong> ${data.tracking_id || 'N/A'}</p>
-
-        ${data.tracking_url
-        ? `
-        <div style="margin-top:18px;text-align:center;">
-          <a href="${data.tracking_url}"
-             style="background:#FB6CC0;color:#fff;padding:10px 28px;border-radius:8px;
-             text-decoration:none;font-size:14px;font-weight:500;display:inline-block;">
-            🔍 Track Your Shipment
-          </a>
-        </div>`
-        : ''
-      }
-
-        <p style="font-size:12px;color:#666;text-align:center;margin-top:16px;">
-          If the tracking number is not active yet, please allow a few hours for the carrier to update their system.
-        </p>
-
-      </td>
-    </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" style="background:#FFF0F9;padding:12px;font-size:12px;color:#5D0032;">
-        © ${new Date().getFullYear()} Beauty-Run • Customer Services
-      </td>
-    </tr>
-
-  </table>
-</body>
-`,
-  }
-}
-
-const subscriptionActivatedEmail = (data: any) => {
-  return {
-    to: data.user.email,
-    subject: `✅ Subscription Activated – Welcome to Beauty-Run`,
-    html: `
-<body style="margin:0;padding:0;font-family:Inter,Segoe UI,sans-serif;background:#f7f9fc;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="max-width:620px;margin:30px auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,0.06);">
-    <tr>
-      <td align="center" style="background:#FFF0F9;padding:25px 20px;">
-        <h2 style="margin:0;color:#FB6CC0;font-size:20px;">Subscription Activated!</h2>
-      </td>
-    </tr>
-    <tr>
-      <td style="padding:25px 20px;">
-        <p style="font-size:14px;color:#000;line-height:1.5;">
-          Hello <strong>${data.user.fullName}</strong>,<br/>
-          Your subscription for <strong>${data.plan.title}</strong> has been successfully activated.
-        </p>
-        <p style="font-size:13px;margin:2px 0;"><strong>Amount Paid:</strong> £${data.amountPaid}</p>
-        <p style="font-size:13px;margin:2px 0;"><strong>Transaction ID:</strong> ${data.trxId}</p>
-        <div style="text-align:center;margin-top:20px;">
-          <a href="${config.frontend_url}/dashboard" style="background:#FB6CC0;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:14px;display:inline-block;">Go to Dashboard</a>
-        </div>
       </td>
     </tr>
   </table>
@@ -1119,12 +412,4 @@ export const emailTemplate = {
   resendOtp,
   userContactConfirmationEmail,
   adminContactNotificationEmail,
-  sendPaymentConfirmationEmail,
-  sendAdminPaymentNotificationEmail,
-  businessUserShipmentInfoEmail,
-  businessUserRegistrationInviteEmail,
-  guestLostItemNotificationEmail,
-  businessShippingDetailsUpdateEmail,
-  customerShippingDetailsUpdateEmail,
-  subscriptionActivatedEmail,
 }
