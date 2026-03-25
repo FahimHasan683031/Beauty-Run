@@ -1,0 +1,6 @@
+{Wed Mar 25 2026 08:26:39} [APP 🐞] error: ::ffff:10.10.7.50 - GET /api/v1/webhook 404 - 1.365 ms
+{Wed Mar 25 2026 08:27:35} [APP 🐞] error: ::ffff:10.10.7.50 - GET /api/v1/webhook 404 - 1.230 ms
+{Wed Mar 25 2026 08:28:34} [APP 🐞] error: ::ffff:10.10.7.50 - GET /api/v1/webhook 404 - 0.474 ms
+{Wed Mar 25 2026 08:28:41} [APP 🐞] error: ::ffff:10.10.7.50 - GET /favicon.ico 404 - 0.942 ms
+{Wed Mar 25 2026 08:28:48} [APP 🐞] error: ::ffff:10.10.7.50 - GET /api/v1/webhook 404 - 0.500 ms
+{Wed Mar 25 2026 08:29:20} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/webhook 400 - 3.886 ms

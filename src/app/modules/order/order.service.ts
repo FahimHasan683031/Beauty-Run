@@ -5,6 +5,7 @@ import { Product } from '../product/product.model';
 import { IOrder } from './order.interface';
 import { Order } from './order.model';
 import QueryBuilder from '../../builder/QueryBuilder';
+import { createPaymentSession } from '../../../stripe/createPaymentSession';
 
 const createOrderToDB = async (user: JwtPayload, payload: Partial<IOrder>) => {
   const product = await Product.findById(payload.product);
@@ -24,7 +25,9 @@ const createOrderToDB = async (user: JwtPayload, payload: Partial<IOrder>) => {
   };
 
   const result = await Order.create(orderData);
-  return result;
+  const paymentUrl = await createPaymentSession(user, orderFinalPrice, result._id.toString());
+
+  return { result, paymentUrl };
 };
 
 const getAllOrdersFromDB = async (query: Record<string, unknown>) => {

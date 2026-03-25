@@ -10,7 +10,10 @@ const createOrder = catchAsync(async (req: Request, res: Response) => {
     statusCode: StatusCodes.CREATED,
     success: true,
     message: 'Order created successfully',
-    data: result,
+    data: {
+      order: result.result,
+      paymentUrl: result.paymentUrl,
+    },
   });
 });
 
