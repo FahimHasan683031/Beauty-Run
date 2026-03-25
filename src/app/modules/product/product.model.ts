@@ -42,14 +42,20 @@ const productSchema = new Schema<IProduct>(
       ref: 'User',
       required: true,
     },
-    isActive: {
-      type: Boolean,
-      default: true,
-    },
     finalPrice: {
       type: Number,
       required: true,
       min: 0,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+      min: 0,
+      default: 0,
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
     },
   },
   {

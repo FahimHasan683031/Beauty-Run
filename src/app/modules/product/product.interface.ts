@@ -12,4 +12,5 @@ export interface IProduct {
   createdBy: Types.ObjectId;
   isActive: boolean;
   finalPrice: number;
+  quantity: number;
 }

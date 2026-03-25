@@ -13,10 +13,17 @@ import QueryBuilder from '../../builder/QueryBuilder';
 import { createPaymentSession } from '../../../stripe/createPaymentSession';
 import { USER_ROLES } from '../../../enum/user';
 
+// create order
 const createOrderToDB = async (user: JwtPayload, payload: Partial<IOrder>) => {
   const product = await Product.findById(payload.product);
   if (!product) {
     throw new ApiError(StatusCodes.NOT_FOUND, 'Product not found');
+  }
+
+  // Check stock
+  const orderedQty = payload.quantity || 1;
+  if (product.quantity < orderedQty) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, `Insufficient stock. Only ${product.quantity} item(s) available.`);
   }
 
   // Record current price and finalPrice from product snapshot
@@ -31,11 +38,18 @@ const createOrderToDB = async (user: JwtPayload, payload: Partial<IOrder>) => {
   };
 
   const result = await Order.create(orderData);
+
+  // Decrement stock atomically
+  await Product.findByIdAndUpdate(payload.product, {
+    $inc: { quantity: -orderedQty }
+  });
+
   const paymentUrl = await createPaymentSession(user, orderFinalPrice, result._id.toString());
 
   return { result, paymentUrl };
 };
 
+// get all orders
 const getAllOrdersFromDB = async (query: Record<string, unknown>) => {
   const orderQueryBuilder = new QueryBuilder(
     Order.find().populate('user', 'fullName email').populate('product', 'productName image'),
@@ -51,6 +65,7 @@ const getAllOrdersFromDB = async (query: Record<string, unknown>) => {
   return { meta, result };
 };
 
+// get my orders
 const getMyOrdersFromDB = async (user: JwtPayload, query: Record<string, unknown>) => {
   const { page = 1, limit = 10, sort = '-createdAt', searchTerm, ...filterData } = query;
   const skip = (Number(page) - 1) * Number(limit);
@@ -143,6 +158,7 @@ const getMyOrdersFromDB = async (user: JwtPayload, query: Record<string, unknown
   };
 };
 
+// get single order
 const getSingleOrderFromDB = async (id: string) => {
   const result = await Order.findById(id)
     .populate('user', 'fullName email')
@@ -150,6 +166,7 @@ const getSingleOrderFromDB = async (id: string) => {
   return result;
 };
 
+// update order
 const updateOrderToDB = async (id: string, user: JwtPayload, payload: Partial<IOrder>) => {
   const order = await Order.findById(id).populate('product');
   if (!order) {
@@ -198,6 +215,11 @@ const updateOrderToDB = async (id: string, user: JwtPayload, payload: Partial<IO
     // Platform to Customer refund
     logger.info(`Order ${id} marked as cancelled. Triggering refund...`);
     await PaymentService.processRefund(id);
+    // Restore product stock
+    await Product.findByIdAndUpdate(order.product, {
+      $inc: { quantity: order.quantity || 1 }
+    });
+    logger.info(`Stock restored for product: ${order.product}`);
   }
 
   return result;

@@ -8,6 +8,7 @@ export const createProductZod = z.object({
     deliveryCharge: z.number().min(0, 'Delivery charge must be non-negative').default(0),
     offer: z.number().min(0).max(100).optional(),
     description: z.string().min(1, 'Description is required'),
+    quantity: z.number().min(0, 'Quantity must be non-negative'),
   }),
 });
 
@@ -20,6 +21,7 @@ export const updateProductZod = z.object({
     offer: z.number().min(0).max(100).optional().nullable(),
     description: z.string().min(1).optional(),
     isActive: z.boolean().optional(),
+    quantity: z.number().optional(),
   }),
 });
 

@@ -7,6 +7,7 @@ import { errorLogger, logger } from './shared/logger'
 import { socketHelper } from './helpers/socketHelper'
 import { UserServices } from './app/modules/user/user.service'
 import seedAdmin from './app/DB'
+import { startPendingOrderCleanupJob } from './cronjob/pendingOrderCleanup'
 
 process.on('uncaughtException', error => {
     errorLogger.error('UnhandledException Detected', error)
@@ -45,6 +46,9 @@ async function main() {
         socketHelper.socket(io)
         //@ts-ignore
         global.io = io
+
+        // Start scheduled jobs
+        startPendingOrderCleanupJob()
     } catch (error) {
         errorLogger.error(colors.red('Server Failed to connect Database'))
         config.node_env === 'development' && console.log(error)

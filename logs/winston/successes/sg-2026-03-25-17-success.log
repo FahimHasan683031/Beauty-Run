@@ -1,0 +1,7 @@
+{Wed Mar 25 2026 17:00:00} [APP 🚀] info: [CleanupJob] Running pending order cleanup...
+{Wed Mar 25 2026 17:00:00} [APP 🚀] info: [CleanupJob] Found 4 stale pending order(s). Processing...
+{Wed Mar 25 2026 17:00:00} [APP 🚀] info: [CleanupJob] Stock restored for product: 69c26dbf4f4ce1af86eb80f1 (Order: 69c2719e1c6bb9cd451a9c10)
+{Wed Mar 25 2026 17:00:00} [APP 🚀] info: [CleanupJob] Stock restored for product: 69c26dbf4f4ce1af86eb80f1 (Order: 69c271a21c6bb9cd451a9c13)
+{Wed Mar 25 2026 17:00:00} [APP 🚀] info: [CleanupJob] Stock restored for product: 69c26dbf4f4ce1af86eb80f1 (Order: 69c271a61c6bb9cd451a9c16)
+{Wed Mar 25 2026 17:00:00} [APP 🚀] info: [CleanupJob] Stock restored for product: 69c26dbf4f4ce1af86eb80f1 (Order: 69c34b0d0535adbb50c02563)
+{Wed Mar 25 2026 17:00:00} [APP 🚀] info: [CleanupJob] ✅ Deleted 4 stale pending order(s).
