@@ -5,3 +5,7 @@
 {Wed Mar 25 2026 17:00:00} [APP 🚀] info: [CleanupJob] Stock restored for product: 69c26dbf4f4ce1af86eb80f1 (Order: 69c271a61c6bb9cd451a9c16)
 {Wed Mar 25 2026 17:00:00} [APP 🚀] info: [CleanupJob] Stock restored for product: 69c26dbf4f4ce1af86eb80f1 (Order: 69c34b0d0535adbb50c02563)
 {Wed Mar 25 2026 17:00:00} [APP 🚀] info: [CleanupJob] ✅ Deleted 4 stale pending order(s).
+{Wed Mar 25 2026 17:03:40} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Wed Mar 25 2026 17:03:40} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Wed Mar 25 2026 17:03:40} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Wed Mar 25 2026 17:03:40} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
