@@ -3,11 +3,31 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { StatusCodes } from 'http-status-codes';
 import { ProductService } from './product.service';
+import { User } from '../user/user.model';
+import { USER_ROLES } from '../../../enum/user';
+import ApiError from '../../../errors/ApiError';
+import { UserServices } from '../user/user.service';
 
 // Create product
 const createProduct = catchAsync(async (req: Request, res: Response) => {
+  const user = await User.findById((req as any).user!.authId);
+  if (user?.role === USER_ROLES.VENDOR && !user.stripeConnect?.onboardingCompleted) {
+    // Try to sync status in case they just completed it
+    try {
+      const syncedUser = await UserServices.syncStripeStatus((req as any).user!);
+      if (!syncedUser?.stripeConnect?.onboardingCompleted) {
+        const onboardingUrl = await UserServices.getOnboardingUrl((req as any).user!);
+        throw new ApiError(StatusCodes.FORBIDDEN, "Please complete your Stripe onboarding to create products.", { onboardingUrl });
+      }
+    } catch (error: any) {
+      if (error instanceof ApiError) throw error;
+      const onboardingUrl = await UserServices.getOnboardingUrl((req as any).user!);
+      throw new ApiError(StatusCodes.FORBIDDEN, "Please complete your Stripe onboarding to create products.", { onboardingUrl });
+    }
+  }
+
   const images = req.body.images || [];
-  const result = await ProductService.createProduct(req.user!, req.body, images);
+  const result = await ProductService.createProduct((req as any).user!, req.body, images);
   sendResponse(res, {
     statusCode: StatusCodes.CREATED,
     success: true,
@@ -30,7 +50,7 @@ const getAllProducts = catchAsync(async (req: Request, res: Response) => {
 
 // Get my products (vendor)
 const getMyProducts = catchAsync(async (req: Request, res: Response) => {
-  const result = await ProductService.getMyProducts(req.user!, req.query);
+  const result = await ProductService.getMyProducts((req as any).user!, req.query);
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
@@ -54,7 +74,7 @@ const getSingleProduct = catchAsync(async (req: Request, res: Response) => {
 // Update product
 const updateProduct = catchAsync(async (req: Request, res: Response) => {
   const images = req.body.images || [];
-  const result = await ProductService.updateProduct(req.user!, req.params.id, req.body, images);
+  const result = await ProductService.updateProduct((req as any).user!, req.params.id, req.body, images);
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
@@ -65,7 +85,7 @@ const updateProduct = catchAsync(async (req: Request, res: Response) => {
 
 // Delete product
 const deleteProduct = catchAsync(async (req: Request, res: Response) => {
-  const result = await ProductService.deleteProduct(req.user!, req.params.id);
+  const result = await ProductService.deleteProduct((req as any).user!, req.params.id);
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,

@@ -16,13 +16,13 @@ router.post(
 
 router.get(
   '/',
-  auth(USER_ROLES.ADMIN, USER_ROLES.VENDOR),
+  auth(USER_ROLES.ADMIN),
   OrderController.getAllOrders
 );
 
 router.get(
   '/my-orders',
-  auth(USER_ROLES.CUSTOMER),
+  auth(USER_ROLES.CUSTOMER, USER_ROLES.VENDOR),
   OrderController.getMyOrders
 );
 

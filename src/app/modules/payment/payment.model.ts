@@ -38,6 +38,54 @@ const PaymentSchema = new Schema<IPayment>(
       trim: true,
       maxlength: 100,
     },
+    productPrice: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    discount: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    finalPrice: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    customerPaymentAmount: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    stripeGatewayFee: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    platformCommission: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    vendorPayoutAmount: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    refundAmount: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    chargeId: {
+      type: String,
+    },
+    status: {
+      type: String,
+      enum: ['customer_paid', 'settled', 'refunded'],
+      default: 'customer_paid',
+    },
   },
   { timestamps: true }
 );

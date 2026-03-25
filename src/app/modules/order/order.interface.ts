@@ -7,7 +7,7 @@ export interface IOrder {
   quantity: number;
   price: number;
   finalPrice: number;
-  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  status: 'pending' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
   paymentStatus: 'pending' | 'paid' | 'failed';
   transactionId?: string;
   address: string;

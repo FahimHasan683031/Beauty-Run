@@ -74,6 +74,26 @@ const deleteMyAccount = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+const getOnboardingUrl = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserServices.getOnboardingUrl(req.user! as JwtPayload)
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Onboarding URL fetched successfully',
+    data: result,
+  })
+})
+
+const syncStripeStatus = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserServices.syncStripeStatus(req.user! as JwtPayload)
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Stripe status synced successfully',
+    data: result,
+  })
+})
+
 
 
 export const UserController = {
@@ -83,5 +103,6 @@ export const UserController = {
   deleteUser,
   getProfile,
   deleteMyAccount,
- 
+  getOnboardingUrl,
+  syncStripeStatus,
 }

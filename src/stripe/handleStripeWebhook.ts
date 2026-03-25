@@ -7,6 +7,7 @@ import ApiError from '../errors/ApiError'
 import { logger } from '../shared/logger'
 import { Payment } from '../app/modules/payment/payment.model'
 import { Order } from '../app/modules/order/order.model'
+import { Settings } from '../app/modules/settings/settings.model'
 
 const handleStripeWebhook = async (req: Request, res: Response) => {
     console.log('hit stripe webhook')
@@ -15,7 +16,8 @@ const handleStripeWebhook = async (req: Request, res: Response) => {
     let event: Stripe.Event
 
     try {
-        event = stripe.webhooks.constructEvent(req.body, signature, webhookSecret)
+        const body = (req as any).rawBody || req.body;
+        event = stripe.webhooks.constructEvent(body, signature, webhookSecret)
     } catch (error) {
         throw new ApiError(
             StatusCodes.BAD_REQUEST,
@@ -30,28 +32,56 @@ const handleStripeWebhook = async (req: Request, res: Response) => {
         switch (eventType) {
             case 'checkout.session.completed': {
                 const session = data as Stripe.Checkout.Session
-                logger.info('✅ Checkout completed:', session.id)
+                if (session.mode === 'payment' && session.metadata?.referenceId) {
+                    const order = await Order.findById(session.metadata.referenceId);
+                    const settings = await Settings.findOne();
+                    const commissionRate = settings?.commissionRate || 0;
 
-                if (session.mode === 'payment') {
-                    // Handle one-time payment
-                    await Payment.create({
-                        email: session.customer_details?.email,
-                        amount: (session.amount_total || 0) / 100,
-                        transactionId: session.payment_intent as string || session.id,
-                        dateTime: new Date(),
-                        customerName: session.customer_details?.name,
-                        referenceId: session.metadata?.referenceId,
-                    });
+                    if (order) {
+                        const productPrice = order.price;
+                        const finalPrice = order.finalPrice;
+                        const discount = productPrice - finalPrice;
+                        const customerPaymentAmount = (session.amount_total || 0) / 100;
+                        
+                        // Approximate Stripe fee (2.9% + 0.30)
+                        const stripeGatewayFee = (customerPaymentAmount * 0.029) + 0.30;
+                        
+                        // Platform commission based on settings
+                        const platformCommission = (finalPrice * commissionRate) / 100;
+                        const vendorPayoutAmount = finalPrice - platformCommission;
 
-                    // Update corresponding Order payment status
-                    if (session.metadata?.referenceId) {
-                        await Order.findByIdAndUpdate(
-                            session.metadata.referenceId,
-                            {
-                                paymentStatus: 'paid',
-                                transactionId: session.payment_intent as string || session.id
-                            }
-                        );
+                        // Retrieve session with expansion to get charge ID
+                        const fullSession = await stripe.checkout.sessions.retrieve(session.id, {
+                            expand: ['payment_intent.latest_charge'],
+                        });
+                        const latestCharge = (fullSession.payment_intent as any)?.latest_charge;
+                        const chargeId = typeof latestCharge === 'object' ? latestCharge.id : latestCharge;
+
+                        await Payment.create({
+                            email: session.customer_details?.email,
+                            dateTime: new Date(),
+                            referenceId: order._id,
+                            amount: customerPaymentAmount,
+                            transactionId: session.payment_intent as string || session.id,
+                            chargeId: chargeId as string,
+                            customerName: session.customer_details?.name,
+                            productPrice,
+                            discount,
+                            finalPrice,
+                            customerPaymentAmount,
+                            stripeGatewayFee,
+                            platformCommission,
+                            vendorPayoutAmount,
+                            status: 'customer_paid'
+                        });
+
+                        await Order.findByIdAndUpdate(order._id, {
+                            status: 'confirmed',
+                            paymentStatus: 'paid',
+                            transactionId: session.payment_intent as string || session.id
+                        });
+                        
+                        logger.info(`✅ Payment processed for Order: ${order._id}`);
                     }
                 }
                 break

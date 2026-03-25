@@ -57,4 +57,14 @@ export const PaymentController = {
   getPaymentsController,
   getPaymentByIdController,
   handleStripeWebhook,
+  getMyPaymentsController: catchAsync(async (req: Request, res: Response) => {
+    const result = await PaymentService.getMyPaymentsFromDB(req.user!, req.query);
+    sendResponse(res, {
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: 'My payments retrieved successfully',
+      data: result.data,
+      meta: result.meta,
+    });
+  }),
 }

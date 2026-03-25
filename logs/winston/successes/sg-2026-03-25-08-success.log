@@ -24,3 +24,21 @@
 {Wed Mar 25 2026 08:37:43} [APP 🚀] info: [32m🚀 Database connected successfully[39m
 {Wed Mar 25 2026 08:37:43} [APP 🚀] info: [32m🍁 Server connected successfully[39m
 {Wed Mar 25 2026 08:37:43} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Wed Mar 25 2026 08:40:14} [APP 🚀] info: ::ffff:10.10.7.50 - POST /api/v1/order 201 - 874.426 ms
+{Wed Mar 25 2026 08:41:11} [APP 🚀] info: ✅ Checkout completed:
+{Wed Mar 25 2026 08:41:12} [APP 🚀] info: ⚠️ Unhandled event type: charge.succeeded
+{Wed Mar 25 2026 08:41:12} [APP 🚀] info: ::ffff:10.10.7.50 - POST /api/v1/webhook 200 - 1.995 ms
+{Wed Mar 25 2026 08:41:12} [APP 🚀] info: ⚠️ Unhandled event type: payment_intent.created
+{Wed Mar 25 2026 08:41:12} [APP 🚀] info: ::ffff:10.10.7.50 - POST /api/v1/webhook 200 - 1.013 ms
+{Wed Mar 25 2026 08:41:12} [APP 🚀] info: ::ffff:10.10.7.50 - POST /api/v1/webhook 200 - 21.139 ms
+{Wed Mar 25 2026 08:41:12} [APP 🚀] info: ⚠️ Unhandled event type: payment_intent.succeeded
+{Wed Mar 25 2026 08:41:12} [APP 🚀] info: ::ffff:10.10.7.50 - POST /api/v1/webhook 200 - 0.854 ms
+{Wed Mar 25 2026 08:41:14} [APP 🚀] info: ⚠️ Unhandled event type: charge.updated
+{Wed Mar 25 2026 08:41:14} [APP 🚀] info: ::ffff:10.10.7.50 - POST /api/v1/webhook 200 - 2.087 ms
+{Wed Mar 25 2026 08:42:07} [APP 🚀] info: ::ffff:10.10.7.50 - GET /api/v1/order/my-orders 200 - 26.991 ms
+{Wed Mar 25 2026 08:58:49} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Wed Mar 25 2026 08:58:49} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Wed Mar 25 2026 08:58:49} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Wed Mar 25 2026 08:58:51} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Wed Mar 25 2026 08:58:51} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Wed Mar 25 2026 08:58:51} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m

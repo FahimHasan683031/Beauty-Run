@@ -76,6 +76,7 @@ const globalErrorHandler: ErrorRequestHandler = (
     success: false,
     message: message,
     errorMessages,
+    data: error?.data || undefined,
     stack: config.node_env === 'production' ? undefined : error?.stack,
   })
 }

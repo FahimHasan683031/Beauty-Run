@@ -86,6 +86,24 @@ const UserSchema = new Schema(
             type: String,
             default: "",
         },
+        stripeConnect: {
+            accountId: {
+                type: String,
+                default: "",
+            },
+            detailsSubmitted: {
+                type: Boolean,
+                default: false,
+            },
+            payoutsEnabled: {
+                type: Boolean,
+                default: false,
+            },
+            onboardingCompleted: {
+                type: Boolean,
+                default: false,
+            },
+        },
     },
     {
         timestamps: true,

@@ -7,6 +7,7 @@ import { JwtPayload } from 'jsonwebtoken'
 import { logger } from '../../../shared/logger'
 import QueryBuilder from '../../builder/QueryBuilder'
 import config from '../../../config'
+import { createConnectAccount, createOnboardingUrl, getAccountStatus } from '../../../stripe/stripeConnect'
 
 
 const getAllUser = async (query: Record<string, unknown>) => {
@@ -96,6 +97,46 @@ const deleteMyAccount = async (user: JwtPayload) => {
     return 'Account deleted successfully'
 }
 
+const getOnboardingUrl = async (user: JwtPayload) => {
+    const isExistUser = await User.findById(user.authId);
+    if (!isExistUser) {
+        throw new ApiError(StatusCodes.NOT_FOUND, 'User not found');
+    }
+
+    if (isExistUser.role !== USER_ROLES.VENDOR) {
+        throw new ApiError(StatusCodes.BAD_REQUEST, 'Only vendors can onboard to Stripe Connect');
+    }
+
+    let accountId = isExistUser.stripeConnect?.accountId;
+    if (!accountId) {
+        const account = await createConnectAccount(isExistUser.email);
+        accountId = account.id;
+        await User.findByIdAndUpdate(user.authId, {
+            'stripeConnect.accountId': accountId
+        });
+    }
+
+    const url = await createOnboardingUrl(accountId);
+    return url;
+};
+
+const syncStripeStatus = async (user: JwtPayload) => {
+    const isExistUser = await User.findById(user.authId);
+    if (!isExistUser?.stripeConnect?.accountId) {
+        throw new ApiError(StatusCodes.BAD_REQUEST, 'Stripe account not found for this user');
+    }
+
+    const status = await getAccountStatus(isExistUser.stripeConnect.accountId);
+    
+    const updatedUser = await User.findByIdAndUpdate(user.authId, {
+        'stripeConnect.detailsSubmitted': status.detailsSubmitted,
+        'stripeConnect.payoutsEnabled': status.payoutsEnabled,
+        'stripeConnect.onboardingCompleted': status.onboardingCompleted,
+    }, { new: true });
+
+    return updatedUser;
+}
+
 export const UserServices = {
     updateProfile,
     getAllUser,
@@ -103,4 +144,6 @@ export const UserServices = {
     deleteUser,
     getProfile,
     deleteMyAccount,
+    getOnboardingUrl,
+    syncStripeStatus,
 }

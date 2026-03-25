@@ -27,6 +27,18 @@ router.delete(
   UserController.deleteMyAccount,
 )
 
+router.get(
+  '/onboarding-url',
+  auth(USER_ROLES.VENDOR),
+  UserController.getOnboardingUrl
+)
+
+router.get(
+  '/sync-stripe',
+  auth(USER_ROLES.VENDOR),
+  UserController.syncStripeStatus
+)
+
 // get single user
 router.get('/:id', UserController.getSingleUser)
 
