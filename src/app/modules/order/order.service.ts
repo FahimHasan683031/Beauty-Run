@@ -150,22 +150,51 @@ const getSingleOrderFromDB = async (id: string) => {
   return result;
 };
 
-const updateOrderToDB = async (id: string, payload: Partial<IOrder>) => {
-  const order = await Order.findById(id);
+const updateOrderToDB = async (id: string, user: JwtPayload, payload: Partial<IOrder>) => {
+  const order = await Order.findById(id).populate('product');
   if (!order) {
     throw new ApiError(StatusCodes.NOT_FOUND, 'Order not found');
   }
 
-  const prevStatus = order.status;
+  const currentStatus = order.status;
   const newStatus = payload.status;
+  const userId = user.id || user.authId;
+
+  // Validation based on roles
+  if (user.role === USER_ROLES.CUSTOMER) {
+    if (order.user.toString() !== userId) {
+      throw new ApiError(StatusCodes.FORBIDDEN, "You cannot update someone else's order");
+    }
+    if (newStatus && newStatus !== 'cancelled') {
+      throw new ApiError(StatusCodes.FORBIDDEN, "Customers can only cancel orders");
+    }
+    if (newStatus === 'cancelled' && ['shipped', 'delivered', 'cancelled'].includes(currentStatus)) {
+      throw new ApiError(StatusCodes.BAD_REQUEST, `Cannot cancel order when it is already ${currentStatus}`);
+    }
+  } 
+  else if (user.role === USER_ROLES.VENDOR) {
+    const product = order.product as any;
+    if (product.createdBy.toString() !== userId) {
+      throw new ApiError(StatusCodes.FORBIDDEN, "This order is not for one of your products");
+    }
+    const allowedVendorStatuses = ['processing', 'shipped'];
+    if (newStatus && !allowedVendorStatuses.includes(newStatus)) {
+      throw new ApiError(StatusCodes.FORBIDDEN, `Vendors can only update status to: ${allowedVendorStatuses.join(', ')}`);
+    }
+    // Business logic: cannot go backwards or skip confirmed
+    if (currentStatus === 'pending' && newStatus === 'processing') {
+       throw new ApiError(StatusCodes.BAD_REQUEST, "Wait for payment confirmation before processing");
+    }
+  }
+  // Admin (and others) have full control in this logic branch
 
   const result = await Order.findByIdAndUpdate(id, payload, { new: true });
 
-  if (newStatus === 'delivered' && prevStatus !== 'delivered') {
+  if (newStatus === 'delivered' && currentStatus !== 'delivered') {
     // Platform to Vendor payout
     logger.info(`Order ${id} marked as delivered. Triggering payout...`);
     await PaymentService.processPayout(id);
-  } else if (newStatus === 'cancelled' && prevStatus !== 'cancelled') {
+  } else if (newStatus === 'cancelled' && currentStatus !== 'cancelled') {
     // Platform to Customer refund
     logger.info(`Order ${id} marked as cancelled. Triggering refund...`);
     await PaymentService.processRefund(id);

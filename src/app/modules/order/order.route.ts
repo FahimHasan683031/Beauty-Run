@@ -34,7 +34,7 @@ router.get(
 
 router.patch(
   '/:id',
-  auth(USER_ROLES.ADMIN, USER_ROLES.VENDOR),
+  auth(USER_ROLES.ADMIN, USER_ROLES.VENDOR, USER_ROLES.CUSTOMER),
   validateRequest(OrderValidations.updateOrderZod),
   OrderController.updateOrder
 );

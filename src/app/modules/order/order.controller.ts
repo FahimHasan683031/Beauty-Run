@@ -50,7 +50,7 @@ const getSingleOrder = catchAsync(async (req: Request, res: Response) => {
 });
 
 const updateOrder = catchAsync(async (req: Request, res: Response) => {
-  const result = await OrderService.updateOrderToDB(req.params.id, req.body);
+  const result = await OrderService.updateOrderToDB(req.params.id, req.user!, req.body);
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
