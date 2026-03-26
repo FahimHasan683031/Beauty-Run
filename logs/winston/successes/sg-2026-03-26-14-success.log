@@ -166,3 +166,5 @@
 {Thu Mar 26 2026 14:44:00} [APP 🚀] info: 103.186.20.8 - GET /api/v1/dashboard/vendor-stats 200 - 4.713 ms
 {Thu Mar 26 2026 14:44:06} [APP 🚀] info: 103.186.20.8 - GET /api/v1/dashboard/admin-stats 200 - 7.240 ms
 {Thu Mar 26 2026 14:44:07} [APP 🚀] info: 103.186.20.8 - GET /api/v1/dashboard/admin-stats 200 - 5.903 ms
+{Thu Mar 26 2026 14:46:29} [APP 🚀] info: ⚠️ Unhandled event type: balance.available
+{Thu Mar 26 2026 14:46:29} [APP 🚀] info: 54.187.216.72 - POST /api/v1/webhook 200 - 1.233 ms
