@@ -4,6 +4,8 @@ import ApiError from '../../../errors/ApiError';
 import { ISupport } from './support.interface';
 import { Support } from './support.model';
 import QueryBuilder from '../../builder/QueryBuilder';
+import { emailHelper } from '../../../helpers/emailHelper';
+import { emailTemplate } from '../../../shared/emailTemplate';
 
 // Create support ticket
 const createSupport = async (user: JwtPayload, payload: Partial<ISupport>, fileUrl?: string) => {
@@ -12,9 +14,6 @@ const createSupport = async (user: JwtPayload, payload: Partial<ISupport>, fileU
     user: user.id || user.authId,
   };
 
-  if (fileUrl) {
-    supportData.attachment = fileUrl;
-  }
 
   const result = await Support.create(supportData);
   return result;
@@ -70,10 +69,25 @@ const getSingleSupportTicket = async (id: string, user: JwtPayload) => {
 
 // Update support ticket status (admin)
 const updateSupportStatus = async (id: string, status: 'pending' | 'resolved') => {
-  const ticket = await Support.findById(id);
+  const ticket = await Support.findById(id).populate('user', 'fullName email');
 
   if (!ticket) {
     throw new ApiError(StatusCodes.NOT_FOUND, 'Support ticket not found');
+  }
+
+  // If status is changing to resolved, send an email
+  if (status === 'resolved' && ticket.status !== 'resolved') {
+    const user = ticket.user as any;
+    if (user && user.email) {
+      const emailData = {
+        name: user.fullName || 'User',
+        email: user.email,
+        ticketTitle: ticket.title,
+      };
+      setTimeout(() => {
+        emailHelper.sendEmail(emailTemplate.supportTicketResolved(emailData));
+      },0);
+    }
   }
 
   ticket.status = status;

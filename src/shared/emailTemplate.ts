@@ -406,10 +406,81 @@ const userContactConfirmationEmail = (payload: {
   }
 }
 
+const supportTicketResolved = (payload: {
+  name: string
+  email: string
+  ticketTitle: string
+}) => {
+  return {
+    to: payload.email,
+    subject: '✅ Your Support Ticket has been Resolved – Beauty-Run',
+    html: `
+<body style="margin:0; padding:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0"
+         style="max-width:640px; margin:40px auto; background-color:#ffffff; border-radius:14px;
+                overflow:hidden; box-shadow:0 5px 25px rgba(0,0,0,0.08);">
+
+    <!-- Header -->
+    <tr>
+      <td align="center" 
+          style="background:linear-gradient(135deg,#FFF0F9,#FFE6F2); padding:35px 20px; border-bottom:1px solid #FB6CC033;">
+        <img src="https://i.ibb.co.com/ZCCGRGf/dd55d4a6535f8e84f9d45593679b0f9429bf90de.png" alt="App"
+             style="width:220px; height:auto; filter:drop-shadow(0 0 6px rgba(0,0,0,0.25));">
+      </td>
+    </tr>
+
+    <!-- Body -->
+    <tr>
+      <td style="padding:45px;">
+        <h1 style="color:#FB6CC0; font-size:26px; font-weight:700; margin-bottom:20px; text-align:center;">
+          Ticket Resolved ✅
+        </h1>
+
+        <p style="color:#5D0032; font-size:16px; line-height:1.6; text-align:center;">
+          Dear <strong>${payload.name}</strong>,<br>
+          We are pleased to inform you that your support ticket has been resolved!
+        </p>
+
+        <!-- Ticket Info Box -->
+        <div style="background:linear-gradient(145deg,#FFF0F9,#FFE6F2); border:2px solid #FB6CC0; 
+                    border-radius:12px; padding:25px 20px; text-align:center; margin:30px auto; max-width:500px;">
+          <p style="font-size:15px; color:#5D0032; line-height:1.6; margin:0;">
+            <strong>Ticket Title:</strong><br>
+            <em>${payload.ticketTitle}</em>
+          </p>
+        </div>
+
+        <p style="color:#5D0032; font-size:15px; line-height:1.6; text-align:center;">
+          If you have any further questions or need additional assistance, please feel free to open a new support ticket or reply to our support team.<br>
+          Thanks for choosing <strong>Beauty-Run</strong> 💗
+        </p>
+
+      </td>
+    </tr>
+
+    <!-- Footer -->
+    <tr>
+      <td align="center" 
+          style="background:linear-gradient(135deg,#FFF0F9,#FFE6F2); padding:25px 20px; border-top:1px solid #FB6CC033;">
+        <p style="margin:0; color:#5D0032; font-size:13px;">
+          © ${new Date().getFullYear()} <strong>Beauty-Run</strong>. All rights reserved.
+        </p>
+        <p style="margin:6px 0 0; color:#5D0032; font-size:13px;">
+          Powered by <strong style="color:#FB6CC0;">Beauty-Run API</strong> ✨
+        </p>
+      </td>
+    </tr>
+  </table>
+</body>
+`,
+  }
+}
+
 export const emailTemplate = {
   createAccount,
   resetPassword,
   resendOtp,
   userContactConfirmationEmail,
   adminContactNotificationEmail,
+  supportTicketResolved,
 }
