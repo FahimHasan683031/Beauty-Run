@@ -15,7 +15,10 @@ router.post("/create",
     validateRequest(createCategoryZod),
     categoryController.createCategory);
 
-router.get("/", categoryController.getAllCategories);
+router.get("/",
+    auth(USER_ROLES.VENDOR, USER_ROLES.ADMIN, USER_ROLES.CUSTOMER),
+     categoryController.getAllCategories
+    );
 
 router.patch("/:id",
     auth(USER_ROLES.ADMIN),

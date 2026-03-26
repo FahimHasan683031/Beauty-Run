@@ -18,7 +18,7 @@ router.post(
 );
 
 // Get all products — Public
-router.get('/', ProductController.getAllProducts);
+router.get('/', auth(USER_ROLES.VENDOR, USER_ROLES.ADMIN, USER_ROLES.CUSTOMER), ProductController.getAllProducts);
 
 // Get my products — Vendor only
 router.get(
@@ -28,7 +28,7 @@ router.get(
 );
 
 // Get single product — Public
-router.get('/:id', ProductController.getSingleProduct);
+router.get('/:id',auth(USER_ROLES.VENDOR, USER_ROLES.ADMIN, USER_ROLES.CUSTOMER), ProductController.getSingleProduct);
 
 // Update product — Vendor or Admin
 router.patch(

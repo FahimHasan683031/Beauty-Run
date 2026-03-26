@@ -5,6 +5,7 @@ import { Product } from './product.model';
 import { JwtPayload } from 'jsonwebtoken';
 import QueryBuilder from '../../builder/QueryBuilder';
 
+
 // Create product
 const createProduct = async (user: JwtPayload, payload: IProduct, images: string[]) => {
   if (!images || images.length === 0) {
@@ -33,6 +34,7 @@ const getAllProducts = async (query: Record<string, unknown>) => {
       .populate('createdBy', 'fullName email image'),
     query
   )
+    .search(['productName', 'description'])
     .filter()
     .sort()
     .fields()
@@ -51,6 +53,7 @@ const getMyProducts = async (user: JwtPayload, query: Record<string, unknown>) =
       .populate('category', 'name image'),
     query
   )
+    .search(['productName', 'description'])
     .filter()
     .sort()
     .paginate();

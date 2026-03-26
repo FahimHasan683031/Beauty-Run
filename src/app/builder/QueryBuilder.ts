@@ -45,25 +45,20 @@ filter() {
 
   const filters: Record<string, any> = cleanObject(queryObj)
 
-  // Handle salary range filtering
-  if (queryObj.minSalary || queryObj.maxSalary) {
-    if (queryObj.minSalary) {
-      filters.minSalary = { $gte: Number(queryObj.minSalary) }
-      delete queryObj.minSalary
+
+
+  // Handle price range filtering
+  if (queryObj.minPrice || queryObj.maxPrice) {
+    if (queryObj.minPrice) {
+      filters.price = { ...filters.price, $gte: Number(queryObj.minPrice) }
+      delete filters.minPrice
     }
-    if (queryObj.maxSalary) {
-      filters.maxSalary = { $lte: Number(queryObj.maxSalary) }
-      delete queryObj.maxSalary
+    if (queryObj.maxPrice) {
+      filters.price = { ...filters.price, $lte: Number(queryObj.maxPrice) }
+      delete filters.maxPrice
     }
   }
 
-  // ✅ Add partial match for jobLocation
-  if (this.query.jobLocation) {
-    filters.jobLocation = {
-      $regex: this.query.jobLocation,
-      $options: 'i', // case-insensitive
-    }
-  }
 
   this.modelQuery = this.modelQuery.find(filters as FilterQuery<T>)
   return this
