@@ -22,7 +22,7 @@ router.get(
 
 router.get(
   '/my-orders',
-  auth(USER_ROLES.CUSTOMER, USER_ROLES.VENDOR),
+  auth(USER_ROLES.CUSTOMER, USER_ROLES.VENDOR, USER_ROLES.ADMIN),
   OrderController.getMyOrders
 );
 

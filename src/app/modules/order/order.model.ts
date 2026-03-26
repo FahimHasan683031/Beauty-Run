@@ -22,6 +22,16 @@ const orderSchema = new Schema<IOrder>(
       type: Number,
       required: true,
     },
+    deliveryCharge: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    discount: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
     finalPrice: {
       type: Number,
       required: true,

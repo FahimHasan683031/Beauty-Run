@@ -28,6 +28,26 @@ router.post(
   validateRequest(UserValidations.userSignupSchema),
   AuthController.createUser,
 )
+
+router.post(
+  '/create-vendor',
+  auth(USER_ROLES.ADMIN),
+  fileUploadHandler(),
+  async (req, res, next) => {
+    try {
+      if (req.files && Object.keys(req.files).length > 0) {
+        const image = getSingleFilePath(req.files, "image");
+        if (image) req.body.image = image;
+      }
+      next();
+    } catch (error) {
+      res.status(400).json({ message: "Failed to upload Vendor Image" });
+    }
+  },
+  validateRequest(UserValidations.adminCreateVendorSchema),
+  AuthController.createVendorByAdmin
+)
+
 router.post(
   '/admin-login',
   validateRequest(AuthValidations.loginZodSchema),

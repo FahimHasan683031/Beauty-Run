@@ -38,26 +38,6 @@ const PaymentSchema = new Schema<IPayment>(
       trim: true,
       maxlength: 100,
     },
-    productPrice: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
-    discount: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
-    finalPrice: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
-    customerPaymentAmount: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
     stripeGatewayFee: {
       type: Number,
       required: true,

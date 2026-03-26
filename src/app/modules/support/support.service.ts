@@ -6,6 +6,7 @@ import { Support } from './support.model';
 import QueryBuilder from '../../builder/QueryBuilder';
 import { emailHelper } from '../../../helpers/emailHelper';
 import { emailTemplate } from '../../../shared/emailTemplate';
+import { NotificationService } from '../notification/notification.service';
 
 // Create support ticket
 const createSupport = async (user: JwtPayload, payload: Partial<ISupport>, fileUrl?: string) => {
@@ -75,18 +76,30 @@ const updateSupportStatus = async (id: string, status: 'pending' | 'resolved') =
     throw new ApiError(StatusCodes.NOT_FOUND, 'Support ticket not found');
   }
 
-  // If status is changing to resolved, send an email
+  // If status is changing to resolved, send an email & notification
   if (status === 'resolved' && ticket.status !== 'resolved') {
     const user = ticket.user as any;
-    if (user && user.email) {
-      const emailData = {
-        name: user.fullName || 'User',
-        email: user.email,
-        ticketTitle: ticket.title,
-      };
-      setTimeout(() => {
-        emailHelper.sendEmail(emailTemplate.supportTicketResolved(emailData));
-      },0);
+    if (user) {
+      // In-App & Push Notification
+      await NotificationService.insertNotification({
+        title: "Support Ticket Resolved",
+        message: `Your support ticket '${ticket.title}' has been resolved by our team.`,
+        receiver: user._id,
+        type: "USER",
+        referenceId: ticket._id as any
+      });
+
+      // Email Notification
+      if (user.email) {
+        const emailData = {
+          name: user.fullName || 'User',
+          email: user.email,
+          ticketTitle: ticket.title,
+        };
+        setTimeout(() => {
+          emailHelper.sendEmail(emailTemplate.supportTicketResolved(emailData));
+        },0);
+      }
     }
   }
 

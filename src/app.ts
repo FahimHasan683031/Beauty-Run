@@ -1,59 +1,76 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import { StatusCodes } from "http-status-codes";
+import requestIp from "request-ip";
+
 import { Morgan } from "./shared/morgan";
-import router from './app/routes';
-import globalErrorHandler from './app/middleware/globalErrorHandler';
-import requestIp from 'request-ip';;
+import router from "./app/routes";
+import globalErrorHandler from "./app/middleware/globalErrorHandler";
+import handleStripeWebhook from "./stripe/handleStripeWebhook";
+
 const app = express();
 
 
-// morgan
+//TRUST PROXY (important for real IP in production)
+app.set("trust proxy", true);
+
+
+//LOGGING (first)
 app.use(Morgan.successHandler);
 app.use(Morgan.errorHandler);
 
 
-//body parser
+//CORS
 app.use(cors());
-app.use(express.json({
-    verify: (req: any, res, buf) => {
-        if (req.originalUrl.includes('/webhook')) {
-            req.rawBody = buf;
-        }
-    }
-}));
+
+
+//STRIPE WEBHOOK (MUST be before json parser)
+app.post(
+  "/api/v1/webhook",
+  express.raw({ type: "application/json" }),
+  handleStripeWebhook
+);
+
+
+//BODY PARSERS (after webhook)
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+
+//CLIENT IP
 app.use(requestIp.mw());
 
 
-//file retrieve
-app.use(express.static('uploads'));
-
-//router
-app.use('/api/v1', router);
+//STATIC FILES
+app.use(express.static("uploads"));
 
 
+//API ROUTES
+app.use("/api/v1", router);
 
 
+//ROOT
 app.get("/", (req: Request, res: Response) => {
-    res.send("Welcome to Beauty-Run Backend!");
-})
+  res.send("Welcome to Beauty-Run Backend!");
+});
 
-//global error handle
+
+//GLOBAL ERROR HANDLER
 app.use(globalErrorHandler);
 
-// handle not found route
+
+// NOT FOUND ROUTE
 app.use((req: Request, res: Response) => {
-    res.status(StatusCodes.NOT_FOUND).json({
-        success: false,
-        message: "Not Found",
-        errorMessages: [
-            {
-                path: req.originalUrl,
-                message: "API DOESN'T EXIST"
-            }
-        ]
-    })
+  res.status(StatusCodes.NOT_FOUND).json({
+    success: false,
+    message: "Not Found",
+    errorMessages: [
+      {
+        path: req.originalUrl,
+        message: "API DOESN'T EXIST",
+      },
+    ],
+  });
 });
 
 export default app;

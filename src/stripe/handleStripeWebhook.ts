@@ -8,6 +8,9 @@ import { logger } from '../shared/logger'
 import { Payment } from '../app/modules/payment/payment.model'
 import { Order } from '../app/modules/order/order.model'
 import { Settings } from '../app/modules/settings/settings.model'
+import { Product } from '../app/modules/product/product.model'
+import { User } from '../app/modules/user/user.model'
+import { USER_ROLES } from '../enum/user'
 
 const handleStripeWebhook = async (req: Request, res: Response) => {
     console.log('hit stripe webhook')
@@ -46,9 +49,21 @@ const handleStripeWebhook = async (req: Request, res: Response) => {
                         // Approximate Stripe fee (2.9% + 0.30)
                         const stripeGatewayFee = (customerPaymentAmount * 0.029) + 0.30;
                         
-                        // Platform commission based on settings
-                        const platformCommission = (finalPrice * commissionRate) / 100;
-                        const vendorPayoutAmount = finalPrice - platformCommission;
+                        const productModel = await Product.findById(order.product);
+                        const vendorUser = productModel ? await User.findById(productModel.createdBy) : null;
+                        
+                        let platformCommission = 0;
+                        let vendorPayoutAmount = finalPrice;
+
+                        // If the vendor is not an Admin, calculate the commission
+                        if (vendorUser && vendorUser.role !== USER_ROLES.ADMIN) {
+                            platformCommission = (finalPrice * commissionRate) / 100;
+                            vendorPayoutAmount = finalPrice - platformCommission;
+                        } else if (vendorUser && vendorUser.role === USER_ROLES.ADMIN) {
+                            platformCommission = 0;
+                            vendorPayoutAmount = 0;
+                            logger.info(`[Webhook] Admin product purchased. Platform Commission set to 0. Vendor Payout = 0`);
+                        }
 
                         // Retrieve session with expansion to get charge ID
                         const fullSession = await stripe.checkout.sessions.retrieve(session.id, {
@@ -65,10 +80,6 @@ const handleStripeWebhook = async (req: Request, res: Response) => {
                             transactionId: session.payment_intent as string || session.id,
                             chargeId: chargeId as string,
                             customerName: session.customer_details?.name,
-                            productPrice,
-                            discount,
-                            finalPrice,
-                            customerPaymentAmount,
                             stripeGatewayFee,
                             platformCommission,
                             vendorPayoutAmount,

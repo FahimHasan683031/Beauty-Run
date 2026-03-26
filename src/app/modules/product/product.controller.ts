@@ -11,18 +11,20 @@ import { UserServices } from '../user/user.service';
 // Create product
 const createProduct = catchAsync(async (req: Request, res: Response) => {
   const user = await User.findById((req as any).user!.authId);
-  if (user?.role === USER_ROLES.VENDOR && !user.stripeConnect?.onboardingCompleted) {
-    // Try to sync status in case they just completed it
-    try {
-      const syncedUser = await UserServices.syncStripeStatus((req as any).user!);
-      if (!syncedUser?.stripeConnect?.onboardingCompleted) {
+  if (user?.role === USER_ROLES.VENDOR) {
+    if (!user.stripeConnect?.onboardingCompleted) {
+      // Try to sync status in case they just completed it
+      try {
+        const syncedUser = await UserServices.syncStripeStatus((req as any).user!);
+        if (!syncedUser?.stripeConnect?.onboardingCompleted) {
+          const onboardingUrl = await UserServices.getOnboardingUrl((req as any).user!);
+          throw new ApiError(StatusCodes.FORBIDDEN, "Please complete your Stripe onboarding to create products.", { onboardingUrl });
+        }
+      } catch (error: any) {
+        if (error instanceof ApiError) throw error;
         const onboardingUrl = await UserServices.getOnboardingUrl((req as any).user!);
         throw new ApiError(StatusCodes.FORBIDDEN, "Please complete your Stripe onboarding to create products.", { onboardingUrl });
       }
-    } catch (error: any) {
-      if (error instanceof ApiError) throw error;
-      const onboardingUrl = await UserServices.getOnboardingUrl((req as any).user!);
-      throw new ApiError(StatusCodes.FORBIDDEN, "Please complete your Stripe onboarding to create products.", { onboardingUrl });
     }
   }
 

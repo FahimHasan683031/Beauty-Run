@@ -140,8 +140,6 @@ const createUserZodSchema = z.object({
     address: z.string().optional(),
     role: z.enum(
       [
-        USER_ROLES.ADMIN,
-        USER_ROLES.VENDOR,
         USER_ROLES.CUSTOMER,
       ],
       {

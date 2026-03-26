@@ -102,6 +102,67 @@ export const createUser = async (payload: IUser) => {
   }
 }
 
+export const createVendorByAdmin = async (payload: IUser) => {
+  payload.email = payload.email?.toLowerCase().trim();
+  const session = await mongoose.startSession();
+
+  try {
+    session.startTransaction();
+
+    // 1. Check if user already exists
+    const isUserExist = await User.findOne({
+      email: payload.email,
+      status: { $nin: [USER_STATUS.DELETED] },
+    }).session(session);
+
+    if (isUserExist) {
+      throw new ApiError(
+        StatusCodes.BAD_REQUEST,
+        `An account with this email already exists.`
+      );
+    }
+
+    // 2. Create User explicitly bypassing authentication rules
+    // Role is strictly set to VENDOR, verified is set to true immediately
+    const user = await User.create(
+      [
+        {
+          ...payload,
+          password: payload.password,
+          role: USER_ROLES.VENDOR,
+          verified: true, // Auto verify to skip OTP email flow
+          authentication: {
+            authType: null,
+            latestRequestAt: new Date(),
+            oneTimeCode: "", // No OTP
+            requestCount: 0,
+            resetPassword: false,
+            wrongLoginAttempts: 0,
+            restrictionLeftAt: null,
+          }
+        },
+      ],
+      { session }
+    );
+
+    if (!user[0]) {
+      throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create vendor account.');
+    }
+
+    const createdUser = user[0];
+
+    // 3. Commit Transaction
+    await session.commitTransaction();
+    return createdUser._id;
+  } catch (error) {
+    // Rollback on error
+    await session.abortTransaction();
+    throw error;
+  } finally {
+    session.endSession();
+  }
+}
+
 const login = async (payload: ILoginData): Promise<IAuthResponse> => {
   const { email, phone } = payload
   const query = email ? { email: email.toLowerCase().trim() } : { phone: phone }
@@ -665,5 +726,6 @@ export const AuthServices = {
   resendOtp,
   changePassword,
   createUser,
+  createVendorByAdmin,
   adminLogin
 }

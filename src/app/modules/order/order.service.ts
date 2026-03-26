@@ -12,6 +12,8 @@ import { logger } from '../../../shared/logger';
 import QueryBuilder from '../../builder/QueryBuilder';
 import { createPaymentSession } from '../../../stripe/createPaymentSession';
 import { USER_ROLES } from '../../../enum/user';
+import { NotificationService } from '../notification/notification.service';
+import { User } from '../user/user.model';
 
 // create order
 const createOrderToDB = async (user: JwtPayload, payload: Partial<IOrder>) => {
@@ -26,14 +28,18 @@ const createOrderToDB = async (user: JwtPayload, payload: Partial<IOrder>) => {
     throw new ApiError(StatusCodes.BAD_REQUEST, `Insufficient stock. Only ${product.quantity} item(s) available.`);
   }
 
-  // Record current price and finalPrice from product snapshot
-  const orderPrice = product.price;
-  const orderFinalPrice = product.finalPrice;
+  // Calculate mathematically correct prices incorporating quantity and delivery
+  const orderPrice = product.price * orderedQty;
+  const deliveryCharge = product.deliveryCharge || 0;
+  const discount = (product.price - product.finalPrice) * orderedQty;
+  const orderFinalPrice = (product.finalPrice * orderedQty) + deliveryCharge;
 
   const orderData = {
     ...payload,
     user: user.id || user.authId,
     price: orderPrice,
+    deliveryCharge,
+    discount,
     finalPrice: orderFinalPrice,
   };
 
@@ -43,6 +49,18 @@ const createOrderToDB = async (user: JwtPayload, payload: Partial<IOrder>) => {
   await Product.findByIdAndUpdate(payload.product, {
     $inc: { quantity: -orderedQty }
   });
+
+  // Notify Vendor/Admin about the new order
+  const vendorUser = await User.findById(product.createdBy);
+  if (vendorUser) {
+    await NotificationService.insertNotification({
+      title: "New Order Received!",
+      message: `You have received a new order for ${product.productName}.`,
+      receiver: vendorUser._id,
+      type: vendorUser.role === USER_ROLES.ADMIN ? "ADMIN" : "USER",
+      referenceId: result._id
+    });
+  }
 
   const paymentUrl = await createPaymentSession(user, orderFinalPrice, result._id.toString());
 
@@ -85,7 +103,7 @@ const getMyOrdersFromDB = async (user: JwtPayload, query: Record<string, unknown
   // Role-based matching
   if (user.role === USER_ROLES.CUSTOMER) {
     pipeline.push({ $match: { user: new mongoose.Types.ObjectId(user.authId) } });
-  } else if (user.role === USER_ROLES.VENDOR) {
+  } else if (user.role === USER_ROLES.VENDOR || user.role === USER_ROLES.ADMIN) {
     pipeline.push({ $match: { 'product.createdBy': new mongoose.Types.ObjectId(user.authId) } });
   }
 
@@ -127,6 +145,8 @@ const getMyOrdersFromDB = async (user: JwtPayload, query: Record<string, unknown
             finalPrice: 1,
             status: 1,
             paymentStatus: 1,
+            deliveryCharge: 1,
+            discount: 1,
             transactionId: 1,
             address: 1,
             number: 1,
@@ -206,8 +226,28 @@ const updateOrderToDB = async (id: string, user: JwtPayload, payload: Partial<IO
   // Admin (and others) have full control in this logic branch
 
   const result = await Order.findByIdAndUpdate(id, payload, { new: true });
+  const productObj = order.product as any;
+
+  if (newStatus === 'processing' || newStatus === 'shipped') {
+    await NotificationService.insertNotification({
+      title: "Order Status Updated",
+      message: `Your order for ${productObj.productName} is now ${newStatus}.`,
+      receiver: order.user,
+      type: "USER",
+      referenceId: order._id
+    });
+  }
 
   if (newStatus === 'delivered' && currentStatus !== 'delivered') {
+    // Notify Customer
+    await NotificationService.insertNotification({
+      title: "Order Delivered!",
+      message: `Your order for ${productObj.productName} has been delivered. Enjoy!`,
+      receiver: order.user,
+      type: "USER",
+      referenceId: order._id
+    });
+
     // Platform to Vendor payout
     logger.info(`Order ${id} marked as delivered. Triggering payout...`);
     await PaymentService.processPayout(id);
@@ -220,6 +260,27 @@ const updateOrderToDB = async (id: string, user: JwtPayload, payload: Partial<IO
       $inc: { quantity: order.quantity || 1 }
     });
     logger.info(`Stock restored for product: ${order.product}`);
+
+    // Notify Customer
+    await NotificationService.insertNotification({
+      title: "Order Cancelled",
+      message: `Your order for ${productObj.productName} has been cancelled.`,
+      receiver: order.user,
+      type: "USER",
+      referenceId: order._id
+    });
+
+    // Notify Vendor
+    const vendorUser = await User.findById(productObj.createdBy);
+    if (vendorUser) {
+      await NotificationService.insertNotification({
+        title: "Order Cancelled",
+        message: `The order for ${productObj.productName} was cancelled.`,
+        receiver: vendorUser._id,
+        type: vendorUser.role === USER_ROLES.ADMIN ? "ADMIN" : "USER",
+        referenceId: order._id
+      });
+    }
   }
 
   return result;

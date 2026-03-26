@@ -1,1 +1,4 @@
 {Thu Mar 26 2026 10:06:19} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/public 403 - 13.740 ms
+{Thu Mar 26 2026 10:35:55} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/webhook 400 - 16.416 ms
+{Thu Mar 26 2026 10:40:51} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/webhook 400 - 3.714 ms
+{Thu Mar 26 2026 10:50:30} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/webhook 400 - 2.313 ms

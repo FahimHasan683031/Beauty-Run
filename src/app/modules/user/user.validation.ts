@@ -7,8 +7,21 @@ export const userSignupSchema = z.object({
     fullName: z.string().min(1, "Full name is required"),
     phone: z.string().min(1, "Phone number is required"),
     password: z.string().min(6, "Password must be at least 6 characters"),
-    role: z.enum([USER_ROLES.VENDOR, USER_ROLES.CUSTOMER]),
-  })
+    role: z.enum([USER_ROLES.CUSTOMER]),
+    image: z.string().optional(),
+  }).strict()
+});
+
+export const adminCreateVendorSchema = z.object({
+  body: z.object({
+    email: z.string().email("Invalid email address").toLowerCase().trim(),
+    fullName: z.string().min(1, "Full name is required"),
+    phone: z.string().min(1, "Phone number is required"),
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    role: z.enum([USER_ROLES.VENDOR]).optional(),
+    address: z.string().optional(),
+    image: z.string().optional(),
+  }).strict()
 });
 
 export const userLoginSchema = z.object({
@@ -28,8 +41,7 @@ export const userUpdateSchema = z.object({
     password: z.string().min(6, "Password must be at least 6 characters").optional(),
     status: z.nativeEnum(USER_STATUS).optional(),
     verified: z.boolean().optional(),
-    role: z.nativeEnum(USER_ROLES).optional(),
-  })
+  }).strict()
 });
 
 export const changePasswordSchema = z.object({
@@ -41,6 +53,7 @@ export const changePasswordSchema = z.object({
 
 export const UserValidations = {
   userSignupSchema,
+  adminCreateVendorSchema,
   userLoginSchema,
   userUpdateSchema,
   changePasswordSchema,

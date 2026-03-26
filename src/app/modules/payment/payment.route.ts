@@ -16,7 +16,7 @@ router.post(
 
 router.get(
     "/my-payments",
-    auth(USER_ROLES.CUSTOMER, USER_ROLES.VENDOR),
+    auth(USER_ROLES.CUSTOMER, USER_ROLES.VENDOR, USER_ROLES.ADMIN),
     PaymentController.getMyPaymentsController
 )
 

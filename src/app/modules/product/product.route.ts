@@ -11,7 +11,7 @@ const router = express.Router();
 // Create product — Vendor only
 router.post(
   '/',
-  auth(USER_ROLES.VENDOR),
+  auth(USER_ROLES.VENDOR, USER_ROLES.ADMIN),
   fileAndBodyProcessorUsingDiskStorage(),
   validateRequest(ProductValidations.createProductZod),
   ProductController.createProduct
@@ -23,7 +23,7 @@ router.get('/', ProductController.getAllProducts);
 // Get my products — Vendor only
 router.get(
   '/my-products',
-  auth(USER_ROLES.VENDOR),
+  auth(USER_ROLES.VENDOR, USER_ROLES.ADMIN),
   ProductController.getMyProducts
 );
 

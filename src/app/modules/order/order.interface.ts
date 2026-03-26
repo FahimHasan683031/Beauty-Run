@@ -6,6 +6,8 @@ export interface IOrder {
   product: Types.ObjectId;
   quantity: number;
   price: number;
+  deliveryCharge: number;
+  discount: number;
   finalPrice: number;
   status: 'pending' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
   paymentStatus: 'pending' | 'paid' | 'failed';

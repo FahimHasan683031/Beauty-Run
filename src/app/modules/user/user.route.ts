@@ -4,6 +4,8 @@ import auth from '../../middleware/auth'
 import { USER_ROLES } from '../../../enum/user'
 import fileUploadHandler from '../../middleware/fileUploadHandler'
 import { fileAndBodyProcessorUsingDiskStorage } from '../../middleware/processReqBody'
+import validateRequest from '../../middleware/validateRequest'
+import { UserValidations } from './user.validation'
 
 const router = express.Router()
 
@@ -17,6 +19,7 @@ router.patch(
   '/profile',
   auth(USER_ROLES.VENDOR, USER_ROLES.CUSTOMER, USER_ROLES.ADMIN),
   fileAndBodyProcessorUsingDiskStorage(),
+  validateRequest(UserValidations.userUpdateSchema),
   UserController.updateProfile,
 )
 

@@ -132,6 +132,18 @@ const createUser = catchAsync(async (req: Request, res: Response) => {
     data: result,
   })
 })
+
+const createVendorByAdmin = catchAsync(async (req: Request, res: Response) => {
+  const { ...vendorData } = req.body
+  const result = await AuthServices.createVendorByAdmin(vendorData)
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Vendor created successfully.',
+    data: result,
+  })
+})
+
 const deleteAccount = catchAsync(async (req: Request, res: Response) => {
   const user = req.user
   const { password } = req.body
@@ -165,6 +177,7 @@ export const AuthController = {
   resendOtp,
   changePassword,
   createUser,
+  createVendorByAdmin,
   deleteAccount,
   adminLogin,
 

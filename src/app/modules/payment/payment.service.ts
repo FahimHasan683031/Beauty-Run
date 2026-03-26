@@ -11,6 +11,7 @@ import QueryBuilder from "../../builder/QueryBuilder";
 import stripe from "../../../config/stripe";
 import { User } from "../user/user.model";
 import { logger } from "../../../shared/logger";
+import { NotificationService } from "../notification/notification.service";
 
 // Create session
 const creatSession = async (user: JwtPayload, orderId: string) => {
@@ -91,7 +92,7 @@ const getMyPaymentsFromDB = async (user: JwtPayload, query: Record<string, unkno
   // Role-based matching
   if (user.role === USER_ROLES.CUSTOMER) {
     pipeline.push({ $match: { 'order.user': new mongoose.Types.ObjectId(user.authId) } });
-  } else if (user.role === USER_ROLES.VENDOR) {
+  } else if (user.role === USER_ROLES.VENDOR || user.role === USER_ROLES.ADMIN) {
     pipeline.push({ $match: { 'product.createdBy': new mongoose.Types.ObjectId(user.authId) } });
   }
 
@@ -116,10 +117,6 @@ const getMyPaymentsFromDB = async (user: JwtPayload, query: Record<string, unkno
             dateTime: 1,
             customerName: 1,
             email: 1,
-            productPrice: 1,
-            discount: 1,
-            finalPrice: 1,
-            customerPaymentAmount: 1,
             stripeGatewayFee: 1,
             platformCommission: 1,
             vendorPayoutAmount: 1,
@@ -189,34 +186,47 @@ const processPayout = async (orderId: string) => {
       return;
     }
 
-    if (!vendor.stripeConnect?.accountId || !vendor.stripeConnect.onboardingCompleted) {
-      logger.error(`[Payout] ❌ Vendor ${vendorId} has not completed Stripe onboarding or account ID is missing.`);
-      return;
+    // If vendor is Admin, skip Stripe transfer and just settle the payment
+    if (vendor.role === USER_ROLES.ADMIN) {
+      logger.info(`[Payout] Vendor is Admin (${vendorId}). Skipping Stripe transfer as funds are already in the platform account.`);
+    } else {
+      if (!vendor.stripeConnect?.accountId || !vendor.stripeConnect.onboardingCompleted) {
+        logger.error(`[Payout] ❌ Vendor ${vendorId} has not completed Stripe onboarding or account ID is missing.`);
+        return;
+      }
+
+      logger.info(`[Payout] Processing transfer to Stripe Account: ${vendor.stripeConnect.accountId}`);
+
+      const transferData: any = {
+        amount: Math.round(payment.vendorPayoutAmount * 100),
+        currency: 'usd',
+        destination: vendor.stripeConnect.accountId,
+        metadata: { orderId: orderId.toString(), transactionId: payment.transactionId }
+      };
+
+      // If we have a source_transaction (Charge ID), use it to link the transfer
+      // This allows the transfer to be funded by the original charge even if balance is pending
+      if (payment.chargeId) {
+        logger.info(`[Payout] Using source_transaction: ${payment.chargeId}`);
+        transferData.source_transaction = payment.chargeId;
+      }
+
+      const transfer = await stripe.transfers.create(transferData);
+      logger.info(`[Payout] ✅ SUCCESS: Payout of ${payment.vendorPayoutAmount} processed for Vendor: ${vendor.stripeConnect.accountId} (Order: ${orderId}, Transfer: ${transfer.id})`);
     }
-
-    logger.info(`[Payout] Processing transfer to Stripe Account: ${vendor.stripeConnect.accountId}`);
-
-    const transferData: any = {
-      amount: Math.round(payment.vendorPayoutAmount * 100),
-      currency: 'usd',
-      destination: vendor.stripeConnect.accountId,
-      metadata: { orderId: orderId.toString(), transactionId: payment.transactionId }
-    };
-
-    // If we have a source_transaction (Charge ID), use it to link the transfer
-    // This allows the transfer to be funded by the original charge even if balance is pending
-    if (payment.chargeId) {
-      logger.info(`[Payout] Using source_transaction: ${payment.chargeId}`);
-      transferData.source_transaction = payment.chargeId;
-    }
-
-    const transfer = await stripe.transfers.create(transferData);
 
     await Payment.findByIdAndUpdate(payment._id, {
       status: 'settled',
     });
 
-    logger.info(`[Payout] ✅ SUCCESS: Payout of ${payment.vendorPayoutAmount} processed for Vendor: ${vendor.stripeConnect.accountId} (Order: ${orderId}, Transfer: ${transfer.id})`);
+    // Notify Vendor about successful payout
+    await NotificationService.insertNotification({
+      title: "Payout Successful",
+      message: `Your payout of $${payment.vendorPayoutAmount} for order #${orderId} has been securely processed.`,
+      receiver: vendor._id,
+      type: vendor.role === USER_ROLES.ADMIN ? "ADMIN" : "USER",
+      referenceId: payment._id
+    });
   } catch (error) {
     logger.error(`[Payout] ❌ FATAL ERROR for Order ${orderId}:`, error);
   }
@@ -245,7 +255,7 @@ const processRefund = async (orderId: string) => {
 
     await Payment.findByIdAndUpdate(payment._id, {
       status: 'refunded',
-      refundAmount: payment.finalPrice, // Full refund
+      refundAmount: payment.amount, // Full refund
     });
 
     logger.info(`[Refund] ✅ SUCCESS: Refund processed for Order: ${orderId} (Refund: ${refund.id})`);
