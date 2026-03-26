@@ -1,0 +1,5 @@
+{Thu Mar 26 2026 09:00:48} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/message 500 - 6.765 ms
+{Thu Mar 26 2026 09:01:01} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/message 500 - 6.893 ms
+{Thu Mar 26 2026 09:01:55} [APP 🐞] error: ::ffff:10.10.7.50 - GET /api/v1/message/69c49cb46bb7839954c935cf 500 - 2.339 ms
+{Thu Mar 26 2026 09:06:51} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/message 500 - 2.195 ms
+{Thu Mar 26 2026 09:09:58} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/webhook 400 - 11.928 ms

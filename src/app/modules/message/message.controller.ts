@@ -5,7 +5,7 @@ import { StatusCodes } from 'http-status-codes';
 import { MessageService } from './message.service';
 
 const sendMessage = catchAsync(async (req: Request, res: Response) => {
-  req.body.sender = req.user.id
+  req.body.sender = req.user.authId
   const message = await MessageService.sendMessageToDB(req.body);
   sendResponse(res, {
     statusCode: StatusCodes.OK,
@@ -32,7 +32,7 @@ const getMessage = catchAsync(async (req: Request, res: Response) => {
 const updateMessage = catchAsync(async (req: Request, res: Response) => {
   const result = await MessageService.updateMessageToDB(
     req.params.id,
-    req.user.id,
+    req.user.authId,
     req.body
   );
   sendResponse(res, {
@@ -44,7 +44,7 @@ const updateMessage = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getUnreadCount = catchAsync(async (req: Request, res: Response) => {
-  const count = await MessageService.getTotalUnreadCount(req.user.id);
+  const count = await MessageService.getTotalUnreadCount(req.user.authId);
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
@@ -54,7 +54,7 @@ const getUnreadCount = catchAsync(async (req: Request, res: Response) => {
 });
 
 const deleteMessage = catchAsync(async (req: Request, res: Response) => {
-  const result = await MessageService.deleteMessageFromDB(req.params.id, req.user.id);
+  const result = await MessageService.deleteMessageFromDB(req.params.id, req.user.authId);
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,

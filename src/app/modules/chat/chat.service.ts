@@ -62,6 +62,7 @@ const getChatFromDB = async (
         .filter()
         .paginate();
 
+
     const chats = await chatQueryBuilder.modelQuery
         .populate({
             path: 'participants',
@@ -72,7 +73,8 @@ const getChatFromDB = async (
             path: 'lastMessage',
             select: 'text files type createdAt sender'
         })
-        .select('participants status isAdminSupport lastMessage lastMessageAt')
+        .select('participants status isAdminSupport lastMessage lastMessageAt updatedAt')
+        .sort({ updatedAt: -1 })
         .lean();
 
     const pagination = await chatQueryBuilder.getPaginationInfo();

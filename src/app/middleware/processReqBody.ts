@@ -6,7 +6,7 @@ import path from 'path'
 import fs from 'fs'
 import sharp from 'sharp'
 
-type IFolderName = 'image' | 'images' | 'media' | 'documents'
+type IFolderName = 'image' | 'images' | 'media' | 'documents' | 'files'
 
 interface ProcessedFiles {
   [key: string]: string | string[] | undefined
@@ -17,6 +17,7 @@ const uploadFields = [
   { name: 'images', maxCount: 5 },
   { name: 'media', maxCount: 3 },
   { name: 'documents', maxCount: 3 },
+  { name: 'files', maxCount: 4 },
 ] as const
 
 export const fileAndBodyProcessorUsingDiskStorage = () => {
@@ -49,15 +50,18 @@ export const fileAndBodyProcessorUsingDiskStorage = () => {
     cb: FileFilterCallback,
   ) => {
     try {
-      const allowedTypes: Record<IFolderName, string[]> = {
+      const allowedTypes: Record<IFolderName, string[] | null> = {
         image: ['image/jpeg', 'image/png', 'image/jpg', 'image/webp', 'image/heic', 'image/heif'],
         images: ['image/jpeg', 'image/png', 'image/jpg', 'image/webp', 'image/heic', 'image/heif'],
         media: ['video/mp4', 'audio/mpeg'],
         documents: ['application/pdf'],
+        files: null, // null means all types allowed
       };
 
       const fieldType = file.fieldname as IFolderName;
-      if (!allowedTypes[fieldType]?.includes(file.mimetype)) {
+      const allowed = allowedTypes[fieldType];
+      // null means all types are allowed (e.g. 'files' field)
+      if (allowed !== null && allowed !== undefined && !allowed.includes(file.mimetype)) {
         return cb(
           new ApiError(
             StatusCodes.BAD_REQUEST,
@@ -158,6 +162,7 @@ export const fileAndBodyProcessorUsingDiskStorage = () => {
           ...(processedFiles.images && { images: processedFiles.images }),
           ...(processedFiles.media && { media: processedFiles.media }),
           ...(processedFiles.documents && { documents: processedFiles.documents }),
+          ...(processedFiles.files && { files: processedFiles.files }),
         };
 
         next();

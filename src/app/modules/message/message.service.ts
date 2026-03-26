@@ -4,13 +4,12 @@ import { IMessage } from './message.interface';
 import { Message } from './message.model';
 import { checkMongooseIDValidation } from '../../../shared/checkMongooseIDValidation';
 import { Chat } from '../chat/chat.model';
-import { MESSAGE } from '../../../enum/message';
 import { JwtPayload } from 'jsonwebtoken';
 import ApiError from '../../../errors/ApiError';
 import { StatusCodes } from 'http-status-codes';
 import { PushNotificationService } from '../notification/pushNotification.service';
 import { User } from '../user/user.model';
-import { ADMIN_ROLES } from '../../../enum/user';
+
 
 const sendMessageToDB = async (payload: any): Promise<IMessage> => {
   // Initialize readBy with sender's ID
@@ -100,7 +99,7 @@ const getMessageFromDB = async (
     throw new ApiError(StatusCodes.BAD_REQUEST, "Chat doesn't exist!");
   }
 
-  if (!isExistChat.participants.some(p => p.toString() === user.id.toString())) {
+  if (!isExistChat.participants.some(p => p.toString() === user.authId.toString())) {
     throw new Error('You are not participant of this chat')
   }
 
@@ -108,11 +107,11 @@ const getMessageFromDB = async (
   await Message.updateMany(
     {
       chatId: new mongoose.Types.ObjectId(id),
-      sender: { $ne: new mongoose.Types.ObjectId(user.id) },
-      readBy: { $ne: new mongoose.Types.ObjectId(user.id) }
+      sender: { $ne: new mongoose.Types.ObjectId(user.authId) },
+      readBy: { $ne: new mongoose.Types.ObjectId(user.authId) }
     },
     {
-      $addToSet: { readBy: new mongoose.Types.ObjectId(user.id) }
+      $addToSet: { readBy: new mongoose.Types.ObjectId(user.authId) }
     }
   );
 
@@ -131,13 +130,12 @@ const getMessageFromDB = async (
     path: 'participants',
     select: '-_id fullName image ',
     match: {
-      _id: { $ne: new mongoose.Types.ObjectId(user.id) }
+      _id: { $ne: new mongoose.Types.ObjectId(user.authId) }
     }
   });
 
   return { messages, pagination, participant: participant?.participants[0] };
 };
-
 
 // Update a message
 const updateMessageToDB = async (messageId: string, userId: string, payload: Partial<IMessage>): Promise<IMessage | null> => {
@@ -219,4 +217,4 @@ export const MessageService = {
   getUnreadCountForChat,
   getTotalUnreadCount,
   deleteMessageFromDB,
-};
+};

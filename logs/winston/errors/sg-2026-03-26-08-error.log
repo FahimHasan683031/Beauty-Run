@@ -1,5 +1,0 @@
-{Thu Mar 26 2026 08:28:39} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/chat 400 - 53.915 ms
-{Thu Mar 26 2026 08:35:09} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/chat 400 - 23.857 ms
-{Thu Mar 26 2026 08:35:12} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/chat 400 - 4.607 ms
-{Thu Mar 26 2026 08:35:54} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/chat 400 - 19.579 ms
-{Thu Mar 26 2026 08:36:56} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/chat 400 - 22.939 ms
