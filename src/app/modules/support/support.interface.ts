@@ -4,7 +4,7 @@ export interface ISupport {
   _id?: Types.ObjectId;
   title: string;
   description: string;
-  attachment?: string;
+  files?: string[];
   user: Types.ObjectId;
   status: 'pending' | 'resolved';
 }

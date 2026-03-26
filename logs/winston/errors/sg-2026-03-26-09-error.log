@@ -11,3 +11,13 @@
 {Thu Mar 26 2026 09:22:58} [APP 🐞] error: ::ffff:10.10.7.50 - DELETE /api/v1/wishlist/69c3642638d0e878833ca351 404 - 2.886 ms
 {Thu Mar 26 2026 09:24:28} [APP 🐞] error: ::ffff:10.10.7.50 - DELETE /api/v1/wishlist/69c3642638d0e878833ca351 404 - 11.579 ms
 {Thu Mar 26 2026 09:25:13} [APP 🐞] error: ::ffff:10.10.7.50 - DELETE /api/v1/wishlist/69c3642638d0e878833ca351 404 - 10.682 ms
+{Thu Mar 26 2026 09:29:00} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/webhook 400 - 18.423 ms
+{Thu Mar 26 2026 09:32:42} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/webhook 400 - 19.976 ms
+{Thu Mar 26 2026 09:43:11} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/webhook 400 - 3.451 ms
+{Thu Mar 26 2026 09:48:47} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/webhook 400 - 14.092 ms
+{Thu Mar 26 2026 09:51:26} [APP 🐞] error: ::ffff:10.10.7.50 - GET /api/v1/support 403 - 2.855 ms
+{Thu Mar 26 2026 09:52:20} [APP 🐞] error: ::ffff:10.10.7.50 - GET /api/v1/support/my-tickets 403 - 1.533 ms
+{Thu Mar 26 2026 09:53:29} [APP 🐞] error: ::ffff:10.10.7.50 - GET /api/v1/support/69c4acefa33a7a4314bcb385 404 - 0.898 ms
+{Thu Mar 26 2026 09:55:09} [APP 🐞] error: ::ffff:10.10.7.50 - PATCH /api/v1/support/69c4acefa33a7a4314bcb385/resolved 404 - 0.324 ms
+{Thu Mar 26 2026 09:56:39} [APP 🐞] error: ::ffff:10.10.7.50 - PATCH /api/v1/support/69c4acefa33a7a4314bcb385/status 403 - 1.484 ms
+{Thu Mar 26 2026 09:57:10} [APP 🐞] error: ::ffff:10.10.7.50 - PATCH /api/v1/support/69c4acefa33a7a4314bcb385/status 403 - 1.272 ms

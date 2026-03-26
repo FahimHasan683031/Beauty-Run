@@ -12,8 +12,8 @@ const supportSchema = new Schema<ISupport>(
       type: String,
       required: true,
     },
-    attachment: {
-      type: String,
+    files: {
+      type: [String],
     },
     user: {
       type: Schema.Types.ObjectId,
