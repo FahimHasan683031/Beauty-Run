@@ -3,3 +3,11 @@
 {Thu Mar 26 2026 09:01:55} [APP 🐞] error: ::ffff:10.10.7.50 - GET /api/v1/message/69c49cb46bb7839954c935cf 500 - 2.339 ms
 {Thu Mar 26 2026 09:06:51} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/message 500 - 2.195 ms
 {Thu Mar 26 2026 09:09:58} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/webhook 400 - 11.928 ms
+{Thu Mar 26 2026 09:20:43} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/wishlist 400 - 3.532 ms
+{Thu Mar 26 2026 09:20:51} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/wishlist 400 - 3.377 ms
+{Thu Mar 26 2026 09:22:27} [APP 🐞] error: ::ffff:10.10.7.50 - DELETE /api/v1/wishlist/69c3642638d0e878833ca351 404 - 1.849 ms
+{Thu Mar 26 2026 09:22:33} [APP 🐞] error: ::ffff:10.10.7.50 - DELETE /api/v1/wishlist/69c3642638d0e878833ca351 404 - 2.634 ms
+{Thu Mar 26 2026 09:22:47} [APP 🐞] error: ::ffff:10.10.7.50 - POST /api/v1/wishlist 400 - 3.405 ms
+{Thu Mar 26 2026 09:22:58} [APP 🐞] error: ::ffff:10.10.7.50 - DELETE /api/v1/wishlist/69c3642638d0e878833ca351 404 - 2.886 ms
+{Thu Mar 26 2026 09:24:28} [APP 🐞] error: ::ffff:10.10.7.50 - DELETE /api/v1/wishlist/69c3642638d0e878833ca351 404 - 11.579 ms
+{Thu Mar 26 2026 09:25:13} [APP 🐞] error: ::ffff:10.10.7.50 - DELETE /api/v1/wishlist/69c3642638d0e878833ca351 404 - 10.682 ms

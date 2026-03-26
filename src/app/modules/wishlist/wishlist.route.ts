@@ -9,20 +9,20 @@ const router = express.Router();
 
 router.post(
   '/',
-  auth(USER_ROLES.CUSTOMER, USER_ROLES.VENDOR),
+  auth(USER_ROLES.CUSTOMER),
   validateRequest(WishlistValidations.createWishlistZod),
   WishlistController.addToWishlist
 );
 
 router.get(
   '/',
-  auth(USER_ROLES.CUSTOMER, USER_ROLES.VENDOR),
+  auth(USER_ROLES.CUSTOMER),
   WishlistController.getMyWishlist
 );
 
 router.delete(
   '/:id',
-  auth(USER_ROLES.CUSTOMER, USER_ROLES.VENDOR),
+  auth(USER_ROLES.CUSTOMER),
   WishlistController.removeFromWishlist
 );
 

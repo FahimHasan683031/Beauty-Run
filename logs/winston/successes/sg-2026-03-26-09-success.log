@@ -43,3 +43,69 @@
 {Thu Mar 26 2026 09:16:15} [APP 🚀] info: ::ffff:10.10.7.50 - GET /api/v1/chat?searchTerm=lifoc5897dfs0@qvmao.com 200 - 8.788 ms
 {Thu Mar 26 2026 09:16:45} [APP 🚀] info: ::ffff:10.10.7.50 - GET /api/v1/chat?searchTerm=%22vendor%20Doe 200 - 7.188 ms
 {Thu Mar 26 2026 09:16:51} [APP 🚀] info: ::ffff:10.10.7.50 - GET /api/v1/chat?searchTerm=vendor%20Doe 200 - 7.703 ms
+{Thu Mar 26 2026 09:18:52} [APP 🚀] info: ::ffff:10.10.7.50 - GET /api/v1/product 200 - 15.751 ms
+{Thu Mar 26 2026 09:19:14} [APP 🚀] info: ::ffff:10.10.7.50 - POST /api/v1/wishlist 201 - 26.533 ms
+{Thu Mar 26 2026 09:19:51} [APP 🚀] info: ::ffff:10.10.7.50 - POST /api/v1/wishlist 201 - 8.490 ms
+{Thu Mar 26 2026 09:20:02} [APP 🚀] info: ::ffff:10.10.7.50 - GET /api/v1/wishlist 200 - 168.335 ms
+{Thu Mar 26 2026 09:23:22} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Thu Mar 26 2026 09:23:22} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Thu Mar 26 2026 09:23:22} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Thu Mar 26 2026 09:23:22} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Thu Mar 26 2026 09:23:28} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Thu Mar 26 2026 09:23:28} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Thu Mar 26 2026 09:23:28} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Thu Mar 26 2026 09:23:28} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Thu Mar 26 2026 09:23:33} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Thu Mar 26 2026 09:23:33} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Thu Mar 26 2026 09:23:33} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Thu Mar 26 2026 09:23:33} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Thu Mar 26 2026 09:24:21} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Thu Mar 26 2026 09:24:21} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Thu Mar 26 2026 09:24:21} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Thu Mar 26 2026 09:24:21} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Thu Mar 26 2026 09:24:23} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Thu Mar 26 2026 09:24:23} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Thu Mar 26 2026 09:24:23} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Thu Mar 26 2026 09:24:23} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Thu Mar 26 2026 09:24:24} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Thu Mar 26 2026 09:24:24} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Thu Mar 26 2026 09:24:24} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Thu Mar 26 2026 09:24:24} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Thu Mar 26 2026 09:24:50} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Thu Mar 26 2026 09:24:50} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Thu Mar 26 2026 09:24:50} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Thu Mar 26 2026 09:24:50} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Thu Mar 26 2026 09:24:51} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Thu Mar 26 2026 09:24:51} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Thu Mar 26 2026 09:24:51} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Thu Mar 26 2026 09:24:51} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Thu Mar 26 2026 09:24:59} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Thu Mar 26 2026 09:24:59} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Thu Mar 26 2026 09:24:59} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Thu Mar 26 2026 09:24:59} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Thu Mar 26 2026 09:25:01} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Thu Mar 26 2026 09:25:01} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Thu Mar 26 2026 09:25:01} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Thu Mar 26 2026 09:25:01} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Thu Mar 26 2026 09:25:03} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Thu Mar 26 2026 09:25:03} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Thu Mar 26 2026 09:25:03} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Thu Mar 26 2026 09:25:03} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Thu Mar 26 2026 09:25:05} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Thu Mar 26 2026 09:25:05} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Thu Mar 26 2026 09:25:05} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Thu Mar 26 2026 09:25:05} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Thu Mar 26 2026 09:25:07} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Thu Mar 26 2026 09:25:07} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Thu Mar 26 2026 09:25:07} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Thu Mar 26 2026 09:25:07} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Thu Mar 26 2026 09:25:08} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Thu Mar 26 2026 09:25:08} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Thu Mar 26 2026 09:25:08} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Thu Mar 26 2026 09:25:08} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Thu Mar 26 2026 09:25:39} [APP 🚀] info: ::ffff:10.10.7.50 - GET /api/v1/wishlist 200 - 13.681 ms
+{Thu Mar 26 2026 09:25:55} [APP 🚀] info: ::ffff:10.10.7.50 - DELETE /api/v1/wishlist/69c4a5b2f7298e50d7ce7abf 200 - 7.942 ms
+{Thu Mar 26 2026 09:26:11} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Thu Mar 26 2026 09:26:11} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Thu Mar 26 2026 09:26:11} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Thu Mar 26 2026 09:26:11} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m

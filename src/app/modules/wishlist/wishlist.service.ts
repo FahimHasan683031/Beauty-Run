@@ -50,7 +50,6 @@ const getMyWishlist = async (user: JwtPayload, query: Record<string, unknown>) =
 // Remove from wishlist
 const removeFromWishlist = async (user: JwtPayload, id: string) => {
   const wishlistItem = await Wishlist.findById(id);
-
   if (!wishlistItem) {
     throw new ApiError(StatusCodes.NOT_FOUND, 'Wishlist item not found');
   }
