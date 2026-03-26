@@ -12,7 +12,7 @@ router.post(
   async (req, res, next) => {
     try {
       req.body = {
-        participants: [req.user.id, req.body.participant],
+        participants: [req.user.authId, req.body.participant],
         isAdminSupport: false
       };
       next();
