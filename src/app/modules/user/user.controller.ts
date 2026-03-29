@@ -63,6 +63,16 @@ const getProfile = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+// block user
+const blocOrUnblockUser = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserServices.blocOrUnblockUser(req.params.id)
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'User blocked successfully',
+  })
+})
+
 
 // delete my account
 const deleteMyAccount = catchAsync(async (req: Request, res: Response) => {
@@ -105,4 +115,5 @@ export const UserController = {
   deleteMyAccount,
   getOnboardingUrl,
   syncStripeStatus,
+  blocOrUnblockUser
 }

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { USER_ROLES, USER_STATUS } from "./user.interface";
+import { USER_ROLES } from "./user.interface";
 
 export const userSignupSchema = z.object({
   body: z.object({
@@ -33,14 +33,11 @@ export const userLoginSchema = z.object({
 
 export const userUpdateSchema = z.object({
   body: z.object({
-    email: z.string().email("Invalid email address").trim().toLowerCase().optional(),
-    fullName: z.string().min(1, "Full name is required").optional(),
-    phone: z.string().min(1, "Phone is required").optional(),
+    fullName: z.string().optional(),
+    phone: z.string().optional(),
     address: z.string().optional(),
-    image: z.string().url("Invalid image URL").optional(),
-    password: z.string().min(6, "Password must be at least 6 characters").optional(),
-    status: z.nativeEnum(USER_STATUS).optional(),
-    verified: z.boolean().optional(),
+    image: z.string().optional(),
+    password: z.string().optional(),
   }).strict()
 });
 

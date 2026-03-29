@@ -14,14 +14,14 @@ export const createProductZod = z.object({
 
 export const updateProductZod = z.object({
   body: z.object({
-    productName: z.string().min(1).optional(),
+    productName: z.string().optional(),
     category: z.string().optional(),
     price: z.number().min(0).optional(),
     deliveryCharge: z.number().min(0).optional(),
-    offer: z.number().min(0).max(100).optional().nullable(),
-    description: z.string().min(1).optional(),
+    offer: z.number().min(0).max(100).optional(),
+    description: z.string().optional(),
     isActive: z.boolean().optional(),
-    quantity: z.number().optional(),
+    quantity: z.number().min(0).optional(),
   }),
 });
 

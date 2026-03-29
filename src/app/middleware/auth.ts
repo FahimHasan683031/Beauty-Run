@@ -4,6 +4,8 @@ import { Secret } from 'jsonwebtoken'
 import config from '../../config'
 import { jwtHelper } from '../../helpers/jwtHelper'
 import ApiError from '../../errors/ApiError'
+import { User } from '../modules/user/user.model'
+import { USER_STATUS } from '../../enum/user'
 
 const auth =
     (...roles: string[]) =>
@@ -28,6 +30,15 @@ const auth =
 
                         // Set user to header
                         req.user = verifyUser
+
+                        const isUserExist = await User.findById(verifyUser.authId)
+                        if (!isUserExist) {
+                            throw new ApiError(StatusCodes.NOT_FOUND, 'User not found')
+                        }
+
+                        if(isUserExist.status === USER_STATUS.BLOCKED){
+                            throw new ApiError(StatusCodes.FORBIDDEN, 'User is blocked')
+                        }
 
                         // Guard user
                         if (roles.length && !roles.includes(verifyUser.role)) {

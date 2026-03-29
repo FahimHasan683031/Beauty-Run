@@ -9,10 +9,10 @@ import { IAuthResponse } from './auth.interface'
 import { IUser } from '../user/user.interface'
 import { emailTemplate } from '../../../shared/emailTemplate'
 import { emailHelper } from '../../../helpers/emailHelper'
-import bcrypt from "bcrypt";
 
 
-const handleLoginLogic = async (payload: ILoginData, isUserExist: IUser):Promise<IAuthResponse> => {
+
+const handleLoginLogic = async (payload: ILoginData, isUserExist: IUser): Promise<IAuthResponse> => {
   const { authentication, verified, status, password } = isUserExist
   const { restrictionLeftAt, wrongLoginAttempts } = authentication
 
@@ -36,7 +36,7 @@ const handleLoginLogic = async (payload: ILoginData, isUserExist: IUser):Promise
 
     const otpTemplate = emailTemplate.createAccount({
       name: isUserExist.fullName,
-      email: isUserExist.email!,   
+      email: isUserExist.email!,
       otp,
     })
     setTimeout(() => {
@@ -52,6 +52,13 @@ const handleLoginLogic = async (payload: ILoginData, isUserExist: IUser):Promise
     )
   }
 
+  if (status === USER_STATUS.BLOCKED) {
+    throw new ApiError(
+      StatusCodes.FORBIDDEN,
+      'Your account has been blocked. Please contact the administrator for assistance.',
+    )
+  }
+
   if (status === USER_STATUS.RESTRICTED) {
     if (restrictionLeftAt && new Date() < restrictionLeftAt) {
       const remainingMinutes = Math.ceil(
@@ -62,6 +69,8 @@ const handleLoginLogic = async (payload: ILoginData, isUserExist: IUser):Promise
         `You are restricted to login for ${remainingMinutes} minutes`,
       )
     }
+
+
 
     // Handle restriction expiration
     await User.findByIdAndUpdate(isUserExist._id, {
@@ -126,7 +135,7 @@ const handleLoginLogic = async (payload: ILoginData, isUserExist: IUser):Promise
   )
 
   const tokens = AuthHelper.createToken(isUserExist._id, isUserExist.role, isUserExist.fullName, isUserExist.email)
-  const userInfo={
+  const userInfo = {
     id: isUserExist._id,
     role: isUserExist.role,
     name: isUserExist.fullName,
@@ -134,15 +143,15 @@ const handleLoginLogic = async (payload: ILoginData, isUserExist: IUser):Promise
     image: isUserExist.image!,
   }
 
-  return  authResponse(
-  StatusCodes.OK,
-  `Welcome back ${isUserExist.fullName}`,
-  undefined,           
-  tokens.accessToken,     
-  tokens.refreshToken,     
-  undefined,                 
-  userInfo                   
-)
+  return authResponse(
+    StatusCodes.OK,
+    `Welcome back ${isUserExist.fullName}`,
+    undefined,
+    tokens.accessToken,
+    tokens.refreshToken,
+    undefined,
+    userInfo
+  )
 }
 
 

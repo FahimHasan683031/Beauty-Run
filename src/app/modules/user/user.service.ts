@@ -84,6 +84,21 @@ const getProfile = async (user: JwtPayload) => {
     return isExistUser
 }
 
+// block or unblock user
+const blocOrUnblockUser = async (id: string) => {
+    const isExistUser = await User.findById(id)
+    if (!isExistUser) {
+        throw new ApiError(StatusCodes.NOT_FOUND, 'User not found')
+    }
+    if (isExistUser.status === USER_STATUS.BLOCKED) {
+        const result = await User.findByIdAndUpdate(id, { status: USER_STATUS.ACTIVE })
+        return result
+    } else {
+        const result = await User.findByIdAndUpdate(id, { status: USER_STATUS.BLOCKED })
+        return result
+    }
+}
+
 // delete my account
 const deleteMyAccount = async (user: JwtPayload) => {
     const isExistUser = await User.findById(user.authId)
@@ -141,6 +156,8 @@ const syncStripeStatus = async (user: JwtPayload) => {
     return updatedUser;
 }
 
+
+
 export const UserServices = {
     updateProfile,
     getAllUser,
@@ -150,4 +167,5 @@ export const UserServices = {
     deleteMyAccount,
     getOnboardingUrl,
     syncStripeStatus,
+    blocOrUnblockUser
 }
