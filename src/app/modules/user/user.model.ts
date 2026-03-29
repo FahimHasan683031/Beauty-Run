@@ -4,12 +4,17 @@ import { IUser, USER_STATUS, UserModel } from "./user.interface";
 import { StatusCodes } from "http-status-codes";
 import ApiError from "../../../errors/ApiError";
 import config from "../../../config";
+import { generateFormattedId } from "../../../util/generateId";
 
 const UserSchema = new Schema(
     {
         email: {
             type: String,
             required: true,
+            unique: true,
+        },
+        id: {
+            type: String,
             unique: true,
         },
         password: {
@@ -127,6 +132,10 @@ UserSchema.statics.isPasswordMatched = async function (
 
 UserSchema.pre("save", async function (next) {
     try {
+        if (!this.id) {
+            this.id = await generateFormattedId('User', 'USR');
+        }
+
         if (this.isModified("email")) {
             const isExist = await User.findOne({
                 email: this.email,

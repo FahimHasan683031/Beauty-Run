@@ -1,5 +1,4 @@
 import express from 'express';
-import handleStripeWebhook from '../../stripe/handleStripeWebhook';
 import { UserRoutes } from '../modules/user/user.route';
 import { AuthRoutes } from '../modules/auth/auth.route';
 import { CategoryRoutes } from '../modules/category/category.route';
@@ -36,7 +35,6 @@ const apiRoutes = [
     { path: "/dashboard", route: DashboardRoutes },
 ]
 
-router.post('/webhook', handleStripeWebhook);
 
 apiRoutes.forEach(route => router.use(route.path, route.route));
 export default router;

@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { IOrder } from './order.interface';
+import { generateFormattedId } from '../../../util/generateId';
 
 const orderSchema = new Schema<IOrder>(
   {
@@ -7,6 +8,10 @@ const orderSchema = new Schema<IOrder>(
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
+    },
+    id: {
+      type: String,
+      unique: true,
     },
     product: {
       type: Schema.Types.ObjectId,
@@ -65,5 +70,12 @@ const orderSchema = new Schema<IOrder>(
     timestamps: true,
   }
 );
+
+orderSchema.pre('save', async function (next) {
+  if (!this.id) {
+    this.id = await generateFormattedId('Order', 'ODR');
+  }
+  next();
+});
 
 export const Order = model<IOrder>('Order', orderSchema);

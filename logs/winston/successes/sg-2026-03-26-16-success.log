@@ -1,8 +1,0 @@
-{Thu Mar 26 2026 16:00:00} [APP 🚀] info: [CleanupJob] Running pending order cleanup...
-{Thu Mar 26 2026 16:00:00} [APP 🚀] info: [CleanupJob] No stale pending orders found.
-{Thu Mar 26 2026 16:01:18} [APP 🚀] info: 52.112.49.156 - GET / 200 - 0.812 ms
-{Thu Mar 26 2026 16:01:26} [APP 🚀] info: 52.112.49.104 - GET / 200 - 0.421 ms
-{Thu Mar 26 2026 16:02:06} [APP 🚀] info: 103.186.20.8 - POST /api/v1/auth/login 200 - 247.982 ms
-{Thu Mar 26 2026 16:02:17} [APP 🚀] info: 103.186.20.8 - POST /api/v1/auth/login 200 - 214.527 ms
-{Thu Mar 26 2026 16:02:44} [APP 🚀] info: 103.186.20.8 - POST /api/v1/auth/login 200 - 209.369 ms
-{Thu Mar 26 2026 16:03:04} [APP 🚀] info: 103.186.20.8 - POST /api/v1/auth/login 200 - 213.374 ms

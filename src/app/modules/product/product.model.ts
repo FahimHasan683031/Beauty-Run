@@ -1,5 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import { IProduct } from './product.interface';
+import { generateFormattedId } from '../../../util/generateId';
 
 const productSchema = new Schema<IProduct>(
   {
@@ -7,6 +8,10 @@ const productSchema = new Schema<IProduct>(
       type: String,
       required: true,
       trim: true,
+    },
+    id: {
+      type: String,
+      unique: true,
     },
     images: {
       type: [String],
@@ -62,5 +67,12 @@ const productSchema = new Schema<IProduct>(
     timestamps: true,
   }
 );
+
+productSchema.pre('save', async function (next) {
+  if (!this.id) {
+    this.id = await generateFormattedId('Product', 'PRD');
+  }
+  next();
+});
 
 export const Product = mongoose.model<IProduct>('Product', productSchema);

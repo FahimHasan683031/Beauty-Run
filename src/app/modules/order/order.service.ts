@@ -5,8 +5,6 @@ import ApiError from '../../../errors/ApiError';
 import { Product } from '../product/product.model';
 import { IOrder } from './order.interface';
 import { Order } from './order.model';
-import config from '../../../config'
-import { createConnectAccount, createOnboardingUrl, getAccountStatus } from '../../../stripe/stripeConnect'
 import { PaymentService } from '../payment/payment.service'
 import { logger } from '../../../shared/logger';
 import QueryBuilder from '../../builder/QueryBuilder';
@@ -74,6 +72,7 @@ const getAllOrdersFromDB = async (query: Record<string, unknown>) => {
     query
   )
     .filter()
+    .search([ 'number',"id",'user','transactionId'])
     .sort()
     .paginate();
 
@@ -114,6 +113,9 @@ const getMyOrdersFromDB = async (user: JwtPayload, query: Record<string, unknown
         $or: [
           { 'product.productName': { $regex: searchTerm, $options: 'i' } },
           { 'address': { $regex: searchTerm, $options: 'i' } },
+          {id: { $regex: searchTerm, $options: 'i' } },
+          {number: { $regex: searchTerm, $options: 'i' } },
+          {transactionId: { $regex: searchTerm, $options: 'i' } },
         ],
       },
     });

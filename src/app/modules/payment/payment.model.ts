@@ -1,5 +1,6 @@
 import { model, Schema } from "mongoose";
 import { IPayment } from "./payment.interface";
+import { generateFormattedId } from "../../../util/generateId";
 
 const PaymentSchema = new Schema<IPayment>(
   {
@@ -8,6 +9,10 @@ const PaymentSchema = new Schema<IPayment>(
       required: true,
       trim: true,
       lowercase: true,
+    },
+    id: {
+      type: String,
+      unique: true,
     },
     dateTime: {
       type: Date,
@@ -73,5 +78,12 @@ const PaymentSchema = new Schema<IPayment>(
 // Index for better search performance
 PaymentSchema.index({ email: 1, dateTime: -1 });
 
+
+PaymentSchema.pre('save', async function (next) {
+  if (!this.id) {
+    this.id = await generateFormattedId('Payment', 'PAY');
+  }
+  next();
+});
 
 export const Payment = model<IPayment>('Payment', PaymentSchema);

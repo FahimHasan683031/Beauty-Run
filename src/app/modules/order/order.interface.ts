@@ -2,6 +2,7 @@ import { Types } from 'mongoose';
 
 export interface IOrder {
   _id?: Types.ObjectId;
+  id: string;
   user: Types.ObjectId;
   product: Types.ObjectId;
   quantity: number;

@@ -4,14 +4,13 @@ import { IUser } from './user.interface'
 import { User } from './user.model'
 import { USER_ROLES, USER_STATUS } from '../../../enum/user'
 import { JwtPayload } from 'jsonwebtoken'
-import { logger } from '../../../shared/logger'
 import QueryBuilder from '../../builder/QueryBuilder'
-import config from '../../../config'
 import { createConnectAccount, createOnboardingUrl, getAccountStatus } from '../../../stripe/stripeConnect'
 
-
+// get all user
 const getAllUser = async (query: Record<string, unknown>) => {
     const userQueryBuilder = new QueryBuilder(User.find({ status: { $ne: USER_STATUS.DELETED }, role: { $ne: USER_ROLES.ADMIN } }).select('-password -authentication'), query)
+        .search(['name', 'email', 'id'])
         .filter()
         .sort()
         .fields()
@@ -31,6 +30,7 @@ const getAllUser = async (query: Record<string, unknown>) => {
     }
 }
 
+// get single user
 const getSingleUser = async (id: string) => {
     const result = await User.findById(id).select('-password -authentication')
     return result
@@ -47,6 +47,7 @@ const deleteUser = async (id: string) => {
     return result
 }
 
+// update profile
 const updateProfile = async (
     user: JwtPayload,
     payload: Partial<IUser>
@@ -70,6 +71,7 @@ const updateProfile = async (
     return updatedUser
 }
 
+// get profile
 const getProfile = async (user: JwtPayload) => {
     const isExistUser = await User.findById(user.authId).lean().select('-password -authentication')
     if (!isExistUser) {
@@ -82,7 +84,7 @@ const getProfile = async (user: JwtPayload) => {
     return isExistUser
 }
 
-
+// delete my account
 const deleteMyAccount = async (user: JwtPayload) => {
     const isExistUser = await User.findById(user.authId)
     if (!isExistUser) {
@@ -97,6 +99,7 @@ const deleteMyAccount = async (user: JwtPayload) => {
     return 'Account deleted successfully'
 }
 
+// get onboarding url
 const getOnboardingUrl = async (user: JwtPayload) => {
     const isExistUser = await User.findById(user.authId);
     if (!isExistUser) {
@@ -120,6 +123,7 @@ const getOnboardingUrl = async (user: JwtPayload) => {
     return url;
 };
 
+// sync stripe status
 const syncStripeStatus = async (user: JwtPayload) => {
     const isExistUser = await User.findById(user.authId);
     if (!isExistUser?.stripeConnect?.accountId) {

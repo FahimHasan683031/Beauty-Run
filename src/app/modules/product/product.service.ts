@@ -34,7 +34,7 @@ const getAllProducts = async (query: Record<string, unknown>) => {
       .populate('createdBy', 'fullName email image'),
     query
   )
-    .search(['productName', 'description'])
+    .search(['productName', 'description', 'id'])
     .filter()
     .sort()
     .fields()
@@ -53,7 +53,7 @@ const getMyProducts = async (user: JwtPayload, query: Record<string, unknown>) =
       .populate('category', 'name image'),
     query
   )
-    .search(['productName', 'description'])
+    .search(['productName', 'description', 'id'])
     .filter()
     .sort()
     .paginate();

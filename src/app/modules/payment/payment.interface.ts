@@ -2,6 +2,7 @@ import { Types } from 'mongoose';
 
 export type IPayment = {
   _id: Types.ObjectId;
+  id: string;
   email: string;
   dateTime: Date;
   referenceId?: Types.ObjectId;
