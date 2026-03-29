@@ -3,13 +3,12 @@ import { INotification } from './notification.interface';
 import { Notification } from './notification.model';
 import { FilterQuery } from 'mongoose';
 import QueryBuilder from '../../builder/QueryBuilder';
-
 import { PushNotificationService } from './pushNotification.service';
 import { User } from '../user/user.model';
 
-// insert notification
-const insertNotification = async (payload: Partial<INotification>): Promise<INotification> => {
-    const result = await Notification.create(payload);
+const insertNotification = async (payload: Partial<INotification>, session?: any): Promise<INotification> => {
+    const resultArr = await Notification.create([payload], { session });
+    const result = resultArr[0];
 
     // --- PUSH NOTIFICATION ---
     if (result.title && result.message) {

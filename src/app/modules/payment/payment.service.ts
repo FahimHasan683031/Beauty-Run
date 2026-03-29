@@ -148,13 +148,9 @@ const getMyPaymentsFromDB = async (user: JwtPayload, query: Record<string, unkno
   };
 };
 
-/**
- * Process payout to vendor connected account
- */
-const processPayout = async (orderId: string) => {
-  logger.info(`[Payout] Starting process for Order: ${orderId}`);
+const processPayout = async (orderId: string, session?: any) => {
   try {
-    const payment = await Payment.findOne({ referenceId: orderId });
+    const payment = await Payment.findOne({ referenceId: orderId }).session(session);
     if (!payment) {
       logger.error(`[Payout] ❌ Payment record not found for Order: ${orderId}`);
       return;
@@ -167,7 +163,7 @@ const processPayout = async (orderId: string) => {
       return;
     }
 
-    const order = await Order.findById(orderId).populate('product');
+    const order = await Order.findById(orderId).populate('product').session(session);
     if (!order) {
       logger.error(`[Payout] ❌ Order not found: ${orderId}`);
       return;
@@ -179,7 +175,7 @@ const processPayout = async (orderId: string) => {
     }
 
     const vendorId = (order.product as any).createdBy;
-    const vendor = await User.findById(vendorId);
+    const vendor = await User.findById(vendorId).session(session);
 
     if (!vendor) {
       logger.error(`[Payout] ❌ Vendor not found (ID: ${vendorId})`);
@@ -217,28 +213,23 @@ const processPayout = async (orderId: string) => {
 
     await Payment.findByIdAndUpdate(payment._id, {
       status: 'settled',
-    });
+    }, { session });
 
-    // Notify Vendor about successful payout
     await NotificationService.insertNotification({
       title: "Payout Successful",
       message: `Your payout of $${payment.vendorPayoutAmount} for order #${orderId} has been securely processed.`,
       receiver: vendor._id,
       type: vendor.role === USER_ROLES.ADMIN ? "ADMIN" : "USER",
       referenceId: payment._id
-    });
+    }, session);
   } catch (error) {
     logger.error(`[Payout] ❌ FATAL ERROR for Order ${orderId}:`, error);
   }
 };
 
-/**
- * Process refund to customer
- */
-const processRefund = async (orderId: string) => {
-  logger.info(`[Refund] Starting process for Order: ${orderId}`);
+const processRefund = async (orderId: string, session?: any) => {
   try {
-    const payment = await Payment.findOne({ referenceId: orderId });
+    const payment = await Payment.findOne({ referenceId: orderId }).session(session);
     if (!payment) {
       logger.error(`[Refund] ❌ Payment record not found for Order: ${orderId}`);
       return;
@@ -255,8 +246,8 @@ const processRefund = async (orderId: string) => {
 
     await Payment.findByIdAndUpdate(payment._id, {
       status: 'refunded',
-      refundAmount: payment.amount, // Full refund
-    });
+      refundAmount: payment.amount,
+    }, { session });
 
     logger.info(`[Refund] ✅ SUCCESS: Refund processed for Order: ${orderId} (Refund: ${refund.id})`);
   } catch (error) {

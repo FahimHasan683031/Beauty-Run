@@ -6,7 +6,6 @@ import { Product } from '../product/product.model';
 import { IOrder } from './order.interface';
 import { Order } from './order.model';
 import { PaymentService } from '../payment/payment.service'
-import { logger } from '../../../shared/logger';
 import QueryBuilder from '../../builder/QueryBuilder';
 import { createPaymentSession } from '../../../stripe/createPaymentSession';
 import { USER_ROLES } from '../../../enum/user';
@@ -20,13 +19,11 @@ const createOrderToDB = async (user: JwtPayload, payload: Partial<IOrder>) => {
     throw new ApiError(StatusCodes.NOT_FOUND, 'Product not found');
   }
 
-  // Check stock
   const orderedQty = payload.quantity || 1;
   if (product.quantity < orderedQty) {
     throw new ApiError(StatusCodes.BAD_REQUEST, `Insufficient stock. Only ${product.quantity} item(s) available.`);
   }
 
-  // Calculate mathematically correct prices incorporating quantity and delivery
   const orderPrice = product.price * orderedQty;
   const deliveryCharge = product.deliveryCharge || 0;
   const discount = (product.price - product.finalPrice) * orderedQty;
@@ -41,28 +38,42 @@ const createOrderToDB = async (user: JwtPayload, payload: Partial<IOrder>) => {
     finalPrice: orderFinalPrice,
   };
 
-  const result = await Order.create(orderData);
+  const session = await mongoose.startSession();
+  try {
+    session.startTransaction();
 
-  // Decrement stock atomically
-  await Product.findByIdAndUpdate(payload.product, {
-    $inc: { quantity: -orderedQty }
-  });
+    const result = await Order.create([orderData], { session });
+    if (!result.length) {
+      throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create order');
+    }
 
-  // Notify Vendor/Admin about the new order
-  const vendorUser = await User.findById(product.createdBy);
-  if (vendorUser) {
-    await NotificationService.insertNotification({
-      title: "New Order Received!",
-      message: `You have received a new order for ${product.productName}.`,
-      receiver: vendorUser._id,
-      type: vendorUser.role === USER_ROLES.ADMIN ? "ADMIN" : "USER",
-      referenceId: result._id
-    });
+    await Product.findByIdAndUpdate(
+      payload.product,
+      { $inc: { quantity: -orderedQty } },
+      { session }
+    );
+
+    const vendorUser = await User.findById(product.createdBy).session(session);
+    if (vendorUser) {
+      await NotificationService.insertNotification({
+        title: "New Order Received!",
+        message: `You have received a new order for ${product.productName}.`,
+        receiver: vendorUser._id,
+        type: vendorUser.role === USER_ROLES.ADMIN ? "ADMIN" : "USER",
+        referenceId: result[0]._id
+      }, session);
+    }
+
+    await session.commitTransaction();
+
+    const paymentUrl = await createPaymentSession(user, orderFinalPrice, result[0]._id.toString());
+    return { result: result[0], paymentUrl };
+  } catch (error) {
+    await session.abortTransaction();
+    throw error;
+  } finally {
+    session.endSession();
   }
-
-  const paymentUrl = await createPaymentSession(user, orderFinalPrice, result._id.toString());
-
-  return { result, paymentUrl };
 };
 
 // get all orders
@@ -199,7 +210,6 @@ const updateOrderToDB = async (id: string, user: JwtPayload, payload: Partial<IO
   const newStatus = payload.status;
   const userId = user.id || user.authId;
 
-  // Validation based on roles
   if (user.role === USER_ROLES.CUSTOMER) {
     if (order.user.toString() !== userId) {
       throw new ApiError(StatusCodes.FORBIDDEN, "You cannot update someone else's order");
@@ -220,72 +230,73 @@ const updateOrderToDB = async (id: string, user: JwtPayload, payload: Partial<IO
     if (newStatus && !allowedVendorStatuses.includes(newStatus)) {
       throw new ApiError(StatusCodes.FORBIDDEN, `Vendors can only update status to: ${allowedVendorStatuses.join(', ')}`);
     }
-    // Business logic: cannot go backwards or skip confirmed
     if (currentStatus === 'pending' && newStatus === 'processing') {
        throw new ApiError(StatusCodes.BAD_REQUEST, "Wait for payment confirmation before processing");
     }
   }
-  // Admin (and others) have full control in this logic branch
 
-  const result = await Order.findByIdAndUpdate(id, payload, { new: true });
-  const productObj = order.product as any;
+  const session = await mongoose.startSession();
+  try {
+    session.startTransaction();
 
-  if (newStatus === 'processing' || newStatus === 'shipped') {
-    await NotificationService.insertNotification({
-      title: "Order Status Updated",
-      message: `Your order for ${productObj.productName} is now ${newStatus}.`,
-      receiver: order.user,
-      type: "USER",
-      referenceId: order._id
-    });
-  }
+    const result = await Order.findByIdAndUpdate(id, payload, { new: true, session });
+    const productObj = order.product as any;
 
-  if (newStatus === 'delivered' && currentStatus !== 'delivered') {
-    // Notify Customer
-    await NotificationService.insertNotification({
-      title: "Order Delivered!",
-      message: `Your order for ${productObj.productName} has been delivered. Enjoy!`,
-      receiver: order.user,
-      type: "USER",
-      referenceId: order._id
-    });
+    if (newStatus === 'processing' || newStatus === 'shipped') {
+      await NotificationService.insertNotification({
+        title: "Order Status Updated",
+        message: `Your order for ${productObj.productName} is now ${newStatus}.`,
+        receiver: order.user,
+        type: "USER",
+        referenceId: order._id
+      }, session);
+    }
 
-    // Platform to Vendor payout
-    logger.info(`Order ${id} marked as delivered. Triggering payout...`);
-    await PaymentService.processPayout(id);
-  } else if (newStatus === 'cancelled' && currentStatus !== 'cancelled') {
-    // Platform to Customer refund
-    logger.info(`Order ${id} marked as cancelled. Triggering refund...`);
-    await PaymentService.processRefund(id);
-    // Restore product stock
-    await Product.findByIdAndUpdate(order.product, {
-      $inc: { quantity: order.quantity || 1 }
-    });
-    logger.info(`Stock restored for product: ${order.product}`);
+    if (newStatus === 'delivered' && currentStatus !== 'delivered') {
+      await NotificationService.insertNotification({
+        title: "Order Delivered!",
+        message: `Your order for ${productObj.productName} has been delivered. Enjoy!`,
+        receiver: order.user,
+        type: "USER",
+        referenceId: order._id
+      }, session);
 
-    // Notify Customer
-    await NotificationService.insertNotification({
-      title: "Order Cancelled",
-      message: `Your order for ${productObj.productName} has been cancelled.`,
-      receiver: order.user,
-      type: "USER",
-      referenceId: order._id
-    });
+      await PaymentService.processPayout(id, session);
+    } else if (newStatus === 'cancelled' && currentStatus !== 'cancelled') {
+      await PaymentService.processRefund(id, session);
+      
+      await Product.findByIdAndUpdate(order.product, {
+        $inc: { quantity: order.quantity || 1 }
+      }, { session });
 
-    // Notify Vendor
-    const vendorUser = await User.findById(productObj.createdBy);
-    if (vendorUser) {
       await NotificationService.insertNotification({
         title: "Order Cancelled",
-        message: `The order for ${productObj.productName} was cancelled.`,
-        receiver: vendorUser._id,
-        type: vendorUser.role === USER_ROLES.ADMIN ? "ADMIN" : "USER",
+        message: `Your order for ${productObj.productName} has been cancelled.`,
+        receiver: order.user,
+        type: "USER",
         referenceId: order._id
-      });
-    }
-  }
+      }, session);
 
-  return result;
+      const vendorUser = await User.findById(productObj.createdBy).session(session);
+      if (vendorUser) {
+        await NotificationService.insertNotification({
+          title: "Order Cancelled",
+          message: `The order for ${productObj.productName} was cancelled.`,
+          receiver: vendorUser._id,
+          type: vendorUser.role === USER_ROLES.ADMIN ? "ADMIN" : "USER",
+          referenceId: order._id
+        }, session);
+      }
+    }
+
+    await session.commitTransaction();
+    return result;
+  } catch (error) {
+    await session.abortTransaction();
+    throw error;
+  } finally {
+    session.endSession();
+  }
 };
 
 export const OrderService = {
