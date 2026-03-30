@@ -1,0 +1,2 @@
+{Mon Mar 30 2026 16:05:42} [APP 🐞] error: 103.186.20.2 - POST /api/v1/product 500 - 4089.258 ms
+{Mon Mar 30 2026 16:17:36} [APP 🐞] error: ::ffff:10.10.7.50 - GET /favicon.ico 404 - 1.076 ms

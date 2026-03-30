@@ -1,0 +1,2 @@
+{Mon Mar 30 2026 12:41:08} [APP 🐞] error: 103.186.20.2 - GET /api/v1/category 404 - 14.862 ms
+{Mon Mar 30 2026 12:44:25} [APP 🐞] error: 103.186.20.2 - POST /api/v1/auth/login 400 - 207.488 ms

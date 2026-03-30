@@ -1,0 +1,23 @@
+{Mon Mar 30 2026 17:00:00} [APP 🚀] info: [CleanupJob] Running pending order cleanup...
+{Mon Mar 30 2026 17:00:00} [APP 🚀] info: [CleanupJob] No stale pending orders found.
+{Mon Mar 30 2026 17:01:31} [APP 🚀] info: 103.186.20.2 - GET /api/v1/support 200 - 15.560 ms
+{Mon Mar 30 2026 17:01:53} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Mon Mar 30 2026 17:01:53} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Mon Mar 30 2026 17:01:53} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Mon Mar 30 2026 17:01:53} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Mon Mar 30 2026 17:02:59} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Mon Mar 30 2026 17:02:59} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Mon Mar 30 2026 17:02:59} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Mon Mar 30 2026 17:02:59} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Mon Mar 30 2026 17:03:04} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Mon Mar 30 2026 17:03:04} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Mon Mar 30 2026 17:03:04} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Mon Mar 30 2026 17:03:04} [APP 🚀] info: [33m♻️  Application listening on port:5003[39m
+{Mon Mar 30 2026 17:05:30} [APP 🚀] info: 103.186.20.2 - GET /api/v1/order 200 - 31.720 ms
+{Mon Mar 30 2026 17:06:48} [APP 🚀] info: ::ffff:10.10.7.47 - OPTIONS /api/v1/order? 204 - 0.594 ms
+{Mon Mar 30 2026 17:06:48} [APP 🚀] info: ::ffff:10.10.7.47 - GET /api/v1/order? 200 - 18.554 ms
+{Mon Mar 30 2026 17:06:49} [APP 🚀] info: ::ffff:10.10.7.47 - GET /images/1774508359249-m0h1he.jpg 200 - 3.108 ms
+{Mon Mar 30 2026 17:06:53} [APP 🚀] info: ::ffff:10.10.7.47 - GET /images/1774508315172-2wkiep.jpg 200 - 1.304 ms
+{Mon Mar 30 2026 17:12:21} [APP 🚀] info: ::ffff:10.10.7.47 - OPTIONS /api/v1/order? 204 - 0.147 ms
+{Mon Mar 30 2026 17:12:21} [APP 🚀] info: ::ffff:10.10.7.47 - GET /api/v1/order? 304 - 9.364 ms
+{Mon Mar 30 2026 17:12:23} [APP 🚀] info: ::ffff:10.10.7.47 - GET /images/1774508315172-2wkiep.jpg 304 - 0.371 ms

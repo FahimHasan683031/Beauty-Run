@@ -10,7 +10,7 @@ import { createConnectAccount, createOnboardingUrl, getAccountStatus } from '../
 // get all user
 const getAllUser = async (query: Record<string, unknown>) => {
     const userQueryBuilder = new QueryBuilder(User.find({ status: { $ne: USER_STATUS.DELETED }, role: { $ne: USER_ROLES.ADMIN } }).select('-password -authentication'), query)
-        .search(['name', 'email', 'id'])
+        .search(['fullName', 'email', 'id'])
         .filter()
         .sort()
         .fields()

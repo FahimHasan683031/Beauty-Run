@@ -79,7 +79,7 @@ const createOrderToDB = async (user: JwtPayload, payload: Partial<IOrder>) => {
 // get all orders
 const getAllOrdersFromDB = async (query: Record<string, unknown>) => {
   const orderQueryBuilder = new QueryBuilder(
-    Order.find().populate('user', 'fullName email').populate('product', 'productName image'),
+    Order.find().populate('user', 'fullName email').populate('product', 'productName images'),
     query
   )
     .filter()
@@ -152,6 +152,7 @@ const getMyOrdersFromDB = async (user: JwtPayload, query: Record<string, unknown
         {
           $project: {
             _id: 1,
+            id:1,
             user: 1,
             quantity: 1,
             price: 1,

@@ -1,0 +1,2 @@
+{Mon Mar 30 2026 15:56:42} [APP 🐞] error: 103.186.20.2 - PATCH /api/v1/product/69c26dbf4f4ce1af86eb80f1 401 - 12.474 ms
+{Mon Mar 30 2026 15:57:28} [APP 🐞] error: 103.186.20.2 - POST /api/v1/product 400 - 505.337 ms

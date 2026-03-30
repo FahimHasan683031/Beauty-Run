@@ -1,27 +1,27 @@
-import { Request, Response, NextFunction } from 'express'
-import multer, { FileFilterCallback } from 'multer'
-import ApiError from '../../errors/ApiError'
-import { StatusCodes } from 'http-status-codes'
-import path from 'path'
-import fs from 'fs'
-import sharp from 'sharp'
+import { Request, Response, NextFunction } from 'express';
+import multer, { FileFilterCallback } from 'multer';
+import ApiError from '../../errors/ApiError';
+import { StatusCodes } from 'http-status-codes';
+import path from 'path';
+import fs from 'fs';
 
-type IFolderName = 'image' | 'images' | 'media' | 'documents' | 'files'
+type IFolderName = 'image' | 'images' | 'media' | 'documents' | 'files';
 
 interface ProcessedFiles {
-  [key: string]: string | string[] | undefined
+  [key: string]: string | string[] | undefined;
 }
 
 const uploadFields = [
   { name: 'image', maxCount: 1 },
-  { name: 'images', maxCount: 5 },
+  { name: 'images', maxCount: 10 },
   { name: 'media', maxCount: 3 },
   { name: 'documents', maxCount: 3 },
   { name: 'files', maxCount: 4 },
-] as const
+] as const;
 
 export const fileAndBodyProcessorUsingDiskStorage = () => {
   const uploadsDir = path.join(process.cwd(), 'uploads');
+
   if (!fs.existsSync(uploadsDir)) {
     fs.mkdirSync(uploadsDir, { recursive: true });
   }
@@ -35,11 +35,14 @@ export const fileAndBodyProcessorUsingDiskStorage = () => {
       cb(null, folderPath);
     },
     filename: (req, file, cb) => {
-      const extension =
-        path.extname(file.originalname) || `.${file.mimetype.split('/')[1]}`;
+      const ext =
+        path.extname(file.originalname) ||
+        `.${file.mimetype.split('/')[1]}`;
+
       const filename = `${Date.now()}-${Math.random()
         .toString(36)
-        .slice(2, 8)}${extension}`;
+        .slice(2, 8)}${ext}`;
+
       cb(null, filename);
     },
   });
@@ -49,45 +52,40 @@ export const fileAndBodyProcessorUsingDiskStorage = () => {
     file: Express.Multer.File,
     cb: FileFilterCallback,
   ) => {
-    try {
-      const allowedTypes: Record<IFolderName, string[] | null> = {
-        image: ['image/jpeg', 'image/png', 'image/jpg', 'image/webp', 'image/heic', 'image/heif'],
-        images: ['image/jpeg', 'image/png', 'image/jpg', 'image/webp', 'image/heic', 'image/heif'],
-        media: ['video/mp4', 'audio/mpeg'],
-        documents: ['application/pdf'],
-        files: null, // null means all types allowed
-      };
+    const allowedTypes: Record<IFolderName, string[] | null> = {
+      image: ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'],
+      images: ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'],
+      media: ['video/mp4', 'audio/mpeg'],
+      documents: ['application/pdf'],
+      files: null,
+    };
 
-      const fieldType = file.fieldname as IFolderName;
-      const allowed = allowedTypes[fieldType];
-      // null means all types are allowed (e.g. 'files' field)
-      if (allowed !== null && allowed !== undefined && !allowed.includes(file.mimetype)) {
-        return cb(
-          new ApiError(
-            StatusCodes.BAD_REQUEST,
-            `Invalid file type for ${file.fieldname}`,
-          ),
-        );
-      }
-      cb(null, true);
-    } catch (error) {
-      cb(
+    const fieldType = file.fieldname as IFolderName;
+    const allowed = allowedTypes[fieldType];
+
+    if (allowed && !allowed.includes(file.mimetype)) {
+      return cb(
         new ApiError(
-          StatusCodes.INTERNAL_SERVER_ERROR,
-          'File validation failed',
+          StatusCodes.BAD_REQUEST,
+          `Invalid file type for ${file.fieldname}`,
         ),
       );
     }
+
+    cb(null, true);
   };
 
   const upload = multer({
     storage,
     fileFilter,
-    limits: { fileSize: 10 * 1024 * 1024, files: 50 },
+    limits: {
+      fileSize: 200 * 1024 * 1024,
+      files: 50,
+    },
   }).fields(uploadFields);
 
   return (req: Request, res: Response, next: NextFunction) => {
-    upload(req, res, async (error) => {
+    upload(req, res, (error) => {
       if (error) return next(error);
 
       try {
@@ -95,74 +93,24 @@ export const fileAndBodyProcessorUsingDiskStorage = () => {
           req.body = JSON.parse(req.body.data);
         }
 
-        if (!req.files) {
-          return next();
-        }
+        if (!req.files) return next();
 
         const processedFiles: ProcessedFiles = {};
-        const fieldsConfig = new Map(
-          uploadFields.map((f) => [f.name, f.maxCount]),
-        );
 
-        await Promise.all(
-          Object.entries(req.files).map(async ([fieldName, files]) => {
-            const fileArray = files as Express.Multer.File[];
-            const maxCount = fieldsConfig.get(fieldName as IFolderName) ?? 1;
-            const paths: string[] = [];
+        for (const [fieldName, files] of Object.entries(req.files)) {
+          const fileArray = files as Express.Multer.File[];
 
-            await Promise.all(
-              fileArray.map(async (file) => {
-                const filePath = `/${fieldName}/${file.filename}`;
-                paths.push(filePath);
+          const paths = fileArray.map(
+            (file) => `/${fieldName}/${file.filename}`,
+          );
 
-                if (
-                  ['image', 'images'].includes(
-                    fieldName,
-                  ) &&
-                  file.mimetype.startsWith('image/')
-                ) {
-                  const fullPath = path.join(
-                    uploadsDir,
-                    fieldName,
-                    file.filename,
-                  );
-                  const tempPath = fullPath + '.opt';
-
-                  try {
-                    let sharpInstance = sharp(fullPath)
-                      .rotate()
-                      .resize(800, null, { withoutEnlargement: true });
-
-                    if (file.mimetype === 'image/png') {
-                      sharpInstance = sharpInstance.png({ quality: 80 });
-                    } else {
-                      sharpInstance = sharpInstance.jpeg({
-                        quality: 80,
-                        mozjpeg: true,
-                      });
-                    }
-
-                    await sharpInstance.toFile(tempPath);
-                    fs.unlinkSync(fullPath);
-                    fs.renameSync(tempPath, fullPath);
-                  } catch (err) {
-                    console.error(`Failed to optimize ${filePath}:`, err);
-                  }
-                }
-              }),
-            );
-
-            processedFiles[fieldName] = maxCount > 1 ? paths : paths[0];
-          }),
-        );
+          processedFiles[fieldName] =
+            fileArray.length > 1 ? paths : paths[0];
+        }
 
         req.body = {
           ...req.body,
-          ...(processedFiles.image && { image: processedFiles.image }),
-          ...(processedFiles.images && { images: processedFiles.images }),
-          ...(processedFiles.media && { media: processedFiles.media }),
-          ...(processedFiles.documents && { documents: processedFiles.documents }),
-          ...(processedFiles.files && { files: processedFiles.files }),
+          ...processedFiles,
         };
 
         next();
