@@ -69,7 +69,7 @@ const getSingleSupportTicket = async (id: string, user: JwtPayload) => {
 };
 
 // Update support ticket status (admin)
-const updateSupportStatus = async (id: string, status: 'pending' | 'resolved') => {
+const updateSupportStatus = async (id: string, payload: Partial<ISupport>) => {
   const ticket = await Support.findById(id).populate('user', 'fullName email');
 
   if (!ticket) {
@@ -77,7 +77,7 @@ const updateSupportStatus = async (id: string, status: 'pending' | 'resolved') =
   }
 
   // If status is changing to resolved, send an email & notification
-  if (status === 'resolved' && ticket.status !== 'resolved') {
+  if (payload.status === 'resolved' && ticket.status !== 'resolved') {
     const user = ticket.user as any;
     if (user) {
       // In-App & Push Notification
@@ -95,6 +95,7 @@ const updateSupportStatus = async (id: string, status: 'pending' | 'resolved') =
           name: user.fullName || 'User',
           email: user.email,
           ticketTitle: ticket.title,
+          adminReply: payload.adminReply
         };
         setTimeout(() => {
           emailHelper.sendEmail(emailTemplate.supportTicketResolved(emailData));
@@ -103,7 +104,8 @@ const updateSupportStatus = async (id: string, status: 'pending' | 'resolved') =
     }
   }
 
-  ticket.status = status;
+  ticket.status = payload.status as 'pending' | 'resolved';
+  ticket.adminReply = payload.adminReply;
   await ticket.save();
 
   return ticket;

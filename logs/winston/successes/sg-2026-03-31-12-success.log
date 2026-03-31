@@ -1,0 +1,18 @@
+{Tue Mar 31 2026 12:00:00} [APP 🚀] info: [CleanupJob] Running pending order cleanup...
+{Tue Mar 31 2026 12:00:00} [APP 🚀] info: [CleanupJob] No stale pending orders found.
+{Tue Mar 31 2026 12:02:55} [APP 🚀] info: 103.186.20.2 - GET /api/v1/public/terms-and-condition 200 - 8.932 ms
+{Tue Mar 31 2026 12:05:26} [APP 🚀] info: 103.186.20.2 - POST /api/v1/auth/signup 200 - 231.289 ms
+{Tue Mar 31 2026 12:05:33} [APP 🚀] info: Mail send successfully
+{Tue Mar 31 2026 12:06:39} [APP 🚀] info: 103.186.20.2 - POST /api/v1/auth/signup 200 - 219.748 ms
+{Tue Mar 31 2026 12:06:44} [APP 🚀] info: Mail send successfully
+{Tue Mar 31 2026 12:11:56} [APP 🚀] info: ::ffff:10.10.7.47 - OPTIONS /api/v1/user/me 204 - 0.105 ms
+{Tue Mar 31 2026 12:11:56} [APP 🚀] info: ::ffff:10.10.7.47 - GET /api/v1/user/me 200 - 3.902 ms
+{Tue Mar 31 2026 12:11:57} [APP 🚀] info: ::ffff:10.10.7.47 - GET /image/1774761876116-l1epyv.jpg 200 - 7.744 ms
+{Tue Mar 31 2026 12:31:27} [APP 🚀] info: 103.186.20.2 - POST /api/v1/auth/signup 200 - 248.208 ms
+{Tue Mar 31 2026 12:31:34} [APP 🚀] info: Mail send successfully
+{Tue Mar 31 2026 12:37:49} [APP 🚀] info: 103.186.20.2 - POST /api/v1/auth/signup 200 - 240.561 ms
+{Tue Mar 31 2026 12:37:58} [APP 🚀] info: Mail send successfully
+{Tue Mar 31 2026 12:40:56} [APP 🚀] info: 103.186.20.2 - POST /api/v1/auth/signup 200 - 223.909 ms
+{Tue Mar 31 2026 12:41:00} [APP 🚀] info: Mail send successfully
+{Tue Mar 31 2026 12:46:55} [APP 🚀] info: 103.186.20.2 - POST /api/v1/auth/signup 200 - 221.341 ms
+{Tue Mar 31 2026 12:47:01} [APP 🚀] info: Mail send successfully

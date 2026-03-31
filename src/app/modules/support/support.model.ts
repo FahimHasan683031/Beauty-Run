@@ -25,6 +25,9 @@ const supportSchema = new Schema<ISupport>(
       enum: ['pending', 'resolved'],
       default: 'pending',
     },
+    adminReply: {
+      type: String,
+    },
   },
   {
     timestamps: true,

@@ -1,5 +1,5 @@
 import config from '../config'
-import { ICreateAccount, IResetPassword } from '../interfaces/emailTemplate'
+import { ICreateAccount, IResetPassword, ISupportTicketResolved } from '../interfaces/emailTemplate'
 
 const createAccount = (values: ICreateAccount) => {
   console.log(values, 'values')
@@ -406,11 +406,7 @@ const userContactConfirmationEmail = (payload: {
   }
 }
 
-const supportTicketResolved = (payload: {
-  name: string
-  email: string
-  ticketTitle: string
-}) => {
+const supportTicketResolved = (payload: ISupportTicketResolved) => {
   return {
     to: payload.email,
     subject: '✅ Your Support Ticket has been Resolved – Beauty-Run',
@@ -448,6 +444,14 @@ const supportTicketResolved = (payload: {
             <strong>Ticket Title:</strong><br>
             <em>${payload.ticketTitle}</em>
           </p>
+          ${payload.adminReply ? `
+          <div style="margin-top:20px; padding-top:20px; border-top:1px solid #FB6CC033;">
+            <p style="font-size:15px; color:#5D0032; line-height:1.6; margin:0;">
+              <strong>Admin's Reply:</strong><br>
+              <em>${payload.adminReply}</em>
+            </p>
+          </div>
+          ` : ''}
         </div>
 
         <p style="color:#5D0032; font-size:15px; line-height:1.6; text-align:center;">

@@ -7,4 +7,5 @@ export interface ISupport {
   files?: string[];
   user: Types.ObjectId;
   status: 'pending' | 'resolved';
+  adminReply?: string;
 }

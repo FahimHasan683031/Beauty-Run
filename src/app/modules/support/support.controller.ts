@@ -58,12 +58,11 @@ const getSingleSupportTicket = catchAsync(async (req: Request, res: Response) =>
 });
 
 const updateSupportStatus = catchAsync(async (req: Request, res: Response) => {
-  const { status } = req.body;
-  const result = await SupportService.updateSupportStatus(req.params.id, status);
+  const result = await SupportService.updateSupportStatus(req.params.id, req.body);
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: `Support ticket marked as ${status}`,
+    message: `Support ticket marked as ${req.body.status}`,
     data: result,
   });
 });

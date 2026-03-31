@@ -11,6 +11,7 @@ const createSupportZod = z.object({
 const updateSupportStatusZod = z.object({
   body: z.object({
     status: z.enum(['pending', 'resolved']),
+    adminReply: z.string(),
   }),
 });
 

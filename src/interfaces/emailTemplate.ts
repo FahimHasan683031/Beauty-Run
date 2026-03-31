@@ -17,3 +17,10 @@ export type IEmailOrPhoneVerification = {
   phone?: string
   type: 'createAccount' | 'resetPassword'
 }
+
+export type ISupportTicketResolved = {
+  name: string
+  email: string
+  ticketTitle: string
+  adminReply?: string
+}
