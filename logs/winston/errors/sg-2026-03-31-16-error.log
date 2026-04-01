@@ -1,0 +1,5 @@
+{Tue Mar 31 2026 16:12:20} [APP 🐞] error: 103.186.20.2 - GET /api/v1/payment/stripe-connect/status 404 - 7.926 ms
+{Tue Mar 31 2026 16:16:05} [APP 🐞] error: 103.186.20.2 - GET /api/v1/payment/stripe-connect/status 404 - 3.981 ms
+{Tue Mar 31 2026 16:16:06} [APP 🐞] error: 103.186.20.2 - GET /api/v1/payment/stripe-connect/status 404 - 0.563 ms
+{Tue Mar 31 2026 16:16:14} [APP 🐞] error: 103.186.20.2 - GET /api/v1/payment/stripe-connect/status 404 - 4.534 ms
+{Tue Mar 31 2026 16:16:28} [APP 🐞] error: ::ffff:10.10.7.50 - GET /favicon.ico 404 - 0.751 ms

@@ -269,6 +269,32 @@ const getAdminStatsFromDB = async (
     };
   });
 
+  // 4. Yearly User Growth Calculation
+  const previousYear = targetYear - 1;
+  const currentYearNewUsers = await User.countDocuments({
+    createdAt: {
+      $gte: new Date(`${targetYear}-01-01T00:00:00.000Z`),
+      $lte: new Date(`${targetYear}-12-31T23:59:59.999Z`),
+    },
+  });
+
+  const previousYearNewUsers = await User.countDocuments({
+    createdAt: {
+      $gte: new Date(`${previousYear}-01-01T00:00:00.000Z`),
+      $lte: new Date(`${previousYear}-12-31T23:59:59.999Z`),
+    },
+  });
+
+  let userGrowthYearly = 0;
+  if (previousYearNewUsers === 0) {
+    userGrowthYearly = currentYearNewUsers > 0 ? 100 : 0;
+  } else {
+    userGrowthYearly = ((currentYearNewUsers - previousYearNewUsers) / previousYearNewUsers) * 100;
+  }
+
+  // User requested to allow values over 100%
+  userGrowthYearly = Number(userGrowthYearly.toFixed(2));
+
   return {
     totalProducts,
     totalUsers,
@@ -277,6 +303,7 @@ const getAdminStatsFromDB = async (
     totalCommission,
     monthlyRevenue,
     monthlyProviderCount,
+    userGrowthYearly,
   };
 };
 

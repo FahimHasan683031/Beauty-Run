@@ -13,4 +13,5 @@ export interface IAdminStats {
   totalCommission: number;
   monthlyRevenue: { month: string; revenue: number }[];
   monthlyProviderCount: { month: string; count: number }[];
+  userGrowthYearly: number;
 }

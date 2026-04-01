@@ -35,6 +35,7 @@ const getChatFromDB = async (
     user: JwtPayload,
     query: Record<string, unknown>
 ): Promise<any> => {
+
     // Build query to find chats where user is a participant
     const chatFilter: FilterQuery<IChat> = {
         participants: { $in: [user.authId] },
@@ -95,6 +96,7 @@ const getChatFromDB = async (
         })
     );
 
+
     // Filter out chats where participants array is empty after filtering
     const filteredChats = chatsWithDetails.filter(
         (chat: any) => chat.participants.length > 0
@@ -102,6 +104,9 @@ const getChatFromDB = async (
 
     return { data: filteredChats, pagination };
 };
+
+
+
 
 // Delete a chat
 const deleteChatFromDB = async (chatId: string, userId: string): Promise<void> => {
