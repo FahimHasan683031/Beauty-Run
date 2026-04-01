@@ -79,7 +79,7 @@ const createOrderToDB = async (user: JwtPayload, payload: Partial<IOrder>) => {
 // get all orders
 const getAllOrdersFromDB = async (query: Record<string, unknown>) => {
   const orderQueryBuilder = new QueryBuilder(
-    Order.find().populate('user', 'fullName email').populate('product', 'productName images'),
+    Order.find({status: {$ne: "pending"}}).populate('user', 'fullName email').populate('product', 'productName images'),
     query
   )
     .filter()
@@ -116,6 +116,9 @@ const getMyOrdersFromDB = async (user: JwtPayload, query: Record<string, unknown
   } else if (user.role === USER_ROLES.VENDOR || user.role === USER_ROLES.ADMIN) {
     pipeline.push({ $match: { 'product.createdBy': new mongoose.Types.ObjectId(user.authId) } });
   }
+
+  // Filter out pending orders
+  pipeline.push({ $match: { status: { $ne: 'pending' } } });
 
   // Handle searchTerm
   if (searchTerm) {
@@ -215,11 +218,16 @@ const updateOrderToDB = async (id: string, user: JwtPayload, payload: Partial<IO
     if (order.user.toString() !== userId) {
       throw new ApiError(StatusCodes.FORBIDDEN, "You cannot update someone else's order");
     }
-    if (newStatus && newStatus !== 'cancelled') {
-      throw new ApiError(StatusCodes.FORBIDDEN, "Customers can only cancel orders");
+    // Customer can: confirmed -> cancelled, or confirmed/shipped -> delivered
+    const allowedCustomerStatuses = ['cancelled', 'delivered'];
+    if (newStatus && !allowedCustomerStatuses.includes(newStatus)) {
+      throw new ApiError(StatusCodes.FORBIDDEN, `Customers can only update status to: ${allowedCustomerStatuses.join(', ')}`);
     }
     if (newStatus === 'cancelled' && ['shipped', 'delivered', 'cancelled'].includes(currentStatus)) {
       throw new ApiError(StatusCodes.BAD_REQUEST, `Cannot cancel order when it is already ${currentStatus}`);
+    }
+    if (newStatus === 'delivered' && !['confirmed', 'shipped'].includes(currentStatus)) {
+       throw new ApiError(StatusCodes.BAD_REQUEST, "Can only mark as delivered after payment confirmation or shipping");
     }
   } 
   else if (user.role === USER_ROLES.VENDOR) {
@@ -227,12 +235,25 @@ const updateOrderToDB = async (id: string, user: JwtPayload, payload: Partial<IO
     if (product.createdBy.toString() !== userId) {
       throw new ApiError(StatusCodes.FORBIDDEN, "This order is not for one of your products");
     }
-    const allowedVendorStatuses = ['processing', 'shipped'];
-    if (newStatus && !allowedVendorStatuses.includes(newStatus)) {
-      throw new ApiError(StatusCodes.FORBIDDEN, `Vendors can only update status to: ${allowedVendorStatuses.join(', ')}`);
+    // Vendor can: confirmed -> shipped only
+    if (newStatus && newStatus !== 'shipped') {
+      throw new ApiError(StatusCodes.FORBIDDEN, "Vendors can only update status to 'shipped'");
     }
-    if (currentStatus === 'pending' && newStatus === 'processing') {
-       throw new ApiError(StatusCodes.BAD_REQUEST, "Wait for payment confirmation before processing");
+    if (currentStatus !== 'confirmed' && newStatus === 'shipped') {
+       throw new ApiError(StatusCodes.BAD_REQUEST, "Wait for payment confirmation (confirmed status) before shipping");
+    }
+  }
+  else if (user.role === USER_ROLES.ADMIN) {
+    // Admin can: confirmed -> cancelled/shipped/delivered, or shipped -> cancelled/delivered
+    const allowedAdminTransitions: Record<string, string[]> = {
+        'confirmed': ['cancelled', 'shipped', 'delivered'],
+        'shipped': ['cancelled', 'delivered']
+    };
+    if (newStatus) {
+        const allowed = allowedAdminTransitions[currentStatus];
+        if (!allowed || !allowed.includes(newStatus)) {
+            throw new ApiError(StatusCodes.BAD_REQUEST, `Admin cannot transition from ${currentStatus} to ${newStatus}`);
+        }
     }
   }
 
@@ -243,7 +264,7 @@ const updateOrderToDB = async (id: string, user: JwtPayload, payload: Partial<IO
     const result = await Order.findByIdAndUpdate(id, payload, { new: true, session });
     const productObj = order.product as any;
 
-    if (newStatus === 'processing' || newStatus === 'shipped') {
+    if (newStatus === 'shipped') {
       await NotificationService.insertNotification({
         title: "Order Status Updated",
         message: `Your order for ${productObj.productName} is now ${newStatus}.`,
@@ -262,7 +283,11 @@ const updateOrderToDB = async (id: string, user: JwtPayload, payload: Partial<IO
         referenceId: order._id
       }, session);
 
-      await PaymentService.processPayout(id, session);
+      // Only process payout if the product creator is a VENDOR (not ADMIN)
+      const vendorUser = await User.findById(productObj.createdBy).session(session);
+      if (vendorUser && vendorUser.role === USER_ROLES.VENDOR) {
+        await PaymentService.processPayout(id, session);
+      }
     } else if (newStatus === 'cancelled' && currentStatus !== 'cancelled') {
       await PaymentService.processRefund(id, session);
       

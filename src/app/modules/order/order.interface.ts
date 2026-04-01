@@ -10,7 +10,7 @@ export interface IOrder {
   deliveryCharge: number;
   discount: number;
   finalPrice: number;
-  status: 'pending' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  status: 'pending' | 'confirmed' | 'shipped' | 'delivered' | 'cancelled';
   paymentStatus: 'pending' | 'paid' | 'failed';
   transactionId?: string;
   address: string;

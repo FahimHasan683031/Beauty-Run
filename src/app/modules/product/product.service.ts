@@ -68,7 +68,7 @@ const getMyProducts = async (user: JwtPayload, query: Record<string, unknown>) =
 const getSingleProduct = async (id: string) => {
   const product = await Product.findById(id)
     .populate('category', 'name image')
-    .populate('createdBy', 'fullName email image');
+    .populate('createdBy', 'fullName email image role');
 
   if (!product) {
     throw new ApiError(StatusCodes.NOT_FOUND, 'Product not found');
