@@ -158,3 +158,4 @@
 {Wed Apr 01 2026 11:16:19} [APP 🚀] info: ::ffff:10.10.7.47 - OPTIONS /api/v1/message/69cb85e64059bf3480fe9448 204 - 0.058 ms
 {Wed Apr 01 2026 11:16:19} [APP 🚀] info: ::ffff:10.10.7.47 - GET /api/v1/message/69cb85e64059bf3480fe9448 304 - 14.518 ms
 {Wed Apr 01 2026 11:16:19} [APP 🚀] info: ::ffff:10.10.7.47 - GET /files/1775019717726-i1klfl.jpg 304 - 0.404 ms
+{Wed Apr 01 2026 11:16:25} [APP 🚀] info: 103.186.20.2 - GET /api/v1/message/69cb85e64059bf3480fe9448 200 - 12.714 ms
