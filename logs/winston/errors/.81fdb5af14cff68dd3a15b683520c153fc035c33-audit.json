@@ -1,0 +1,60 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\errors\\.81fdb5af14cff68dd3a15b683520c153fc035c33-audit.json",
+    "files": [
+        {
+            "date": 1775104483376,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\errors\\sg-2026-04-02-10-error.log",
+            "hash": "be525ce79ca8068e8f061d6dc97a9f1f8aea92c029579b2e6d5c05ecbfcf8b47"
+        },
+        {
+            "date": 1775122580731,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\errors\\sg-2026-04-02-15-error.log",
+            "hash": "dff2be0762d04dd32a874152f7603df462e565ced9f1e997935bf6a59e185be0"
+        },
+        {
+            "date": 1775125770925,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\errors\\sg-2026-04-02-16-error.log",
+            "hash": "d1595ad6e1385e682801c78516b032eae5d120572c84ac332203bfd15fd3ac80"
+        },
+        {
+            "date": 1775135213675,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\errors\\sg-2026-04-02-19-error.log",
+            "hash": "0b45405a34df8cb2709b77dc9b1101772553aea505286bfc247e74c406553c73"
+        },
+        {
+            "date": 1775190844610,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\errors\\sg-2026-04-03-10-error.log",
+            "hash": "4cd58e0eacb920d98ded32c62b73a4059b8a58bf16442650e1535274392391ef"
+        },
+        {
+            "date": 1775192465145,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\errors\\sg-2026-04-03-11-error.log",
+            "hash": "63321f0ea862b5c9c5983c70e20f2149144bae2eb1802591a6a2be8f07a0774d"
+        },
+        {
+            "date": 1775270517052,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\errors\\sg-2026-04-04-08-error.log",
+            "hash": "58749161922442e2724ae10aa9ea06da955cf083874bc23f29d070594844e429"
+        },
+        {
+            "date": 1775272821407,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\errors\\sg-2026-04-04-09-error.log",
+            "hash": "7eb2e8a83fb8a339f19ec953104d46174f9cb013ddae6a255943d9b64451559a"
+        },
+        {
+            "date": 1775289569031,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\errors\\sg-2026-04-04-13-error.log",
+            "hash": "ca9a5230dd911a03ee457831715a049dee975501c91cbfc3cbba6a73fc72dffe"
+        },
+        {
+            "date": 1775289839690,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\errors\\sg-2026-04-04-14-error.log",
+            "hash": "62017c911bf6f3f0095a34e1b4df7b2b82577938474b49c7c05ab6731b0ebdb1"
+        }
+    ],
+    "hashType": "sha256"
+}

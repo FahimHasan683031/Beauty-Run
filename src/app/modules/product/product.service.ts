@@ -130,6 +130,17 @@ const deleteProduct = async (user: JwtPayload, id: string) => {
   await Product.findByIdAndDelete(id);
   return { message: 'Product deleted successfully' };
 };
+ 
+// Get top-selling products
+const getTopSellingProducts = async () => {
+    const products = await Product.find({ isActive: true, quantity: { $gt: 0 } })
+        .sort({ totalOrder: -1 })
+        .limit(10)
+        .populate('category', 'name image')
+        .populate('createdBy', 'fullName email image');
+ 
+    return products;
+};
 
 export const ProductService = {
   createProduct,
@@ -138,4 +149,5 @@ export const ProductService = {
   getSingleProduct,
   updateProduct,
   deleteProduct,
+  getTopSellingProducts,
 };

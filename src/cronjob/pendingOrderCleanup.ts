@@ -31,7 +31,7 @@ export const startPendingOrderCleanupJob = () => {
             // Restore stock for each stale order
             for (const order of stalePendingOrders) {
                 await Product.findByIdAndUpdate(order.product, {
-                    $inc: { quantity: order.quantity || 1 },
+                    $inc: { quantity: order.quantity || 1, totalOrder: -1 },
                 });
                 logger.info(`[CleanupJob] Stock restored for product: ${order.product} (Order: ${order._id})`);
             }

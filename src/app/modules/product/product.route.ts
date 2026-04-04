@@ -27,6 +27,13 @@ router.get(
   ProductController.getMyProducts
 );
 
+// Get top-selling products — Public
+router.get(
+  '/top-selling',
+  auth(USER_ROLES.VENDOR, USER_ROLES.ADMIN, USER_ROLES.CUSTOMER),
+  ProductController.getTopSellingProducts
+);
+ 
 // Get single product — Public
 router.get('/:id',auth(USER_ROLES.VENDOR, USER_ROLES.ADMIN, USER_ROLES.CUSTOMER), ProductController.getSingleProduct);
 

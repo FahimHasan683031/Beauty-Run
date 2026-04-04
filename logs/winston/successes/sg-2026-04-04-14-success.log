@@ -1,0 +1,72 @@
+{Sat Apr 04 2026 14:00:00} [APP 🚀] info: [CleanupJob] Running pending order cleanup...
+{Sat Apr 04 2026 14:00:00} [APP 🚀] info: [CleanupJob] Found 1 stale pending order(s). Processing...
+{Sat Apr 04 2026 14:00:00} [APP 🚀] info: [CleanupJob] Stock restored for product: 69c4d91ba646c7ac7c126e1b (Order: 69d0b5efb097fe8202c43e27)
+{Sat Apr 04 2026 14:00:00} [APP 🚀] info: [CleanupJob] ✅ Deleted 1 stale pending order(s).
+{Sat Apr 04 2026 14:00:22} [APP 🚀] info: ::ffff:10.10.7.94 - GET /api/v1/order/69c4f15a494371dc2373b00e 200 - 8.105 ms
+{Sat Apr 04 2026 14:03:33} [APP 🚀] info: [Payout] Payment record found. Status: settled, Payout Amount: 1049.4
+{Sat Apr 04 2026 14:03:33} [APP 🚀] warn: [Payout] ⚠️ Payment for Order 69c4ec8aa646c7ac7c126e6a is not in 'customer_paid' status. Current status: settled
+{Sat Apr 04 2026 14:03:33} [APP 🚀] info: ::ffff:10.10.7.94 - PATCH /api/v1/order/69c4ec8aa646c7ac7c126e6a 200 - 24.845 ms
+{Sat Apr 04 2026 14:12:15} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Sat Apr 04 2026 14:12:15} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Sat Apr 04 2026 14:12:15} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Sat Apr 04 2026 14:12:15} [APP 🚀] info: [33m♻️  Application listening on port:5000[39m
+{Sat Apr 04 2026 14:12:24} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Sat Apr 04 2026 14:12:24} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Sat Apr 04 2026 14:12:24} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Sat Apr 04 2026 14:12:24} [APP 🚀] info: [33m♻️  Application listening on port:5000[39m
+{Sat Apr 04 2026 14:12:32} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Sat Apr 04 2026 14:12:32} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Sat Apr 04 2026 14:12:32} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Sat Apr 04 2026 14:12:32} [APP 🚀] info: [33m♻️  Application listening on port:5000[39m
+{Sat Apr 04 2026 14:12:40} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Sat Apr 04 2026 14:12:40} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Sat Apr 04 2026 14:12:40} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Sat Apr 04 2026 14:12:40} [APP 🚀] info: [33m♻️  Application listening on port:5000[39m
+{Sat Apr 04 2026 14:21:40} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Sat Apr 04 2026 14:21:40} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Sat Apr 04 2026 14:21:40} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Sat Apr 04 2026 14:21:40} [APP 🚀] info: [33m♻️  Application listening on port:5000[39m
+{Sat Apr 04 2026 14:21:46} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Sat Apr 04 2026 14:21:46} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Sat Apr 04 2026 14:21:46} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Sat Apr 04 2026 14:21:46} [APP 🚀] info: [33m♻️  Application listening on port:5000[39m
+{Sat Apr 04 2026 14:21:56} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Sat Apr 04 2026 14:21:56} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Sat Apr 04 2026 14:21:56} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Sat Apr 04 2026 14:21:56} [APP 🚀] info: [33m♻️  Application listening on port:5000[39m
+{Sat Apr 04 2026 14:22:02} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Sat Apr 04 2026 14:22:02} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Sat Apr 04 2026 14:22:02} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Sat Apr 04 2026 14:22:02} [APP 🚀] info: [33m♻️  Application listening on port:5000[39m
+{Sat Apr 04 2026 14:22:11} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Sat Apr 04 2026 14:22:12} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Sat Apr 04 2026 14:22:12} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Sat Apr 04 2026 14:22:12} [APP 🚀] info: [33m♻️  Application listening on port:5000[39m
+{Sat Apr 04 2026 14:29:34} [APP 🚀] info: ::ffff:10.10.7.94 - GET /api/v1/product/top-selling 200 - 33.144 ms
+{Sat Apr 04 2026 14:30:20} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Sat Apr 04 2026 14:30:20} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Sat Apr 04 2026 14:30:20} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Sat Apr 04 2026 14:30:20} [APP 🚀] info: [33m♻️  Application listening on port:5000[39m
+{Sat Apr 04 2026 14:30:43} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Sat Apr 04 2026 14:30:43} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Sat Apr 04 2026 14:30:43} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Sat Apr 04 2026 14:30:43} [APP 🚀] info: [33m♻️  Application listening on port:5000[39m
+{Sat Apr 04 2026 14:30:45} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Sat Apr 04 2026 14:30:45} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Sat Apr 04 2026 14:30:45} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Sat Apr 04 2026 14:30:45} [APP 🚀] info: [33m♻️  Application listening on port:5000[39m
+{Sat Apr 04 2026 14:30:50} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Sat Apr 04 2026 14:30:50} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Sat Apr 04 2026 14:30:50} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Sat Apr 04 2026 14:30:50} [APP 🚀] info: [33m♻️  Application listening on port:5000[39m
+{Sat Apr 04 2026 14:31:13} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Sat Apr 04 2026 14:31:13} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Sat Apr 04 2026 14:31:13} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Sat Apr 04 2026 14:31:13} [APP 🚀] info: [33m♻️  Application listening on port:5000[39m
+{Sat Apr 04 2026 14:31:43} [APP 🚀] info: [32m🚀 Database connected successfully[39m
+{Sat Apr 04 2026 14:31:43} [APP 🚀] info: [32m🍁 Server connected successfully[39m
+{Sat Apr 04 2026 14:31:43} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
+{Sat Apr 04 2026 14:31:43} [APP 🚀] info: [33m♻️  Application listening on port:5000[39m
+{Sat Apr 04 2026 14:32:00} [APP 🚀] info: ::ffff:10.10.7.94 - GET /api/v1/product/top-selling 200 - 25.913 ms
+{Sat Apr 04 2026 14:32:46} [APP 🚀] info: ::ffff:10.10.7.103 - GET /api/v1/wishlist 200 - 18.817 ms
+{Sat Apr 04 2026 14:32:51} [APP 🚀] info: ::ffff:10.10.7.103 - POST /api/v1/auth/login 200 - 226.856 ms

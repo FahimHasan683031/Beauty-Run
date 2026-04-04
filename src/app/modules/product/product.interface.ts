@@ -14,4 +14,5 @@ export interface IProduct {
   isActive: boolean;
   finalPrice: number;
   quantity: number;
+  totalOrder: number;
 }

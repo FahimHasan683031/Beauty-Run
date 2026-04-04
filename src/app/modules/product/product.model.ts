@@ -62,6 +62,11 @@ const productSchema = new Schema<IProduct>(
       type: Boolean,
       default: true,
     },
+    totalOrder: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
   },
   {
     timestamps: true,

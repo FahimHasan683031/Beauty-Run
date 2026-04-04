@@ -1,0 +1,195 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\.c8fc356e1550d27ffe43a3bd4f4fadca99b3b07a-audit.json",
+    "files": [
+        {
+            "date": 1775104483374,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-02-10-success.log",
+            "hash": "0b9534ba2fd4f4351f49c882bc87f865eee3f18195a142330cdb9223e1a4bb37"
+        },
+        {
+            "date": 1775106000143,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-02-11-success.log",
+            "hash": "a87501e067ebbe07e54b9d7478f830f79f568975d0880452974460d079eae611"
+        },
+        {
+            "date": 1775109600223,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-02-12-success.log",
+            "hash": "6c3e9d05f41722f5d32965684f7e5dc145d3779e72675acf257593befa213977"
+        },
+        {
+            "date": 1775113200012,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-02-13-success.log",
+            "hash": "969baf067850f2d3ac07d14b8bc2d55ee9a16a01dcd8d05d583c5fa27d1cde53"
+        },
+        {
+            "date": 1775116800442,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-02-14-success.log",
+            "hash": "260e8b6671a1de838e2ef26e9d7cc0da1b63676c4df0fd308081af2008210ce6"
+        },
+        {
+            "date": 1775120400909,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-02-15-success.log",
+            "hash": "4f3a4e9ac0fe532a5b8dc492f4411c315e0c5f58b6eb01773d1500959d5d2842"
+        },
+        {
+            "date": 1775124000139,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-02-16-success.log",
+            "hash": "7ce1a1b8bebc86c6b49583a62c8cd6704fde4d8f9654b98ede6373878171aa79"
+        },
+        {
+            "date": 1775127600297,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-02-17-success.log",
+            "hash": "8fd963491e32daf230c6b4f670a443424bf79c345655cf8c5d9e8b22ab2e46c5"
+        },
+        {
+            "date": 1775131200500,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-02-18-success.log",
+            "hash": "98b4da83f48cc7f76bd2d49e96503850b52edb6e06a9a4142fad3bc09786c1ad"
+        },
+        {
+            "date": 1775134800959,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-02-19-success.log",
+            "hash": "bcbbfbd9c6aacd712b21fe8cd37f1d39789218b9234230104b7a308f98e81eb9"
+        },
+        {
+            "date": 1775138400183,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-02-20-success.log",
+            "hash": "ece7d3a589e95a110bb693a6cc3cdcb24464d761ce7de1eacbf839a313554725"
+        },
+        {
+            "date": 1775142000838,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-02-21-success.log",
+            "hash": "4705e2211f0c27d6c723cbd9ca5bac06c0f9fffccbbbfda4b64840fdeda27ca4"
+        },
+        {
+            "date": 1775145600854,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-02-22-success.log",
+            "hash": "2d52eee3a99847e939a0541cd9bb80a96aa0b2f60efeaa80df314813b77f01a5"
+        },
+        {
+            "date": 1775149200912,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-02-23-success.log",
+            "hash": "8e70bcbf08ef167dd7e4ce36d166e4ec9886319926034805a587479f5d4077b2"
+        },
+        {
+            "date": 1775152800013,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-03-00-success.log",
+            "hash": "1449de11546293153b7ae91b26703d9a158f1d6bde010ceea2ca4215fdc705ba"
+        },
+        {
+            "date": 1775156400849,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-03-01-success.log",
+            "hash": "96031082d81d0499788691607b6a592ccb57470063502e1f31508749f321ec85"
+        },
+        {
+            "date": 1775160000094,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-03-02-success.log",
+            "hash": "b5d5550f38dacf3b77524670bd144378886b97cfa3e2e5bf14935b2b8fe95db6"
+        },
+        {
+            "date": 1775163600745,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-03-03-success.log",
+            "hash": "364c079785ba6a9fe1297e2d668793930e0c2ae4ebfcb6b2ceb1b8fce9528557"
+        },
+        {
+            "date": 1775167200411,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-03-04-success.log",
+            "hash": "0353820313a9036b64f0eb51219f0a02c77fa70ac4d5a163c513c443d2a4fc2b"
+        },
+        {
+            "date": 1775170800558,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-03-05-success.log",
+            "hash": "5e6976859124567121c378dbd9067935341209a7227df8c7b20aefaffcc0c7ea"
+        },
+        {
+            "date": 1775174400347,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-03-06-success.log",
+            "hash": "37f0d476a802b2881a76673921ebfbdaf0f20f3071e49c80e5431e1f9b90dffc"
+        },
+        {
+            "date": 1775178000674,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-03-07-success.log",
+            "hash": "ae6cae134b9c82b93a537af39b4ff4201b0bd5a038912dce137b3476900cb4e9"
+        },
+        {
+            "date": 1775181600434,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-03-08-success.log",
+            "hash": "e3a24395b42a54cc8acfed774e1a6b34af8a837a957a33b55a24e706394ed0d6"
+        },
+        {
+            "date": 1775185200315,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-03-09-success.log",
+            "hash": "5eee52cd56a9cbf99f08091c67ce1cbd6d286b854e7675defa93e9c48de01704"
+        },
+        {
+            "date": 1775188800910,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-03-10-success.log",
+            "hash": "b1f6631fa0f51ab0db9c87534a154fa4c1054daead728cba2d647f2eccf6e57e"
+        },
+        {
+            "date": 1775192400259,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-03-11-success.log",
+            "hash": "0a874ebf4f3ace8133fa314c427a1a1da097e770a317c35193043e960c50d6db"
+        },
+        {
+            "date": 1775196000969,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-03-12-success.log",
+            "hash": "9774da9fb609c7ec1ab97b8ef06c03ece6e28ddbd4b1b249897bd75958346f81"
+        },
+        {
+            "date": 1775199600940,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-03-13-success.log",
+            "hash": "7be3a82a5f607c3aebe29eedfb95ce5143f290780ee46b7fa7c337295a9f10d9"
+        },
+        {
+            "date": 1775203200540,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-03-14-success.log",
+            "hash": "24070c2a509ea1c11390eff039a3a5f242e37772f2e359fe17e59d8553f5b892"
+        },
+        {
+            "date": 1775206800332,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-03-15-success.log",
+            "hash": "1debe7b5f8bb9aeee6b079e6eaae5c84e142fc20c4ee3ae77a03b3e2c56475ec"
+        },
+        {
+            "date": 1775270517050,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-04-08-success.log",
+            "hash": "172aa53d58dd6537e0d9eaa7fee7b76b6dbb830a561467d0af7ad08a1c4fb938"
+        },
+        {
+            "date": 1775271600742,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-04-09-success.log",
+            "hash": "cd00db2da20ee3b5fc1131bcf7da030ab6c2b36b8573b15551c4f7745b8b6046"
+        },
+        {
+            "date": 1775275200774,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-04-10-success.log",
+            "hash": "4fadfbcea08ffe95a742547e807519a875737317ff669a82abcbf8568539a928"
+        },
+        {
+            "date": 1775278800949,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-04-11-success.log",
+            "hash": "5971106f08e4157f4473ed4d8bc91aa33141ffcbf7d1829d9bdc30cb06a14adb"
+        },
+        {
+            "date": 1775282400763,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-04-12-success.log",
+            "hash": "cb7c975c4347972807797f71677f4e7a5a95417fc3e595386e749da9dc8a41a6"
+        },
+        {
+            "date": 1775286000944,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-04-13-success.log",
+            "hash": "12385284106f5f2983bf62f6c067b501a924f08be0be97060dc7eee462aaa2e1"
+        },
+        {
+            "date": 1775289600118,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-04-14-success.log",
+            "hash": "117e6c6d7264fad11b521077829f7faf60f6532137d0e06fa8e2c15c2c0b7c99"
+        }
+    ],
+    "hashType": "sha256"
+}

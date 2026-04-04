@@ -49,7 +49,7 @@ const createOrderToDB = async (user: JwtPayload, payload: Partial<IOrder>) => {
 
     await Product.findByIdAndUpdate(
       payload.product,
-      { $inc: { quantity: -orderedQty } },
+      { $inc: { quantity: -orderedQty, totalOrder: 1 } },
       { session }
     );
 
@@ -292,7 +292,7 @@ const updateOrderToDB = async (id: string, user: JwtPayload, payload: Partial<IO
       await PaymentService.processRefund(id, session);
       
       await Product.findByIdAndUpdate(order.product, {
-        $inc: { quantity: order.quantity || 1 }
+        $inc: { quantity: order.quantity || 1, totalOrder: -1 }
       }, { session });
 
       await NotificationService.insertNotification({
