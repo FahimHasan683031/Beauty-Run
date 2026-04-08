@@ -65,6 +65,10 @@ const orderSchema = new Schema<IOrder>(
     instruction: {
       type: String,
     },
+    label: {
+      type: String,
+      enum: ["Home", "Office", "Relative", "Other"],
+    },
   },
   {
     timestamps: true,

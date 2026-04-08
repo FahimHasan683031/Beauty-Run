@@ -7,6 +7,7 @@ const createOrderZod = z.object({
     address: z.string().min(1, 'Address is required'),
     number: z.string().min(1, 'Phone number is required'),
     instruction: z.string().optional(),
+    label: z.enum(["Home", "Office", "Relative", "Other"]).optional(),
   }),
 });
 

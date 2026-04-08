@@ -16,4 +16,5 @@ export interface IOrder {
   address: string;
   number: string;
   instruction?: string;
+  label?: "Home" | "Office" | "Relative"| "Other";
 }
