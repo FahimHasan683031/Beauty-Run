@@ -65,6 +65,9 @@ const orderSchema = new Schema<IOrder>(
     instruction: {
       type: String,
     },
+    cancelReason: {
+      type: String,
+    },
     label: {
       type: String,
       enum: ["Home", "Office", "Relative", "Other"],

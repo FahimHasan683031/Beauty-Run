@@ -15,6 +15,7 @@ const updateOrderZod = z.object({
   body: z.object({
     status: z.enum(['pending', 'processing', 'shipped', 'delivered', 'cancelled']).optional(),
     paymentStatus: z.enum(['pending', 'paid', 'failed']).optional(),
+    cancelReason: z.string().optional(),
   }),
 });
 

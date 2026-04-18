@@ -1,0 +1,2 @@
+{Sat Apr 18 2026 09:26:17} [APP 🐞] error: ::ffff:10.10.7.94 - POST /api/v1/auth/login 400 - 34.536 ms
+{Sat Apr 18 2026 09:26:37} [APP 🐞] error: ::ffff:10.10.7.94 - POST /api/v1/auth/login 400 - 2.513 ms

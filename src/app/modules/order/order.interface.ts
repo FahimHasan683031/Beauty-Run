@@ -16,5 +16,6 @@ export interface IOrder {
   address: string;
   number: string;
   instruction?: string;
+  cancelReason?: string;
   label?: "Home" | "Office" | "Relative"| "Other";
 }

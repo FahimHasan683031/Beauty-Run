@@ -135,6 +135,11 @@ const getMyOrdersFromDB = async (user: JwtPayload, query: Record<string, unknown
     });
   }
 
+  // Handle multiple status filtering
+  if (filterData.status && typeof filterData.status === 'string') {
+    filterData.status = { $in: filterData.status.split(',') };
+  }
+
   // Filtering (basic match)
   if (Object.keys(filterData).length > 0) {
     pipeline.push({ $match: filterData });
@@ -199,7 +204,7 @@ const getMyOrdersFromDB = async (user: JwtPayload, query: Record<string, unknown
 const getSingleOrderFromDB = async (id: string) => {
   const result = await Order.findById(id)
     .populate('user', 'fullName email')
-    .populate('product', 'productName images');
+    .populate('product', 'productName images createdBy');
   return result;
 };
 

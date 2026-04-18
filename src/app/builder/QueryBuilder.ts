@@ -45,7 +45,10 @@ filter() {
 
   const filters: Record<string, any> = cleanObject(queryObj)
 
-
+  // Handle multiple status filtering
+  if (filters.status && typeof filters.status === 'string') {
+    filters.status = { $in: filters.status.split(',') }
+  }
 
   // Handle price range filtering
   if (queryObj.minPrice || queryObj.maxPrice) {
