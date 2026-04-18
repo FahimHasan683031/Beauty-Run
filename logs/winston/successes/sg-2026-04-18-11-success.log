@@ -1,6 +1,0 @@
-{Sat Apr 18 2026 11:00:00} [APP 🚀] info: [CleanupJob] Running pending order cleanup...
-{Sat Apr 18 2026 11:00:00} [APP 🚀] info: [CleanupJob] No stale pending orders found.
-{Sat Apr 18 2026 11:47:42} [APP 🚀] info: [32m🚀 Database connected successfully[39m
-{Sat Apr 18 2026 11:47:42} [APP 🚀] info: [32m🍁 Server connected successfully[39m
-{Sat Apr 18 2026 11:47:42} [APP 🚀] info: [CleanupJob] Pending order cleanup job scheduled (every hour).
-{Sat Apr 18 2026 11:47:42} [APP 🚀] info: [33m♻️  Application listening on port:5000[39m

@@ -5,7 +5,7 @@ const createAccount = (values: ICreateAccount) => {
   console.log(values, 'values')
   const data = {
     to: values.email,
-    subject: `Verify your Beauty-Run account, ${values.name}`,
+    subject: `Verify your Beauty Run account, ${values.name}`,
     html: `
 <body style="margin:0; padding:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0"
@@ -28,7 +28,7 @@ const createAccount = (values: ICreateAccount) => {
         </h1>
 
         <p style="color:#5D0032; font-size:16px; line-height:1.6; margin-bottom:25px; text-align:center;">
-          Hey <strong>${values.name}</strong>, welcome to <strong>Beauty-Run</strong>! 🎉<br>
+          Hey <strong>${values.name}</strong>, welcome to <strong>Beauty Run</strong>! 🎉<br>
           Please verify your email to activate your account.
         </p>
 
@@ -61,10 +61,10 @@ const createAccount = (values: ICreateAccount) => {
     <tr>
       <td align="center" style="background:linear-gradient(135deg,#FFF0F9,#FFE6F2); padding:25px 20px; border-top:1px solid #FB6CC033;">
         <p style="margin:0; color:#5D0032; font-size:13px;">
-          © ${new Date().getFullYear()} <strong>Beauty-Run</strong>. All rights reserved.
+          © ${new Date().getFullYear()} <strong>Beauty Run</strong>. All rights reserved.
         </p>
         <p style="margin:6px 0 0; color:#5D0032; font-size:13px;">
-          Powered by <strong style="color:#FB6CC0;">Beauty-Run API</strong> ✨
+          Powered by <strong style="color:#FB6CC0;">Beauty Run API</strong> ✨
         </p>
       </td>
     </tr>
@@ -80,7 +80,7 @@ const resetPassword = (values: IResetPassword) => {
   console.log(values, 'values')
   const data = {
     to: values.email,
-    subject: `Reset your Beauty-Run password, ${values.name}`,
+    subject: `Reset your Beauty Run password, ${values.name}`,
     html: `
 <body style="margin:0; padding:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0"
@@ -104,7 +104,7 @@ const resetPassword = (values: IResetPassword) => {
 
         <p style="color:#5D0032; font-size:16px; line-height:1.6; margin-bottom:25px; text-align:center;">
           Hi <strong>${values.name}</strong>, 👋<br>
-          We received a request to reset your password for your <strong>Beauty-Run</strong> account.
+          We received a request to reset your password for your <strong>Beauty Run</strong> account.
           <br>Enter the code below to complete the process:
         </p>
 
@@ -125,7 +125,7 @@ const resetPassword = (values: IResetPassword) => {
         <div style="margin-top:35px; background-color:#fff8e1; border-left:6px solid #ffd54f;
                     border-radius:8px; padding:15px 18px;">
           <p style="margin:0; color:#4a4a4a; font-size:14px;">
-            ⚠️ <strong>Security Tip:</strong> Never share your reset code with anyone. Beauty-Run will never ask for it.
+            ⚠️ <strong>Security Tip:</strong> Never share your reset code with anyone. Beauty Run will never ask for it.
           </p>
         </div>
 
@@ -136,10 +136,10 @@ const resetPassword = (values: IResetPassword) => {
     <tr>
       <td align="center" style="background:linear-gradient(135deg,#FFF0F9,#FFE6F2); padding:25px 20px; border-top:1px solid #FB6CC033;">
         <p style="margin:0; color:#5D0032; font-size:13px;">
-          © ${new Date().getFullYear()} <strong>Beauty-Run</strong>. All rights reserved.
+          © ${new Date().getFullYear()} <strong>Beauty Run</strong>. All rights reserved.
         </p>
         <p style="margin:6px 0 0; color:#5D0032; font-size:13px;">
-          Powered by <strong style="color:#FB6CC0;">Beauty-Run API</strong> ✨
+          Powered by <strong style="color:#FB6CC0;">Beauty Run API</strong> ✨
         </p>
       </td>
     </tr>
@@ -188,8 +188,8 @@ const resendOtp = (values: {
         <p style="color:#5D0032; font-size:16px; line-height:1.6; margin-bottom:25px; text-align:center;">
           Hi <strong>${values.name}</strong>, 👋<br>
           ${isReset
-        ? 'You requested a new verification code to reset your Beauty-Run password.'
-        : 'Here is your new verification code to complete your Beauty-Run account setup.'
+        ? 'You requested a new verification code to reset your Beauty Run password.'
+        : 'Here is your new verification code to complete your Beauty Run account setup.'
       }<br>
           Use the code below to continue:
         </p>
@@ -214,7 +214,7 @@ const resendOtp = (values: {
                     border-left:6px solid #ffd54f;
                     border-radius:8px; padding:15px 18px;">
           <p style="margin:0; color:#4a4a4a; font-size:14px;">
-            🔒 <strong>Security Tip:</strong> Never share your OTP with anyone. Beauty-Run
+            🔒 <strong>Security Tip:</strong> Never share your OTP with anyone. Beauty Run
  will never request it.
           </p>
         </div>
@@ -227,10 +227,10 @@ const resendOtp = (values: {
     <tr>
       <td align="center" style="background-color:#FFF0F9; padding:25px 20px; border-top:1px solid #FB6CC033;">
         <p style="margin:0; color:#5D0032; font-size:13px;">
-          © ${new Date().getFullYear()} <strong>Beauty-Run</strong>. All rights reserved.
+          © ${new Date().getFullYear()} <strong>Beauty Run</strong>. All rights reserved.
         </p>
         <p style="margin:6px 0 0; color:#5D0032; font-size:13px;">
-          Powered by <strong style="color:#FB6CC0;">Beauty-Run API</strong> 🚀
+          Powered by <strong style="color:#FB6CC0;">Beauty Run API</strong> 🚀
         </p>
       </td>
     </tr>
@@ -251,7 +251,7 @@ const adminContactNotificationEmail = (payload: {
 }) => {
   return {
     to: config.super_admin.email as string,
-    subject: '📩 New Contact Form Submission – Beauty-Run',
+    subject: '📩 New Contact Form Submission – Beauty Run',
     html: `
 <body style="margin:0; padding:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0"
@@ -275,7 +275,7 @@ const adminContactNotificationEmail = (payload: {
          </h1>
 
         <p style="color:#5D0032; font-size:16px; text-align:center; margin-bottom:30px;">
-          A new contact message has been submitted on <strong>Beauty-Run</strong>.
+          A new contact message has been submitted on <strong>Beauty Run</strong>.
         </p>
 
         <!-- Contact Details -->
@@ -321,10 +321,10 @@ const adminContactNotificationEmail = (payload: {
       <td align="center" 
           style="background:linear-gradient(135deg,#FFF0F9,#FFE6F2); padding:25px 20px; border-top:1px solid #FB6CC033;">
         <p style="margin:0; color:#5D0032; font-size:13px;">
-          © ${new Date().getFullYear()} <strong>Beauty-Run</strong>. All rights reserved.
+          © ${new Date().getFullYear()} <strong>Beauty Run</strong>. All rights reserved.
         </p>
         <p style="margin:6px 0 0; color:#5D0032; font-size:13px;">
-          Powered by <strong style="color:#FB6CC0;">Beauty-Run API</strong> 
+          Powered by <strong style="color:#FB6CC0;">Beauty Run API</strong> 
         </p>
       </td>
     </tr>
@@ -343,7 +343,7 @@ const userContactConfirmationEmail = (payload: {
 }) => {
   return {
     to: payload.email,
-    subject: '💬 Thank You for Contacting Beauty-Run',
+    subject: '💬 Thank You for Contacting Beauty Run',
     html: `
 <body style="margin:0; padding:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0"
@@ -380,7 +380,7 @@ const userContactConfirmationEmail = (payload: {
         </div>
 
         <p style="color:#5D0032; font-size:15px; line-height:1.6; text-align:center;">
-          Thanks for reaching out to <strong>Beauty-Run</strong>.<br>
+          Thanks for reaching out to <strong>Beauty Run</strong>.<br>
           We truly appreciate your message 💗
         </p>
 
@@ -392,11 +392,11 @@ const userContactConfirmationEmail = (payload: {
       <td align="center" 
           style="background:linear-gradient(135deg,#FFF0F9,#FFE6F2); padding:25px 20px; border-top:1px solid #FB6CC033;">
         <p style="margin:0; color:#5D0032; font-size:13px;">
-          © ${new Date().getFullYear()} <strong>Beauty-Run</strong>. All rights reserved.
+          © ${new Date().getFullYear()} <strong>Beauty Run</strong>. All rights reserved.
         </p>
         <p style="margin:6px 0 0; color:#5D0032; font-size:13px;">
-          Powered by <strong style="color:#FB6CC0;">Beauty-Run API</strong> ✨
- e="color:#FB6CC0;">Beauty-Run API</strong> ✨
+          Powered by <strong style="color:#FB6CC0;">Beauty Run API</strong> ✨
+ e="color:#FB6CC0;">Beauty Run API</strong> ✨
         </p>
       </td>
     </tr>
@@ -409,7 +409,7 @@ const userContactConfirmationEmail = (payload: {
 const supportTicketResolved = (payload: ISupportTicketResolved) => {
   return {
     to: payload.email,
-    subject: '✅ Your Support Ticket has been Resolved – Beauty-Run',
+    subject: '✅ Your Support Ticket has been Resolved – Beauty Run',
     html: `
 <body style="margin:0; padding:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0"
@@ -456,7 +456,7 @@ const supportTicketResolved = (payload: ISupportTicketResolved) => {
 
         <p style="color:#5D0032; font-size:15px; line-height:1.6; text-align:center;">
           If you have any further questions or need additional assistance, please feel free to open a new support ticket or reply to our support team.<br>
-          Thanks for choosing <strong>Beauty-Run</strong> 💗
+          Thanks for choosing <strong>Beauty Run</strong> 💗
         </p>
 
       </td>
@@ -467,10 +467,10 @@ const supportTicketResolved = (payload: ISupportTicketResolved) => {
       <td align="center" 
           style="background:linear-gradient(135deg,#FFF0F9,#FFE6F2); padding:25px 20px; border-top:1px solid #FB6CC033;">
         <p style="margin:0; color:#5D0032; font-size:13px;">
-          © ${new Date().getFullYear()} <strong>Beauty-Run</strong>. All rights reserved.
+          © ${new Date().getFullYear()} <strong>Beauty Run</strong>. All rights reserved.
         </p>
         <p style="margin:6px 0 0; color:#5D0032; font-size:13px;">
-          Powered by <strong style="color:#FB6CC0;">Beauty-Run API</strong> ✨
+          Powered by <strong style="color:#FB6CC0;">Beauty Run API</strong> ✨
         </p>
       </td>
     </tr>

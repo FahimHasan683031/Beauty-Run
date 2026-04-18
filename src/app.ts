@@ -51,7 +51,7 @@ app.use("/api/v1", router);
 
 //ROOT
 app.get("/", (req: Request, res: Response) => {
-  res.send("Welcome to Beauty-Run Backend!");
+  res.send("Welcome to Beauty Run Backend!");
 });
 
 
