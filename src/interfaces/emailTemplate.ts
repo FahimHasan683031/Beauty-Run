@@ -24,3 +24,18 @@ export type ISupportTicketResolved = {
   ticketTitle: string
   adminReply?: string
 }
+
+export type IOrderInvoice = {
+  orderId: string;
+  transactionId: string;
+  date: string;
+  customerName: string;
+  customerEmail: string;
+  shippingAddress: string;
+  productName: string;
+  productPrice: number;
+  quantity: number;
+  deliveryCharge: number;
+  discount: number;
+  totalAmount: number;
+}
