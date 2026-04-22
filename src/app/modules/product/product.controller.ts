@@ -50,6 +50,18 @@ const getAllProducts = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+// Get vendor products (excluding admins)
+const getVendorProducts = catchAsync(async (req: Request, res: Response) => {
+  const result = await ProductService.getVendorProducts(req.query);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Vendor products retrieved successfully',
+    data: result.products,
+    meta: result.meta,
+  });
+});
+
 // Get my products (vendor)
 const getMyProducts = catchAsync(async (req: Request, res: Response) => {
   const result = await ProductService.getMyProducts((req as any).user!, req.query);
@@ -110,6 +122,7 @@ const getTopSellingProducts = catchAsync(async (req: Request, res: Response) => 
 export const ProductController = {
   createProduct,
   getAllProducts,
+  getVendorProducts,
   getMyProducts,
   getSingleProduct,
   updateProduct,

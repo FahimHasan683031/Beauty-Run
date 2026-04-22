@@ -20,6 +20,13 @@ router.post(
 // Get all products — Public
 router.get('/', auth(USER_ROLES.VENDOR, USER_ROLES.ADMIN, USER_ROLES.CUSTOMER), ProductController.getAllProducts);
 
+// Get vendor products — Public (excludes admins)
+router.get(
+  '/vendor-products',
+  auth(USER_ROLES.VENDOR, USER_ROLES.ADMIN, USER_ROLES.CUSTOMER),
+  ProductController.getVendorProducts
+);
+
 // Get my products — Vendor only
 router.get(
   '/my-products',

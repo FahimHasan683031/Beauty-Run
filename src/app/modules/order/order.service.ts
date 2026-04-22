@@ -102,9 +102,20 @@ const getAllOrdersFromDB = async (query: Record<string, unknown>) => {
       },
     },
     { $unwind: '$product' },
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'product.createdBy',
+        foreignField: '_id',
+        as: 'productCreator',
+      },
+    },
+    { $unwind: '$productCreator' },
+    {
+      $match: { 'productCreator.role': { $ne: USER_ROLES.ADMIN } }
+    },
   ];
 
-  // Handle SearchTerm
   if (searchTerm) {
     const searchConditions: any[] = [
       { id: searchTerm },
@@ -208,9 +219,22 @@ const getMyOrdersFromDB = async (user: JwtPayload, query: Record<string, unknown
   ];
 
   // Role-based matching
-  if (user.role === USER_ROLES.CUSTOMER) {
+  if (user.role === USER_ROLES.ADMIN) {
+    pipeline.push(
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'product.createdBy',
+          foreignField: '_id',
+          as: 'productCreator',
+        },
+      },
+      { $unwind: '$productCreator' },
+      { $match: { 'productCreator.role': USER_ROLES.ADMIN } }
+    );
+  } else if (user.role === USER_ROLES.CUSTOMER) {
     pipeline.push({ $match: { user: new mongoose.Types.ObjectId(user.authId) } });
-  } else if (user.role === USER_ROLES.VENDOR || user.role === USER_ROLES.ADMIN) {
+  } else if (user.role === USER_ROLES.VENDOR) {
     pipeline.push({ $match: { 'product.createdBy': new mongoose.Types.ObjectId(user.authId) } });
   }
 
