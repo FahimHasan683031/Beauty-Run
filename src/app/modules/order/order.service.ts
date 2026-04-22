@@ -53,15 +53,7 @@ const createOrderToDB = async (user: JwtPayload, payload: Partial<IOrder>) => {
     );
 
     const vendorUser = await User.findById(product.createdBy).session(session);
-    if (vendorUser) {
-      await NotificationService.insertNotification({
-        title: "New Order Received!",
-        message: `You have received a new order for ${product.productName}.`,
-        receiver: vendorUser._id,
-        type: vendorUser.role === USER_ROLES.ADMIN ? "ADMIN" : "USER",
-        referenceId: result[0]._id
-      }, session);
-    }
+    // Notification removed from here to prevent duplication. Sent after payment confirmation.
 
     await session.commitTransaction();
 

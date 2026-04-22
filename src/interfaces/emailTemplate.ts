@@ -46,3 +46,13 @@ export type ISupportTicketNotification = {
   ticketTitle: string;
   ticketDescription: string;
 }
+
+export type IVendorOrderNotification = {
+  vendorName: string;
+  vendorEmail: string;
+  customerName: string;
+  orderId: string;
+  productName: string;
+  quantity: number;
+  totalAmount: number;
+}

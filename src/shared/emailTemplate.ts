@@ -1,5 +1,5 @@
 import config from '../config'
-import { ICreateAccount, IOrderInvoice, IResetPassword, ISupportTicketNotification, ISupportTicketResolved } from '../interfaces/emailTemplate'
+import { ICreateAccount, IOrderInvoice, IResetPassword, ISupportTicketNotification, ISupportTicketResolved, IVendorOrderNotification } from '../interfaces/emailTemplate'
 
 const createAccount = (values: ICreateAccount) => {
   console.log(values, 'values')
@@ -638,6 +638,97 @@ const supportTicketResolved = (payload: ISupportTicketResolved) => {
   }
 }
 
+const vendorOrderNotificationEmail = (payload: IVendorOrderNotification) => {
+  return {
+    to: payload.vendorEmail,
+    subject: '🛍️ New Order Received – Beauty Run',
+    html: `
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @media only screen and (max-width: 600px) {
+      .main-table { width: 100% !important; margin: 0 !important; border-radius: 0 !important; }
+      .content-cell { padding: 30px 20px !important; }
+      .header-cell { padding: 30px 20px !important; }
+      .footer-cell { padding: 20px !important; }
+    }
+  </style>
+</head>
+<body style="margin:0; padding:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" class="main-table"
+         style="max-width:640px; margin:40px auto; background-color:#ffffff; border-radius:14px;
+                overflow:hidden; box-shadow:0 5px 25px rgba(0,0,0,0.08);">
+
+    <!-- Header -->
+    <tr>
+      <td align="center" class="header-cell"
+          style="background:linear-gradient(135deg,#FFF0F9,#FFE6F2); padding:35px 20px; border-bottom:1px solid #FB6CC033;">
+        <img src="https://i.ibb.co.com/DDgsFXq3/dd55d4a6535f8e84f9d45593679b0f9429bf90de.png" alt="App"
+             style="width:260px; height:auto; filter:drop-shadow(0 0 6px rgba(0,0,0,0.25));">
+      </td>
+    </tr>
+
+    <!-- Body -->
+    <tr>
+      <td class="content-cell" style="padding:45px;">
+        <h1 style="color:#FB6CC0; font-size:26px; font-weight:700; margin-bottom:20px; text-align:center;">
+          🛍️ New Order Received
+         </h1>
+
+        <p style="color:#5D0032; font-size:16px; text-align:center; margin-bottom:30px;">
+          Congratulations <strong>${payload.vendorName}</strong>! You have received a new order.
+        </p>
+
+        <!-- Order Details -->
+        <table style="width:100%; border-collapse:collapse; margin:20px 0;">
+          <tr>
+            <td style="padding:12px 0; font-size:15px; color:#5D0032;">🛍️ <strong>Product:</strong></td>
+            <td style="padding:12px 0; font-size:15px; color:#5D0032; text-align:right;">
+              ${payload.productName}
+            </td>
+          </tr>
+          <tr style="border-top:1px solid #FB6CC022;">
+            <td style="padding:12px 0; font-size:15px; color:#5D0032;">🔢 <strong>Quantity:</strong></td>
+            <td style="padding:12px 0; font-size:15px; color:#5D0032; text-align:right;">
+              ${payload.quantity}
+            </td>
+          </tr>
+          <tr style="border-top:1px solid #FB6CC022;">
+            <td style="padding:12px 0; font-size:15px; color:#5D0032;">💰 <strong>Total Amount:</strong></td>
+            <td style="padding:12px 0; font-size:15px; color:#5D0032; text-align:right; font-weight:700; color:#FB6CC0;">
+              $${payload.totalAmount.toFixed(2)}
+            </td>
+          </tr>
+          <tr style="border-top:1px solid #FB6CC022;">
+            <td style="padding:12px 0; font-size:15px; color:#5D0032;">👤 <strong>Customer:</strong></td>
+            <td style="padding:12px 0; font-size:15px; color:#5D0032; text-align:right;">
+              ${payload.customerName}
+            </td>
+          </tr>
+        </table>
+
+        <p style="color:#5D0032; font-size:14px; margin-top:30px; text-align:center;">
+          Please log in to your dashboard to manage this order.
+        </p>
+      </td>
+    </tr>
+
+    <!-- Footer -->
+    <tr>
+      <td align="center" class="footer-cell"
+          style="background:linear-gradient(135deg,#FFF0F9,#FFE6F2); padding:25px 20px; border-top:1px solid #FB6CC033;">
+        <p style="margin:0; color:#5D0032; font-size:13px;">
+          © ${new Date().getFullYear()} <strong>Beauty Run</strong>. All rights reserved.
+        </p>
+      </td>
+    </tr>
+
+  </table>
+</body>
+    `,
+  }
+}
+
 const orderInvoice = (values: IOrderInvoice) => {
   return {
     to: values.customerEmail,
@@ -801,6 +892,7 @@ export const emailTemplate = {
   userContactConfirmationEmail,
   adminContactNotificationEmail,
   adminSupportTicketNotificationEmail,
+  vendorOrderNotificationEmail,
   supportTicketResolved,
   orderInvoice,
 }

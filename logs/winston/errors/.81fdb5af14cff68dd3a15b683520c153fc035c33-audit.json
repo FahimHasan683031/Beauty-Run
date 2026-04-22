@@ -359,6 +359,11 @@
             "date": 1776852360581,
             "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\errors\\sg-2026-04-22-16-error.log",
             "hash": "9cd22cac180ec049b2ffec05cb3f0276dc9d3dd2b09afe2854ca67d680ff9d46"
+        },
+        {
+            "date": 1776856113376,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\errors\\sg-2026-04-22-17-error.log",
+            "hash": "fb9453087952d90ff87199b22e02606bcfef0331a14649dbb973c83b0db90294"
         }
     ],
     "hashType": "sha256"

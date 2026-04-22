@@ -13,6 +13,7 @@ import { User } from '../app/modules/user/user.model'
 import { USER_ROLES } from '../enum/user'
 import { emailHelper } from '../helpers/emailHelper'
 import { emailTemplate } from '../shared/emailTemplate'
+import { NotificationService } from '../app/modules/notification/notification.service'
 
 const handleStripeWebhook = async (req: Request, res: Response) => {
     console.log('hit stripe webhook')
@@ -117,6 +118,35 @@ const handleStripeWebhook = async (req: Request, res: Response) => {
                                 emailHelper.sendEmail(emailTemplate.orderInvoice(invoiceData));
                             }, 0);
                             logger.info(`📧 Invoice sent to: ${invoiceData.customerEmail}`);
+                        }
+
+                        // Notify Vendor/Owner
+                        if (vendorUser) {
+                            // In-app notification
+                            await NotificationService.insertNotification({
+                                title: "New Order Received! 🛍️",
+                                message: `Congratulations! You have received a new order for '${productModel?.productName}'. Order ID: #${order.id || order._id}`,
+                                receiver: vendorUser._id,
+                                type: vendorUser.role === USER_ROLES.ADMIN ? "ADMIN" : "USER",
+                                referenceId: order._id as any
+                            });
+
+                            // Email notification (Skip if Admin to avoid conflicts)
+                            if (vendorUser.role !== USER_ROLES.ADMIN) {
+                                const vendorEmailData = {
+                                    vendorName: vendorUser.fullName || 'Vendor',
+                                    vendorEmail: vendorUser.email || '',
+                                    customerName: session.customer_details?.name || 'Customer',
+                                    orderId: order.id || order._id.toString(),
+                                    productName: productModel?.productName || 'Product',
+                                    quantity: order.quantity,
+                                    totalAmount: order.finalPrice
+                                };
+
+                                setTimeout(() => {
+                                    emailHelper.sendEmail(emailTemplate.vendorOrderNotificationEmail(vendorEmailData));
+                                }, 0);
+                            }
                         }
                     }
                 }
