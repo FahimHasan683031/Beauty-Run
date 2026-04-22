@@ -11,6 +11,8 @@ import { Settings } from '../app/modules/settings/settings.model'
 import { Product } from '../app/modules/product/product.model'
 import { User } from '../app/modules/user/user.model'
 import { USER_ROLES } from '../enum/user'
+import { emailHelper } from '../helpers/emailHelper'
+import { emailTemplate } from '../shared/emailTemplate'
 
 const handleStripeWebhook = async (req: Request, res: Response) => {
     console.log('hit stripe webhook')
@@ -93,6 +95,29 @@ const handleStripeWebhook = async (req: Request, res: Response) => {
                         });
                         
                         logger.info(`✅ Payment processed for Order: ${order._id}`);
+
+                        // Send Invoice Email
+                        const invoiceData = {
+                            orderId: order.id || order._id.toString(),
+                            transactionId: session.payment_intent as string || session.id,
+                            date: new Date().toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }),
+                            customerName: session.customer_details?.name || 'Customer',
+                            customerEmail: session.customer_details?.email || '',
+                            shippingAddress: order.address,
+                            productName: productModel?.productName || 'Product',
+                            productPrice: order.price / order.quantity,
+                            quantity: order.quantity,
+                            deliveryCharge: order.deliveryCharge,
+                            discount: order.discount,
+                            totalAmount: order.finalPrice
+                        };
+
+                        if (invoiceData.customerEmail) {
+                            setTimeout(() => {
+                                emailHelper.sendEmail(emailTemplate.orderInvoice(invoiceData));
+                            }, 0);
+                            logger.info(`📧 Invoice sent to: ${invoiceData.customerEmail}`);
+                        }
                     }
                 }
                 break

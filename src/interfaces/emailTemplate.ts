@@ -39,3 +39,10 @@ export type IOrderInvoice = {
   discount: number;
   totalAmount: number;
 }
+
+export type ISupportTicketNotification = {
+  userName: string;
+  userEmail: string;
+  ticketTitle: string;
+  ticketDescription: string;
+}

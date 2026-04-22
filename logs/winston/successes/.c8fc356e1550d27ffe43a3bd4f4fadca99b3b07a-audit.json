@@ -6,11 +6,6 @@
     "auditLog": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\.c8fc356e1550d27ffe43a3bd4f4fadca99b3b07a-audit.json",
     "files": [
         {
-            "date": 1775642400656,
-            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-08-16-success.log",
-            "hash": "7ff0aaf3361ebbdf44802de0372a49a6ef25bc49e28d6b9a0c38c0acfd08e4f5"
-        },
-        {
             "date": 1775646000551,
             "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-08-17-success.log",
             "hash": "26704df1198247bd6dafcb125096c87eee4b31ce4063aa6f55474e04c368538c"
@@ -1529,6 +1524,11 @@
             "date": 1776852000024,
             "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-22-16-success.log",
             "hash": "06966f9599cdf5ae86c5540586e1dc444d3e01e6917b82768f4bd7db0a0ec085"
+        },
+        {
+            "date": 1776855600047,
+            "name": "D:\\Fahim\\Projects\\Beauty-Run\\logs\\winston\\successes\\sg-2026-04-22-17-success.log",
+            "hash": "c7125d2d39070c37c596ab2e12b6a6087a86cc29701cfee958dc43ddd3891656"
         }
     ],
     "hashType": "sha256"

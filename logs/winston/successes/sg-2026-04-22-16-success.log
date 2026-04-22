@@ -1,9 +1,0 @@
-{Wed Apr 22 2026 16:00:00} [Beauty Run ✨] info: [CleanupJob] Running pending order cleanup...
-{Wed Apr 22 2026 16:00:00} [Beauty Run ✨] info: [CleanupJob] No stale pending orders found.
-{Wed Apr 22 2026 16:04:54} [Beauty Run ✨] info: 103.186.20.2 - GET /image/1776746377652-voi12j.png 304 - 18.470 ms
-{Wed Apr 22 2026 16:04:54} [Beauty Run ✨] info: 103.186.20.2 - GET /image/1775125740828-xe3y5a.jpg 304 - 1.095 ms
-{Wed Apr 22 2026 16:04:54} [Beauty Run ✨] info: 103.186.20.2 - GET /image/1776746434185-htas5d.png 304 - 1.224 ms
-{Wed Apr 22 2026 16:04:54} [Beauty Run ✨] info: 103.186.20.2 - GET /image/1776746341758-mchtmd.png 304 - 1.321 ms
-{Wed Apr 22 2026 16:04:54} [Beauty Run ✨] info: 103.186.20.2 - GET /image/1776746282620-nr68x6.png 304 - 0.386 ms
-{Wed Apr 22 2026 16:04:54} [Beauty Run ✨] info: 103.186.20.2 - OPTIONS /api/v1/notification 204 - 4.763 ms
-{Wed Apr 22 2026 16:04:54} [Beauty Run ✨] info: 103.186.20.2 - GET /api/v1/notification 200 - 40.731 ms

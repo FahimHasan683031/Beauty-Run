@@ -7,6 +7,8 @@ import QueryBuilder from '../../builder/QueryBuilder';
 import { emailHelper } from '../../../helpers/emailHelper';
 import { emailTemplate } from '../../../shared/emailTemplate';
 import { NotificationService } from '../notification/notification.service';
+import config from '../../../config';
+import { User } from '../user/user.model';
 
 // Create support ticket
 const createSupport = async (user: JwtPayload, payload: Partial<ISupport>, fileUrl?: string) => {
@@ -17,6 +19,32 @@ const createSupport = async (user: JwtPayload, payload: Partial<ISupport>, fileU
 
 
   const result = await Support.create(supportData);
+
+  // Send Notification to Admin (Background)
+  const adminUser = await User.findOne({ role: 'admin' });
+  if (adminUser) {
+    // In-app notification
+    await NotificationService.insertNotification({
+      title: "New Support Ticket",
+      message: `A new support ticket '${result.title}' has been created by ${user.fullName || 'a user'}.`,
+      receiver: adminUser._id,
+      type: "ADMIN",
+      referenceId: result._id as any
+    });
+
+    // Email notification
+    const emailData = {
+      userName: user.fullName || 'User',
+      userEmail: user.email || '',
+      ticketTitle: result.title,
+      ticketDescription: result.description || ''
+    };
+    
+    setTimeout(() => {
+      emailHelper.sendEmail(emailTemplate.adminSupportTicketNotificationEmail(emailData));
+    }, 0);
+  }
+
   return result;
 };
 

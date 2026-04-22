@@ -562,7 +562,9 @@ const resendOtpToPhoneOrEmail = async (
       { new: true },
     )
 
-    await emailHelper.sendEmail(forgetPasswordEmailTemplate)
+    setTimeout(() => {
+      emailHelper.sendEmail(forgetPasswordEmailTemplate)
+    }, 0)
   }
 
   if (phone) {
